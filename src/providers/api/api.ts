@@ -38,7 +38,7 @@ export class Api {
 
   post(endpoint: string, body: any, reqOpts?: any) {
 
-    return this.storage.get("token").then(data => {
+    return this.storage.get(Constant.TOKEN).then(data => {
 
       let params = new URLSearchParams();
       for (let key in body)
@@ -51,7 +51,6 @@ export class Api {
           'Authorization': 'Bearer ' + data
         }
       };
-
       return this.http.post(this.url + '/' + endpoint, params.toString(), options).toPromise()
         .then(this.extractData)
         .catch(err => this.handleError(err));

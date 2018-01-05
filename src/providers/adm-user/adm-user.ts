@@ -18,10 +18,7 @@ export class AdmUserProvider {
    */
   login(accountInfo: any) {
     let seq = this.api.post('login/login', accountInfo);
-
     seq.then((data) => {
-      console.log(data);
-      
       this._loggedIn(data);
     });
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Constant } from '../../app/app.config';
+import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
@@ -17,12 +18,12 @@ export class TabsPage {
 
 
   constructor(public navCtrl: NavController, public storage: Storage) {
-    
-    this.storage.get(Constant.SYS_PARAM).then((sysParam)=>{
-      console.log(sysParam);
+    let p1 = this.storage.get(Constant.SYS_PARAM);
+    let p2 = this.storage.get(Constant.TOKEN);
+    Promise.all([p1, p2]).then((result) => {
+      console.log(result);
     });
-      
+    
   }
-
 
 }

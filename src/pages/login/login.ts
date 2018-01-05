@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { AdmUserProvider } from '../../providers/providers';
+import { Constant } from '../../app/app.config';
 
 @IonicPage()
 @Component({
@@ -13,17 +15,17 @@ export class LoginPage {
   // The account fields for the login form.
   // If you're using the username field with or without email, make
   // sure to add it to the type
-  account: { user_code: string, passwd: string } = {
+  user = {
     user_code: 'admin',
     passwd: 'fe185c2abb880b7bbdb6060713b41d90'
   };
-
   // Our translated text strings
   private loginErrorString: string;
 
   constructor(public navCtrl: NavController,
-    public user: AdmUserProvider,
+    public admUserProvider: AdmUserProvider,
     public toastCtrl: ToastController,
+    public storage: Storage,
     public translateService: TranslateService) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
@@ -33,13 +35,12 @@ export class LoginPage {
 
   // Attempt to login in through our User service
   doLogin() {
-    this.user.login(this.account).then((resp) => {
-      // this.navCtrl.push("TabsPage");
-      console.log(resp);
-      
+    this.user.user_code = this.user.user_code.toUpperCase();
+    this.admUserProvider.login(this.user).then((data) => {
+      console.log(data);
+      this.navCtrl.push("TabsPage");
+      this.storage.set(Constant.TOKEN, data.entity.token);
     }, (err) => {
-      console.log(1);
-      
       // this.navCtrl.push("TabsPage");
       // Unable to log in
       let toast = this.toastCtrl.create({
