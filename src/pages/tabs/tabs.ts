@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
-
-/**
- * Generated class for the TabsPage tabs.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Storage } from '@ionic/storage';
+import { Constant } from '../../app/app.config';
 
 @IonicPage()
 @Component({
@@ -21,6 +16,13 @@ export class TabsPage {
   personRoot = 'PersonPage'
 
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public storage: Storage) {
+    
+    this.storage.get(Constant.SYS_PARAM).then((sysParam)=>{
+      console.log(sysParam);
+    });
+      
+  }
+
 
 }
