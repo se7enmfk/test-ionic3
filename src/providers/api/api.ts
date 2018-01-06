@@ -1,4 +1,6 @@
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { URLSearchParams } from '@angular/http';
+
 import { Injectable, Injector } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Constant } from '../../app/app.config';
@@ -42,7 +44,7 @@ export class Api {
 
       let params = new URLSearchParams();
       for (let key in body)
-        params.append(key, body[key]); 
+        params.append(key, body[key]);
 
       let options = {
         headers: {

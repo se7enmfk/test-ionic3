@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { Config, Nav, Platform } from 'ionic-angular';
+import { Config, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { AdmSysParamProvider } from '../providers/providers';
+import { Constant } from './app.config';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,6 +30,7 @@ export class MyApp {
     this.initTranslate();
 
     admSysParam.retrieveSysParamList();
+    this.storage.get(Constant.SYS_PARAM);
    }
 
   //init translate

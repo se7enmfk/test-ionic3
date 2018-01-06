@@ -14,7 +14,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'person.html',
 })
 export class PersonPage {
-
+  event={timeStarts:null,timeStarts1:null};
+  list = [
+    {
+      name:"个人资料"
+    },{
+      name:"个人资料"
+    },{
+      name:"个人资料"
+    },{
+      name:"个人资料"
+    }
+  ]
+  
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -22,4 +34,7 @@ export class PersonPage {
     console.log('ionViewDidLoad PersonPage');
   }
 
+  personDetail(){
+    this.navCtrl.push('HomePage');
+  }
 }

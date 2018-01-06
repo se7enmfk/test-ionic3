@@ -11,9 +11,10 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { MyApp } from './app.component';
-import { Api,AdmUserProvider, AdmSysParamProvider } from '../providers/providers';
+import { Api, AdmUserProvider, AdmSysParamProvider } from '../providers/providers';
 import { HttpProvider } from '../providers/http/http';
-
+import { NgxEchartsModule } from "ngx-echarts";
+import { BackButtonProvider } from '../providers/back-button/back-button';
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -27,6 +28,7 @@ export function createTranslateLoader(http: HttpClient) {
   imports: [
     BrowserModule,
     HttpClientModule,
+    NgxEchartsModule,
     IonicStorageModule.forRoot({
       name: 'drip_db',
       driverOrder: ['sqlite', 'websql', 'indexdb', 'localstorage']
@@ -38,7 +40,10 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{
+      doneText:"确定",
+      cancelText:"取消1"
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -51,7 +56,8 @@ export function createTranslateLoader(http: HttpClient) {
     Api,
     AdmSysParamProvider,
     AdmUserProvider,
-    HttpProvider
+    HttpProvider,
+    BackButtonProvider
   ]
 })
 export class AppModule { }

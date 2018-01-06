@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Api } from '../api/api';
 import { Storage } from '@ionic/storage';
@@ -20,8 +19,8 @@ export class AdmUserProvider {
     let seq = this.api.post('login/login', accountInfo);
     seq.then((data) => {
       this._loggedIn(data);
+      this.storage.set(Constant.SYS_USER, data);
     });
-
     return seq;
   }
 

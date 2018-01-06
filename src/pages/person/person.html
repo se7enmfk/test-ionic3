@@ -14,5 +14,49 @@
 
 
 <ion-content padding>
-{{'NAME'|translate}}
+  <ion-card>
+    <ion-card-header>
+      Explore Nearby
+    </ion-card-header>
+  
+    <ion-list>
+      <ion-item>
+        <ion-label>Daenerys Targaryen</ion-label>
+        <ion-checkbox color="dark" checked="true"></ion-checkbox>
+      </ion-item> 
+      <ion-item>
+        <ion-label>Start Time</ion-label>
+        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="event.timeStarts"  doneText="确定" ></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>e Time</ion-label>
+        <ion-datetime displayFormat="YYYY-MM-DD" max="2020-10-31" pickerFormat="YYYY MM DD" [(ngModel)]="event.timeStarts1" ></ion-datetime>
+      </ion-item>
+      <button ion-item (click)="personDetail()" >
+        <ion-icon name="medical" item-start></ion-icon>
+        Hospital
+      </button>
+  
+      <button ion-item>
+        <ion-icon name="cafe" item-start></ion-icon>
+        Cafe
+      </button>
+  
+      <button ion-item>
+        <ion-icon name="paw" item-start></ion-icon>
+        Dog Park
+      </button>
+  
+      <button ion-item>
+        <ion-icon name="beer" item-start></ion-icon>
+        Pub
+      </button>
+  
+      <button ion-item>
+        <ion-icon name="planet" item-start></ion-icon>
+        Space
+      </button>
+  
+    </ion-list>
+  </ion-card>
 </ion-content>
