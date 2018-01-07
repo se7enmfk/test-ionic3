@@ -12,7 +12,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { MyApp } from './app.component';
-import { Api, AdmUserProvider, AdmSysParamProvider, BackButtonProvider, LockProvider } from '../providers/providers';
+import { Api, AdmUserProvider, AdmSysParamProvider, BackButtonProvider } from '../providers/providers';
 import { HttpProvider } from '../providers/http/http';
 import { NgxEchartsModule } from "ngx-echarts"; 
 // The translate loader needs to know where to load i18n files
@@ -58,8 +58,7 @@ export function createTranslateLoader(http: HttpClient) {
     AdmSysParamProvider,
     AdmUserProvider,
     HttpProvider,
-    BackButtonProvider,
-    LockProvider
+    BackButtonProvider
   ]
 })
 export class AppModule { }
