@@ -1,5 +1,5 @@
 export class Constant {
-
+    
     static SYS_NAME = "FTX";
     static SYS_USER = "TestUser";
     static SYS_PARAM = "sysParam";

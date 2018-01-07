@@ -3,8 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 import { IonicStorageModule } from '@ionic/storage';
+import { GesturePasswordModule } from 'ngx-gesture-password';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
@@ -29,6 +29,7 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     HttpClientModule,
     NgxEchartsModule,
+    GesturePasswordModule,
     IonicStorageModule.forRoot({
       name: 'drip_db',
       driverOrder: ['sqlite', 'websql', 'indexdb', 'localstorage']
@@ -52,7 +53,6 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [
     StatusBar,
     SplashScreen,
-    FingerprintAIO,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Api,
     AdmSysParamProvider,

@@ -7,12 +7,13 @@ import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { AdmSysParamProvider } from '../providers/providers';
 import { Constant } from './app.config';
+import { FirstPage } from '../pages/pages';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: string = "LoginPage";
+  rootPage: string = FirstPage;
 
   constructor(private translate: TranslateService,
     private config: Config,
