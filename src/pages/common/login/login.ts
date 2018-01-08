@@ -4,8 +4,8 @@ import { IonicPage, NavController, ToastController, Platform } from 'ionic-angul
 import { Storage } from '@ionic/storage';
 import { Md5 } from 'ts-md5/dist/md5';
 
-import { AdmUserProvider, BackButtonProvider } from '../../providers/providers';
-import { Constant } from '../../app/app.config';
+import { AdmUserProvider, BackButtonProvider } from '../../../providers/providers';
+import { Constant } from '../../../app/app.config';
 
 @IonicPage()
 @Component({
@@ -29,15 +29,17 @@ export class LoginPage {
     public toastCtrl: ToastController,
     public storage: Storage,
     private platform: Platform,
-    public backButtonProvider :BackButtonProvider,
+    public backButtonProvider: BackButtonProvider,
     public translateService: TranslateService) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     })
+
     platform.ready().then((result) => {
       this.backButtonProvider.registerBackButtonAction(null);
-   })
+    })
+
   }
 
   // Attempt to login in through our User service

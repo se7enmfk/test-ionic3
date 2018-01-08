@@ -1,5 +1,6 @@
 export class Constant {
     
+    static PERSON_PASSWORD = "person_password";
     static SYS_NAME = "FTX";
     static SYS_USER = "TestUser";
     static SYS_PARAM = "sysParam";

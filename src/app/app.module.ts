@@ -1,20 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+
 import { IonicStorageModule } from '@ionic/storage';
-import { GesturePasswordModule } from 'ngx-gesture-password';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { MyApp } from './app.component';
 import { Api, AdmUserProvider, AdmSysParamProvider, BackButtonProvider } from '../providers/providers';
 import { HttpProvider } from '../providers/http/http';
+
 import { NgxEchartsModule } from "ngx-echarts"; 
+import { GesturePasswordModule } from 'ngx-gesture-password';
+
+import { MyApp } from './app.component';
+
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -41,10 +46,7 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    IonicModule.forRoot(MyApp,{
-      doneText:"确定",
-      cancelText:"取消1"
-    })
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

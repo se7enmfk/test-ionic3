@@ -1,1 +1,3 @@
-export const FirstPage = 'GesturePasswordPage';
+export const FirstPage = 'TabsPage';
+
+export const GesturePasswordPage = 'GesturePasswordPage';

@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, Platform, Tabs } from 'ionic-angular';
+import { IonicPage, NavController, Platform, Tabs, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Constant } from '../../app/app.config'; 
-import { BackButtonProvider } from '../../providers/back-button/back-button';
+import { Constant } from '../../../app/app.config'; 
+import { BackButtonProvider } from '../../../providers/providers';
+import { GesturePasswordPage } from '../../pages';
 
 @IonicPage()
 @Component({
@@ -21,6 +22,7 @@ export class TabsPage {
   constructor(public navCtrl: NavController, 
     public storage: Storage,
     private platform: Platform,
+    public modalCtrl: ModalController,
     public backButtonProvider :BackButtonProvider) {
     let p1 = this.storage.get(Constant.SYS_PARAM);
     let p2 = this.storage.get(Constant.TOKEN);
@@ -30,6 +32,9 @@ export class TabsPage {
     platform.ready().then((result) => {
        this.backButtonProvider.registerBackButtonAction(this.tabRef);
     })
+
+    let profileModal = this.modalCtrl.create(GesturePasswordPage);
+    profileModal.present();
   }
 
 }
