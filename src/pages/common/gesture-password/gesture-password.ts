@@ -23,7 +23,7 @@ export class GesturePasswordPage {
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public storage: Storage) {
-    // this.storage.set(Constant.PERSON_PASSWORD, '12369');
+    this.storage.set(Constant.PERSON_PASSWORD, '12369');
     this.storage.get(Constant.PERSON_PASSWORD).then((result) => {
       this.pwd = result;
     });

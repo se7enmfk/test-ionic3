@@ -15,8 +15,9 @@ export class AdmUserProvider {
    * Send a POST request to our login endpoint with the data
    * the user entered on the form.
    */
-  login(accountInfo: any) {
-    let seq = this.api.post('login/login', accountInfo);
+  login(AdmUser: any) {
+
+    let seq = this.api.post('login/login', AdmUser);
     seq.then((data) => {
       this._loggedIn(data);
       this.storage.set(Constant.SYS_USER, data);

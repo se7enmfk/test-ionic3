@@ -12,8 +12,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { Api, AdmUserProvider, AdmSysParamProvider, BackButtonProvider } from '../providers/providers';
-import { HttpProvider } from '../providers/http/http';
+import { HttpProvider,Api, AdmUserProvider, AdmSysParamProvider, BackButtonProvider } from '../providers/providers';
 
 import { NgxEchartsModule } from "ngx-echarts"; 
 import { GesturePasswordModule } from 'ngx-gesture-password';

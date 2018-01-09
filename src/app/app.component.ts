@@ -29,10 +29,10 @@ export class MyApp {
       splashScreen.hide();
     });
     this.initTranslate();
+    this.storage.set(Constant.TOKEN, null);
 
     admSysParam.retrieveSysParamList();
-    this.storage.get(Constant.SYS_PARAM);
-   }
+  }
 
   //init translate
   initTranslate() {

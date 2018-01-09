@@ -5,6 +5,8 @@ import { Injectable, Injector } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Constant } from '../../app/app.config';
 import { ToastController, App } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
 
 /**
  * Api is a generic REST Api handler. Set your API url first.
@@ -38,7 +40,10 @@ export class Api {
     return this.http.get(this.url + '/' + endpoint, reqOpts);
   }
 
+
   post(endpoint: string, body: any, reqOpts?: any) {
+
+
 
     return this.storage.get(Constant.TOKEN).then(data => {
 
@@ -48,45 +53,56 @@ export class Api {
 
       let options = {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-          'Accept': 'application/x.drip.v2+json',
+          // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
           'Authorization': 'Bearer ' + data
         }
       };
-      return this.http.post(this.url + '/' + endpoint, params.toString(), options).toPromise()
+      return this.http.post(this.url + '/' + endpoint, body, options)
+      // .map(this.extractData)
+      .toPromise()
         .then(this.extractData)
         .catch(err => this.handleError(err));
     });
-    //  return this.http.post(this.url + '/' + endpoint, body, reqOpts);
   }
 
-  private handleError(error: Response | any): Promise<any> {
-    console.log(error);
+  // private handleError(error: Response | any): Promise<any> {
+  //   console.log(error);
 
-    if (error.status == 200) {
-      return Promise.resolve("success");
+  //   if (error.status == 200) {
+  //     return Promise.resolve("success");
+  //   }
+
+  //   let msg = error.text ? error.json().message : '请求地址错误';
+
+  //   if (error.status == 400) {
+  //     // this.app.getActiveNav().push('login-default');
+  //     this.app.getRootNav().push('login-default');
+  //   }
+
+  //   let toast = this.toastCtrl.create({
+  //     message: msg,
+  //     duration: 3000,
+  //     position: 'top',
+  //     cssClass: 'my-toast my-toast-error'
+  //   });
+
+  //   toast.present();
+
+  //   return Promise.reject(msg);
+  //   // return Observable.throw(msg);
+  // } 
+  
+  private handleError (error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const err = error || '';
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
     }
-
-    let msg = error.text ? error.json().message : '请求地址错误';
-
-    if (error.status == 400) {
-      // this.app.getActiveNav().push('login-default');
-      this.app.getRootNav().push('login-default');
-    }
-
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 3000,
-      position: 'top',
-      cssClass: 'my-toast my-toast-error'
-    });
-
-    toast.present();
-
-    return Promise.reject(msg);
-    // return Observable.throw(msg);
+    console.error(errMsg);
+    return Observable.throw(errMsg);
   }
-
   private extractData(res: Response) {
     return res ? res : {};
   }

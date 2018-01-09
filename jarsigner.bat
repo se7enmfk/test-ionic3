@@ -1,0 +1,3 @@
+cd C:\Program Files\Java\jdk1.8.0_121\bin\
+jarsigner.exe -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore /Users/se7en/ftx-cus-app.keystore D:\github\ionic\test-ionic3\platforms\android\build\outputs\apk\android-release-unsigned.apk test-Ionic3
+zipalign -v 4 D:\github\ionic\test-ionic3\platforms\android\build\outputs\apk\android-release-unsigned.apk D:\github\ionic\test-ionic3\platforms\android\build\outputs\apk\test-Ionic3.apk
