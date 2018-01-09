@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Constant } from '../../../app/app.config';
+import { AppConfig } from '../../../app/app.config';
 
 /**
  * Generated class for the GesturePasswordPage page.
@@ -23,8 +23,8 @@ export class GesturePasswordPage {
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public storage: Storage) {
-    this.storage.set(Constant.PERSON_PASSWORD, '12369');
-    this.storage.get(Constant.PERSON_PASSWORD).then((result) => {
+    this.storage.set(AppConfig.PERSON_PASSWORD, '12369');
+    this.storage.get(AppConfig.PERSON_PASSWORD).then((result) => {
       this.pwd = result;
     });
   }

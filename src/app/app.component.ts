@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { AdmSysParamProvider } from '../providers/providers';
-import { Constant } from './app.config';
+import { AppConfig } from './app.config';
 import { FirstPage } from '../pages/pages';
 
 @Component({
@@ -29,7 +29,7 @@ export class MyApp {
       splashScreen.hide();
     });
     this.initTranslate();
-    this.storage.set(Constant.TOKEN, null);
+    this.storage.set(AppConfig.TOKEN, null);
 
     admSysParam.retrieveSysParamList();
   }

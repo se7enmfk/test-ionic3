@@ -4,8 +4,8 @@ import { IonicPage, NavController, ToastController, Platform } from 'ionic-angul
 import { Storage } from '@ionic/storage';
 import { Md5 } from 'ts-md5/dist/md5';
 
-import { AdmUserProvider, BackButtonProvider } from '../../../providers/providers';
-import { Constant } from '../../../app/app.config';
+import { AdmUserProvider, BackButtonProvider, PopupProvider } from '../../../providers/providers';
+import { AppConfig } from '../../../app/app.config'; 
 
 @IonicPage()
 @Component({
@@ -30,6 +30,7 @@ export class LoginPage {
     public storage: Storage,
     private platform: Platform,
     public backButtonProvider: BackButtonProvider,
+    public popup: PopupProvider,
     public translateService: TranslateService) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
@@ -39,7 +40,7 @@ export class LoginPage {
     platform.ready().then((result) => {
       this.backButtonProvider.registerBackButtonAction(null);
     })
-
+    popup.toast('aaa');
   }
 
   // Attempt to login in through our User service
@@ -47,10 +48,10 @@ export class LoginPage {
     this.user.user_code = this.user.user_code.toUpperCase();
     this.user.passwd = this.make(this.user.password);
 
-    this.admUserProvider.login(this.user).then((data) => {
+    this.admUserProvider.login(this.user).then((data) => { 
 
       this.navCtrl.push("TabsPage");
-      this.storage.set(Constant.TOKEN, data.entity.token);
+      this.storage.set(AppConfig.TOKEN, data.entity.token);
     }, (err) => {
       // this.navCtrl.push("TabsPage");
       // Unable to log in
@@ -64,6 +65,6 @@ export class LoginPage {
   }
 
   make(remark) {
-    return Md5.hashStr(Md5.hashStr(remark + Constant.SYS_NAME + remark.substring(-3)) + Constant.SYS_NAME + remark.substring(-3));
+    return Md5.hashStr(Md5.hashStr(remark + AppConfig.SYS_NAME + remark.substring(-3)) + AppConfig.SYS_NAME + remark.substring(-3));
   }
 }

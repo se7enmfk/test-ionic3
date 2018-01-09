@@ -3,17 +3,17 @@ import { URLSearchParams } from '@angular/http';
 
 import { Injectable, Injector } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Constant } from '../../app/app.config';
 import { ToastController, App } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
+import { AppConfig } from '../../../app/app.config';
 
 /**
  * Api is a generic REST Api handler. Set your API url first.
  */
 @Injectable()
 export class Api {
-  url: string = Constant.URL;
+  url: string = AppConfig.URL;
 
   constructor(public http: HttpClient,
     private storage: Storage,
@@ -43,9 +43,7 @@ export class Api {
 
   post(endpoint: string, body: any, reqOpts?: any) {
 
-
-
-    return this.storage.get(Constant.TOKEN).then(data => {
+    return this.storage.get(AppConfig.TOKEN).then(data => {
 
       let params = new URLSearchParams();
       for (let key in body)

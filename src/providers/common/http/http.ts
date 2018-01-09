@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
-import { ToastController, App } from 'ionic-angular';
-import { Constant } from '../../app/app.config';
+import { ToastController, App } from 'ionic-angular'; 
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
+import { AppConfig } from '../../../app/app.config';
 
 /*
   Generated class for the HttpProvider provider.
@@ -25,7 +25,7 @@ export class HttpProvider {
   //region post请求
   post(endpoint: string, body: any, reqOpts?: any) {
 
-    return this.storage.get(Constant.TOKEN).then(data => {
+    return this.storage.get(AppConfig.TOKEN).then(data => {
 
       let params = new URLSearchParams();
       for (let key in body)
@@ -39,7 +39,7 @@ export class HttpProvider {
         }
       };
 
-      let seq = this.http.post(Constant.URL + '/' + endpoint, params.toString(), options);
+      let seq = this.http.post(AppConfig.URL + '/' + endpoint, params.toString(), options);
 
       // Observable.create((result) => {
       //    result.next();
@@ -50,9 +50,9 @@ export class HttpProvider {
       //   console.error('ERROR', err);
       // });
 
-      //return  this.http.post(Constant.URL + '/' + endpoint, params.toString(), options);
+      //return  this.http.post(AppConfig.URL + '/' + endpoint, params.toString(), options);
 
-      return this.http.post(Constant.URL + '/' + endpoint, params.toString(), options)
+      return this.http.post(AppConfig.URL + '/' + endpoint, params.toString(), options)
 
         .subscribe((result) => {
 

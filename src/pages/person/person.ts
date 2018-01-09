@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AdmUserProvider } from '../../providers/providers';
 
 /**
  * Generated class for the PersonPage page.
@@ -27,11 +28,15 @@ export class PersonPage {
     }
   ]
   
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public admUser: AdmUserProvider,
+    public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PersonPage');
+    console.log(this.admUser._user);
+    
   }
 
   personDetail(){

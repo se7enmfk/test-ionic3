@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Constant } from '../../app/app.config';
+import { AppConfig } from '../../app/app.config';
+import { AdmUserProvider } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -14,11 +15,12 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public admUser: AdmUserProvider,
     private storage: Storage) {
   }
 
   ionViewDidLoad() {
-    this.storage.get(Constant.TOKEN).then((result) => {
+    this.storage.get(AppConfig.TOKEN).then((result) => {
       let options = {
         color: ['#3398DB'],
         grid: {
@@ -136,6 +138,7 @@ export class HomePage {
       this.options = echartOption;
 
     })
+    console.log(this.admUser._user);
 
     console.log('ionViewDidLoad HomePage');
   }

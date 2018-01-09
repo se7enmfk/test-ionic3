@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, Platform, Tabs, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Constant } from '../../../app/app.config'; 
+import { AppConfig } from '../../../app/app.config'; 
 import { BackButtonProvider } from '../../../providers/providers';
 import { GesturePasswordPage } from '../../pages';
 
@@ -24,8 +24,8 @@ export class TabsPage {
     private platform: Platform,
     public modalCtrl: ModalController,
     public backButtonProvider :BackButtonProvider) {
-    let p1 = this.storage.get(Constant.SYS_PARAM);
-    let p2 = this.storage.get(Constant.TOKEN);
+    let p1 = this.storage.get(AppConfig.SYS_PARAM);
+    let p2 = this.storage.get(AppConfig.TOKEN);
     Promise.all([p1, p2]).then((result) => {
       console.log(result);
     });
