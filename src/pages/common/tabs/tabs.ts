@@ -24,17 +24,16 @@ export class TabsPage {
     private platform: Platform,
     public modalCtrl: ModalController,
     public backButtonProvider :BackButtonProvider) {
-    let p1 = this.storage.get(AppConfig.SYS_PARAM);
+    let p1 = this.storage.get(AppConfig.SYS_NAME);
     let p2 = this.storage.get(AppConfig.TOKEN);
     Promise.all([p1, p2]).then((result) => {
-      console.log(result);
+      // console.log(result);
     });
     platform.ready().then((result) => {
        this.backButtonProvider.registerBackButtonAction(this.tabRef);
     })
 
-    let profileModal = this.modalCtrl.create(GesturePasswordPage);
-    profileModal.present();
+    this.modalCtrl.create(GesturePasswordPage).present();
   }
 
 }

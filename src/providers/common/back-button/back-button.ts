@@ -1,6 +1,6 @@
 import { Platform, App, NavController, Tabs } from 'ionic-angular';
 import { Injectable } from '@angular/core';
-import { PopupProvider } from '../commonProviders';
+import { PopupProvider } from '../popup/popup';
 
 /*
   Generated class for the BackButtonProvider provider.
