@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title center>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item (click)="personDetail()">
+      <ion-icon name="ios-card" item-start></ion-icon>
+      银行卡
+      <ion-note clear item-end>
+        <strong ion-text class="num" color="danger">  </strong>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-note>
+    </ion-item>
+    <ion-item (click)="personDetail()">
+      <ion-icon name="ios-card" item-start></ion-icon>
+      密码修改
+      <ion-note clear item-end>
+        <strong ion-text class="num" color="danger"> </strong>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-note>
+    </ion-item>
+     
+  </ion-list>
+</ion-content>

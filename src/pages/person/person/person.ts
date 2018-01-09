@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AdmUserProvider } from '../../providers/providers';
 import { Storage } from '@ionic/storage';
-import { AppConfig } from '../../app/app.config';
+import { AppConfig } from '../../../app/app.config';
+import { AdmUserProvider } from '../../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -33,7 +33,7 @@ export class PersonPage {
   }
 
   ionViewDidLoad() {
-    this.storage.get(AppConfig.SYS_USER).then((data) => { 
+    this.storage.get(AppConfig.SYS_USER).then((data) => {
 
       this.user = data;
     })
@@ -42,7 +42,7 @@ export class PersonPage {
 
   }
 
-  personDetail() {
-    this.navCtrl.push('HomePage');
+  personDetail(type) {
+    this.navCtrl.push('PersonDetailPage', { type: type });
   }
 }
