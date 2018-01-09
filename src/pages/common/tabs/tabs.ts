@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, Platform, Tabs, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { AppConfig } from '../../../app/app.config'; 
-import { BackButtonProvider } from '../../../providers/providers';
+import { AppConfig } from '../../../app/app.config';  
 import { GesturePasswordPage } from '../../pages';
+import { BackButtonProvider } from '../../../providers/common/commonProviders';
 
 @IonicPage()
 @Component({

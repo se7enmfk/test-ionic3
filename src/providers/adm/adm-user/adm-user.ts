@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
-import { Api } from '../../providers';
-import { AppConfig } from '../../../app/app.config';
+import { Storage } from '@ionic/storage'; 
+import { AppConfig } from '../../../app/app.config'; 
+import { HttpProvider } from '../../common/commonProviders';
 
 @Injectable()
 export class AdmUserProvider {
   _user: any;
 
-  constructor(public api: Api,
+  constructor(public http: HttpProvider,
     private storage: Storage) { }
 
 
@@ -17,7 +17,7 @@ export class AdmUserProvider {
    */
   login(admUser: any) {
     
-    let seq = this.api.post('login/login', admUser);
+    let seq = this.http.post('login/login', admUser);
     seq.then((data) => {
       this._loggedIn(data);
       this.storage.set(AppConfig.SYS_USER, data);
@@ -30,7 +30,7 @@ export class AdmUserProvider {
    * the user entered on the form.
    */
   signup(accountInfo: any) {
-    let seq = this.api.post('signup', accountInfo);
+    let seq = this.http.post('signup', accountInfo);
 
     // seq.subscribe((res: any) => {
     //   // If the API returned a successful response, mark the user as logged in

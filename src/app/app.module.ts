@@ -12,12 +12,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { PopupProvider, HttpProvider, Api, AdmUserProvider, AdmSysParamProvider, BackButtonProvider } from '../providers/providers';
 
 import { NgxEchartsModule } from "ngx-echarts";
 import { GesturePasswordModule } from 'ngx-gesture-password';
 
 import { MyApp } from './app.component';
+
+import { AdmUserProvider, AdmSysParamProvider } from '../providers/providers';
+import { HttpProvider, BackButtonProvider, PopupProvider } from '../providers/common/commonProviders';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -55,7 +57,6 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    Api,
     AdmSysParamProvider,
     AdmUserProvider,
     HttpProvider,

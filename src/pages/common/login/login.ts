@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Md5 } from 'ts-md5/dist/md5';
 
-import { AdmUserProvider, BackButtonProvider, PopupProvider } from '../../../providers/providers';
-import { AppConfig } from '../../../app/app.config'; 
+import { AdmUserProvider } from '../../../providers/providers';
+import { AppConfig } from '../../../app/app.config';
+import { BackButtonProvider, PopupProvider } from '../../../providers/common/commonProviders';
 
 @IonicPage()
 @Component({
@@ -26,7 +27,6 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController,
     public admUserProvider: AdmUserProvider,
-    public toastCtrl: ToastController,
     public storage: Storage,
     private platform: Platform,
     public backButtonProvider: BackButtonProvider,
@@ -48,19 +48,12 @@ export class LoginPage {
     this.user.user_code = this.user.user_code.toUpperCase();
     this.user.passwd = this.make(this.user.password);
 
-    this.admUserProvider.login(this.user).then((data) => { 
+    this.admUserProvider.login(this.user).then((data) => {
 
       this.navCtrl.push("TabsPage");
-      this.storage.set(AppConfig.TOKEN, data.entity.token);
+      // this.storage.set(AppConfig.TOKEN, data.entity.token);
     }, (err) => {
-      // this.navCtrl.push("TabsPage");
-      // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+      this.popup.toast(this.loginErrorString);
     });
   }
 

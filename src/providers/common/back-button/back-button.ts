@@ -1,5 +1,6 @@
-import { Platform, ToastController, App, NavController, Tabs } from 'ionic-angular';
+import { Platform, App, NavController, Tabs } from 'ionic-angular';
 import { Injectable } from '@angular/core';
+import { PopupProvider } from '../commonProviders';
 
 /*
   Generated class for the BackButtonProvider provider.
@@ -10,18 +11,18 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class BackButtonProvider {
 
-  
+
   //控制硬件返回按钮是否触发，默认false
   backButtonPressed: boolean = false;
 
   //构造函数 依赖注入
   constructor(public platform: Platform,
-              public appCtrl: App,
-              public toastCtrl: ToastController) { }
+    public appCtrl: App,
+    private popup: PopupProvider) { }
 
   //注册方法
   registerBackButtonAction(tabRef: Tabs): void {
-    
+
     //registerBackButtonAction是系统自带的方法
     this.platform.registerBackButtonAction(() => {
       //获取NavController
@@ -47,12 +48,8 @@ export class BackButtonProvider {
     if (this.backButtonPressed) {
       this.platform.exitApp();
     } else {
-        //第一次按，弹出Toast
-        this.toastCtrl.create({
-            message: '再按一次退出应用',
-            duration: 2000,
-            position: 'top'
-        }).present();
+      //第一次按，弹出Toast
+      this.popup.toast('再按一次退出应用');
       //标记为true
       this.backButtonPressed = true;
       //两秒后标记为false，如果退出的话，就不会执行了
