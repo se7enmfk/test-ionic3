@@ -15,7 +15,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public admUser: AdmUserProvider,
+    public admUserProvider: AdmUserProvider,
     private storage: Storage) {
   }
 
@@ -138,7 +138,7 @@ export class HomePage {
       this.options = echartOption;
 
     })
-    console.log(this.admUser._user);
+    console.log(this.admUserProvider.admUser);
 
     console.log('ionViewDidLoad HomePage');
   }

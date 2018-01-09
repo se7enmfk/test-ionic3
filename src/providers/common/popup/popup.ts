@@ -132,11 +132,11 @@ export class PopupProvider {
    * toast短暂提示   (支持自定义)
    * http://ionicframework.com/docs/api/components/toast/ToastController/
    * @param {string} content
-   * @param {string} position    //"top", "middle", "bottom".
    * @param {string} cssClass
+   * @param {string} position    //"top", "middle", "bottom".
    * @param {number} duration
    */
-  toast(content: string, position: string = 'middle', cssClass: string = 'toast-content', duration: number = 3000) {
+  toast(content: string, cssClass: string = 'toast-content',position: string = 'middle',  duration: number = 3000) {
     let toast = this.toastCtrl.create({
       message: content,
       duration: 3000,

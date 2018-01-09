@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AdmUserProvider } from '../../providers/providers';
-
-/**
- * Generated class for the PersonPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Storage } from '@ionic/storage';
+import { AppConfig } from '../../app/app.config';
 
 @IonicPage()
 @Component({
@@ -15,31 +10,39 @@ import { AdmUserProvider } from '../../providers/providers';
   templateUrl: 'person.html',
 })
 export class PersonPage {
-  event={timeStarts:null,timeStarts1:null};
+  messageCount = 10;
+  user = {};
+
+  event = { timeStarts: null, timeStarts1: null };
   list = [
     {
-      name:"个人资料"
-    },{
-      name:"个人资料"
-    },{
-      name:"个人资料"
-    },{
-      name:"个人资料"
+      name: "个人资料"
+    }, {
+      name: "个人资料"
+    }, {
+      name: "个人资料"
+    }, {
+      name: "个人资料"
     }
   ]
-  
+
   constructor(public navCtrl: NavController,
-    public admUser: AdmUserProvider,
+    public admUserProvider: AdmUserProvider,
+    public storage: Storage,
     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PersonPage');
-    console.log(this.admUser._user);
-    
+    this.storage.get(AppConfig.SYS_USER).then((data) => { 
+
+      this.user = data;
+    })
+
+    console.log(this.user);
+
   }
 
-  personDetail(){
+  personDetail() {
     this.navCtrl.push('HomePage');
   }
 }

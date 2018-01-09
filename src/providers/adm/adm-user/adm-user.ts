@@ -5,7 +5,7 @@ import { HttpProvider } from '../../common/commonProviders';
 
 @Injectable()
 export class AdmUserProvider {
-  _user: any;
+  admUser: any;
 
   constructor(public http: HttpProvider,
     private storage: Storage) { }
@@ -48,14 +48,14 @@ export class AdmUserProvider {
    * Log the user out, which forgets the session
    */
   logout() {
-    this._user = null;
+    this.admUser = null;
   }
 
   /**
    * Process a login/signup response to store user data
    */
   _loggedIn(resp) {
-    this._user = resp.entity;
+    this.admUser = resp.entity;
   }
 
 }

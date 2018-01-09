@@ -1,62 +1,67 @@
-<!--
-  Generated template for the PersonPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>person</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goSettingPage()">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title center>人人</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="goMessagePage()" class="message-btn">
+        <ion-icon name="mail">
+          <ion-badge class="message-badge" color="danger" *ngIf="messageCount>0">{{messageCount}}</ion-badge>
+        </ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content >
+  <ion-list class="profile-list" >
+    <ion-item (click)="goUserHomePage()">
+      <ion-thumbnail item-start>
+      <img src="{{user.avatar_url || 'assets/imgs/icon.png'}}">
+      </ion-thumbnail >
+      <!-- <h2> <span ion-text [color]="user.is_vip?'danger':'dark'">{{user.nickname || '?????'}}</span><i class="iconfont icon-vip-copy" ion-text [color]="user.is_vip?'danger':'gray'" (click)="goVipPage($event)"></i></h2> -->
+      <!-- <p>{{user.signature || ' '}}</p> -->
+      <ion-note item-end>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+  <ion-row class="follow-row" margin-bottom (click)="goUserHomePage()">
+    <ion-col text-center>
+      <!-- <strong ion-text class="num" color="dark">{{user.follow_count || '0'}}</strong> -->
+      <br>
+      <ion-note>??</ion-note>
+    </ion-col>
+    <ion-col text-center>
+      <!-- <strong ion-text class="num" color="dark">{{user.fans_count || '0'}}</strong> -->
+      <br>
+      <ion-note>??</ion-note>
+    </ion-col>
+    <ion-col text-center>
+      <!-- <strong ion-text class="num" color="dark">{{user.event_count || '0'}}</strong> -->
+      <br>
+      <ion-note>??</ion-note>
+    </ion-col>
+  </ion-row>
 
-<ion-content padding>
-  <ion-card>
-    <ion-card-header>
-      Explore Nearby
-    </ion-card-header>
-  
-    <ion-list>
-      <ion-item>
-        <ion-label>Daenerys Targaryen</ion-label>
-        <ion-checkbox color="dark" checked="true"></ion-checkbox>
-      </ion-item> 
-      <ion-item>
-        <ion-label>Start Time</ion-label>
-        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="event.timeStarts"  doneText="确定" ></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <ion-label>e Time</ion-label>
-        <ion-datetime displayFormat="YYYY-MM-DD" max="2020-10-31" pickerFormat="YYYY MM DD" [(ngModel)]="event.timeStarts1" ></ion-datetime>
-      </ion-item>
-      <button ion-item (click)="personDetail()" >
-        <ion-icon name="medical" item-start></ion-icon>
-        Hospital
-      </button>
-  
-      <button ion-item>
-        <ion-icon name="cafe" item-start></ion-icon>
-        Cafe
-      </button>
-  
-      <button ion-item>
-        <ion-icon name="paw" item-start></ion-icon>
-        Dog Park
-      </button>
-  
-      <button ion-item>
-        <ion-icon name="beer" item-start></ion-icon>
-        Pub
-      </button>
-  
-      <button ion-item>
-        <ion-icon name="planet" item-start></ion-icon>
-        Space
-      </button>
-  
-    </ion-list>
-  </ion-card>
+  <ion-list>
+    <ion-item (click)="goWalletPage()">
+      <ion-icon name="ios-card" item-start></ion-icon>
+      ????
+      <ion-note clear item-end>
+        <strong ion-text class="num" color="danger"> {{user.coin || '54,323'}} </strong>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-note>
+    </ion-item>
+    <!--<ion-item>-->
+      <!--????-->
+      <!--<ion-note clear item-end>-->
+        <!--<ion-icon name="arrow-forward"></ion-icon>-->
+      <!--</ion-note>-->
+    <!--</ion-item>-->
+  </ion-list>
+
 </ion-content>

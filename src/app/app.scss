@@ -14,7 +14,40 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+$primary:   #488aff;
+$darkWhite: #e0e0e0;
 
-.toast-content{
-    width: 50%;
+
+ion-content{
+    background-color: $darkWhite!important;
+}
+ion-navbar {
+    background-color: $primary;
+}
+.message-btn {
+    position: relative;
+    width: 42px;
+    top:1px;
+    right: 1px;
+    overflow: visible!important;
+}
+
+.message-badge {
+    background-color: red;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    border-radius: 100%;
+}
+.toast-content{ 
+    text-align: center;
+    top:33px;
+    .toast-message {
+        padding:3px;
+    }
+    .toast-wrapper {
+        left:0;
+        right:0;
+        border-radius: 0;
+    } 
 }

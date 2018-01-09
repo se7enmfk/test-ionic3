@@ -1,5 +1,6 @@
 {
   "BACK_BUTTON_TEXT": "回退",
+  "err.badNet":"网络连接失败",
 
   "NAME": "姓名",
   "EMAIL": "邮箱",
