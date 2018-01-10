@@ -39,6 +39,7 @@
     "ngx-gesture-password": "^1.0.1",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
+    "sweetalert2": "^7.3.5",
     "ts-md5": "^1.2.2",
     "zone.js": "0.8.18"
   },

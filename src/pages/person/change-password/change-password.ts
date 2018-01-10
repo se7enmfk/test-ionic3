@@ -12,10 +12,7 @@ import { AdmUserProvider } from '../../../providers/providers';
 export class ChangePasswordPage {
 
   private ftxForm: FormGroup;
-
-  personDetail = { password: null, new_password: null };
   showPass = false;
-
   _showPass = false;
 
   constructor(public navCtrl: NavController,

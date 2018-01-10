@@ -14,14 +14,14 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-$primary:   #488aff;
-$darkWhite: #e0e0e0;
 
 
 ion-content{
-    background-color: $darkWhite!important;
+    background-color: color($colors, darkWhite)!important;
 }
-
+ion-title{
+    text-align: center;
+}
 .message-btn {
     position: relative;
     width: 42px;
@@ -49,3 +49,8 @@ ion-content{
         border-radius: 0;
     } 
 }
+.footer-bar {
+    span {
+      color: #999;
+    }
+  }

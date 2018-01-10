@@ -37,21 +37,15 @@ export class AdmUserProvider {
    * Send a POST request to our signup endpoint with the data
    * the user entered on the form.
    */
-  signup(accountInfo: any) {
-    let seq = this.http.post('login/signup', accountInfo);
-
-    // seq.subscribe((res: any) => {
-    //   // If the API returned a successful response, mark the user as logged in
-    //   if (res.status == 'success') {
-    //     this._loggedIn(res);
-    //   }
-    // }, err => {
-    //   console.error('ERROR', err);
-    // });
-
+  signUp(admUser: any) {
+    admUser.user_name="aaa";
+    let seq = this.http.post('login/signUp', admUser);
     return seq;
   }
-
+  getCode(admUser){
+    // let seq = this.http.post('login/signUp', admUser);
+    return Promise.resolve(true);
+  }
   /**
    * Log the user out, which forgets the session
    */

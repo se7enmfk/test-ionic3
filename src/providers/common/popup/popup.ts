@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoadingController, AlertController, ToastController, ModalController } from 'ionic-angular';
+import swal from 'sweetalert2';
 
 /**
  *  遮罩层服务
@@ -135,18 +136,17 @@ export class PopupProvider {
    * @param {string} position    //"top", "middle", "bottom".
    * @param {number} duration
    */
-  toast(content: string, cssClass: string = 'toast-content',position: string = 'middle',  duration: number = 3000) {
+  toast(content: string, cssClass: string = 'toast-content', position: string = 'middle', duration: number = 2000) {
     let toast = this.toastCtrl.create({
       message: content,
-      duration: 2000,
-      position: position,     //"top", "middle", "bottom".
+      duration: duration,
+      position: position,
       cssClass: cssClass,
       showCloseButton: false,
       closeButtonText: "关闭",
       dismissOnPageChange: true,     //当页面变化时是否dismiss
     });
-    toast.onDidDismiss(() => {
-    });
+    toast.onDidDismiss(() => { });
     toast.present();
   }
 
@@ -220,5 +220,19 @@ export class PopupProvider {
       console.log('Dismissed loading');
     });
   }
-
+  /**
+   * swalalert2弹出信息
+   * @param {string} title  //
+   * @param {string} type   //'success' | 'error' | 'warning' | 'info' | 'question' 
+   * @param {string} timer   
+   */
+  swal(title: string, type: any = 'success', timer: number = 2000) {
+    return swal({
+      title: title,
+      type: type,
+      timer: timer,
+      showConfirmButton: false,
+      width: '80%'
+    });
+  }
 }
