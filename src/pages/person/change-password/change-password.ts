@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Md5Provider, PopupProvider } from '../../../providers/common/commonProviders';
 import { AdmUserProvider } from '../../../providers/providers';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @IonicPage()
 @Component({
-  selector: 'page-person-detail',
-  templateUrl: 'person-detail.html',
+  selector: 'page-change-password',
+  templateUrl: 'change-password.html',
 })
-export class PersonDetailPage {
+export class ChangePasswordPage {
 
   private ftxForm: FormGroup;
 

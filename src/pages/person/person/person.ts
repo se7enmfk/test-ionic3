@@ -32,10 +32,13 @@ export class PersonPage {
     this.ionViewDidLoad();
 
     setTimeout(() => {
-        refresher.complete();
+      refresher.complete();
     }, 2000);
-}
+  }
+  changePassword(type) {
+    this.navCtrl.push('ChangePasswordPage', { type: type });
+  }
   personDetail(type) {
-    this.navCtrl.push('PersonDetailPage', { type: type });
+    this.navCtrl.push('ChangePasswordPage', { type: type });
   }
 }
