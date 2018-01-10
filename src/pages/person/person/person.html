@@ -1,5 +1,6 @@
+<!-- header -->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color='navbar'>
     <ion-buttons left>
       <button ion-button icon-only (click)="goSettingPage()">
         <ion-icon name="settings"></ion-icon>
@@ -15,14 +16,21 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
+<!-- content -->
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list class="profile-list">
     <ion-item (click)="personDetail(1)">
       <ion-thumbnail item-start>
         <img src="{{user.avatar_url || 'assets/imgs/icon.png'}}">
       </ion-thumbnail>
-      <h2> <span ion-text [color]="user.is_vip?'danger':'dark'">{{user.nickname || '啬甩'}}</span><i class="iconfont icon-vip-copy" ion-text [color]="user.is_vip?'danger':'gray'" (click)="goVipPage($event)"></i></h2>
+      <h2>
+        <span ion-text [color]="user.is_vip?'danger':'dark'">{{user.nickname || '啬甩'}}</span>
+        <i class="iconfont icon-vip-copy" ion-text [color]="user.is_vip?'danger':'gray'" (click)="goVipPage($event)"></i>
+      </h2>
       <p>13729909281</p>
       <p>最后登录时间:{{user.signature || ''}}</p>
       <ion-note item-end>

@@ -74,7 +74,6 @@ export class HttpProvider {
     })
 
     if (error.status == 400) {
-      // this.app.getActiveNav().push('login-default');
       this.app.getRootNav().push('login-default');
     }
     this.popup.toast(msg);

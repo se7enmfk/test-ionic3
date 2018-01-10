@@ -1,26 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage'; 
-import { AppConfig } from '../../../app/app.config'; 
+import { Storage } from '@ionic/storage';
+import { AppConfig } from '../../../app/app.config';
 import { HttpProvider } from '../../common/commonProviders';
 
 @Injectable()
 export class AdmUserProvider {
-  admUser: any;
+  _admUser: { passwd: any, mode_: any };
 
   constructor(public http: HttpProvider,
     private storage: Storage) { }
 
-
+  save(admUser) {
+    let seq = this.http.post('adm/user', admUser);
+    seq.then((data) => {
+      this._admUser = data.entity;
+      this.storage.set(AppConfig.SYS_USER, data.entity);
+    });
+    return seq;
+  }
   /**
    * Send a POST request to our login endpoint with the data
    * the user entered on the form.
    */
   login(admUser: any) {
-    
+
     let seq = this.http.post('login/login', admUser);
     seq.then((data) => {
-      this._loggedIn(data);
-      this.storage.set(AppConfig.SYS_USER, data);
+      this._admUser = data.entity;
+      this.storage.set(AppConfig.SYS_USER, data.entity);
+      this.storage.set(AppConfig.TOKEN, data.entity.token);
     });
     return seq;
   }
@@ -30,7 +38,7 @@ export class AdmUserProvider {
    * the user entered on the form.
    */
   signup(accountInfo: any) {
-    let seq = this.http.post('signup', accountInfo);
+    let seq = this.http.post('login/signup', accountInfo);
 
     // seq.subscribe((res: any) => {
     //   // If the API returned a successful response, mark the user as logged in
@@ -48,14 +56,6 @@ export class AdmUserProvider {
    * Log the user out, which forgets the session
    */
   logout() {
-    this.admUser = null;
+    this._admUser = null;
   }
-
-  /**
-   * Process a login/signup response to store user data
-   */
-  _loggedIn(resp) {
-    this.admUser = resp.entity;
-  }
-
 }

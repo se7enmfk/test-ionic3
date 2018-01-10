@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the PersonDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Md5Provider, PopupProvider } from '../../../providers/common/commonProviders';
+import { AdmUserProvider } from '../../../providers/providers';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -15,15 +11,59 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PersonDetailPage {
 
-  personDetail = {};
+  private ftxForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log(navParams.get('type'));
+  personDetail = { password: null, new_password: null };
+  showPass = false;
 
+  _showPass = false;
+
+  constructor(public navCtrl: NavController,
+    private formBuilder: FormBuilder,
+    private md5Provider: Md5Provider,
+    private admUserProvider: AdmUserProvider,
+    private popup: PopupProvider,
+    public navParams: NavParams) {
+
+    this.ftxForm = this.formBuilder.group({
+      'old_password': ['', [Validators.required]],
+      'new_password': ['', [Validators.required]],
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PersonDetailPage');
-  }
+  save() {
+    if (!this.ftxForm.valid) {
+      if (!this.ftxForm.controls.old_password.valid) {
+        this.popup.toast("请输入原密码");
+        return;
+      }
 
+      if (!this.ftxForm.controls.new_password.valid) {
+        this.popup.toast("请输入新密码");
+        return;
+      }
+    }
+    let old_passwd = this.md5Provider.make(this.ftxForm.controls.old_password.value);
+    let new_passwd = this.md5Provider.make(this.ftxForm.controls.new_password.value);
+    if (this.admUserProvider._admUser.passwd != old_passwd) {
+      this.popup.toast("原密码输入不正确");
+      return;
+    }
+    this.admUserProvider._admUser.passwd = new_passwd;
+    this.admUserProvider._admUser.mode_ = 'E';
+    this.admUserProvider.save(this.admUserProvider._admUser).then((data) => {
+      if (data) {
+        this.popup.toast("密码修改成功");
+        this.navCtrl.pop();
+      }
+    });
+
+  }
+  showPassword(flag) {
+    if (flag) {
+      this.showPass = !this.showPass;
+    } else {
+      this._showPass = !this._showPass;
+    }
+  }
 }

@@ -138,7 +138,7 @@ export class HomePage {
       this.options = echartOption;
 
     })
-    console.log(this.admUserProvider.admUser);
+    console.log(this.admUserProvider._admUser);
 
     console.log('ionViewDidLoad HomePage');
   }

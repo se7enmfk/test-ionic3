@@ -13,7 +13,6 @@ export class PopupProvider {
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
     public modalCtrl: ModalController) {
-    console.log('PopSerProvider Provider');
   }
 
   /**
@@ -139,15 +138,14 @@ export class PopupProvider {
   toast(content: string, cssClass: string = 'toast-content',position: string = 'middle',  duration: number = 3000) {
     let toast = this.toastCtrl.create({
       message: content,
-      duration: 3000,
+      duration: 2000,
       position: position,     //"top", "middle", "bottom".
       cssClass: cssClass,
       showCloseButton: false,
       closeButtonText: "关闭",
-      dismissOnPageChange: false,     //当页面变化时是否dismiss
+      dismissOnPageChange: true,     //当页面变化时是否dismiss
     });
     toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
     });
     toast.present();
   }

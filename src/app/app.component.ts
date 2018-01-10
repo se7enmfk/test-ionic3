@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
-import { AdmSysParamProvider } from '../providers/providers';
+import { AdmSysParamProvider, AdmUserProvider } from '../providers/providers';
 import { AppConfig } from './app.config';
 import { FirstPage } from '../pages/pages';
 
@@ -21,6 +21,7 @@ export class MyApp {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     public admSysParam: AdmSysParamProvider,
+    public admUserProvider: AdmUserProvider,
     private storage: Storage) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -28,10 +29,15 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+
     this.initTranslate();
     this.storage.set(AppConfig.TOKEN, null);
 
     admSysParam.retrieveSysParamList();
+    
+    this.storage.get(AppConfig.SYS_USER).then((data) => {
+      admUserProvider._admUser = data;
+    })
   }
 
   //init translate

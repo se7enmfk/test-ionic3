@@ -13,19 +13,6 @@ export class PersonPage {
   messageCount = 10;
   user = {};
 
-  event = { timeStarts: null, timeStarts1: null };
-  list = [
-    {
-      name: "个人资料"
-    }, {
-      name: "个人资料"
-    }, {
-      name: "个人资料"
-    }, {
-      name: "个人资料"
-    }
-  ]
-
   constructor(public navCtrl: NavController,
     public admUserProvider: AdmUserProvider,
     public storage: Storage,
@@ -34,14 +21,20 @@ export class PersonPage {
 
   ionViewDidLoad() {
     this.storage.get(AppConfig.SYS_USER).then((data) => {
-
       this.user = data;
     })
 
     console.log(this.user);
 
   }
+  doRefresh(refresher) {
 
+    this.ionViewDidLoad();
+
+    setTimeout(() => {
+        refresher.complete();
+    }, 2000);
+}
   personDetail(type) {
     this.navCtrl.push('PersonDetailPage', { type: type });
   }
