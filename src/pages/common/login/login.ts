@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { AdmUserProvider } from '../../../providers/providers';
 import { AppConfig } from '../../../app/app.config';
 import { BackButtonProvider, PopupProvider, Md5Provider } from '../../../providers/common/commonProviders';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -13,19 +14,12 @@ import { BackButtonProvider, PopupProvider, Md5Provider } from '../../../provide
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  user = {
-    user_code: 'admin',
-    password: '123',
-    passwd: null
-  };
-  // Our translated text strings
-  private loginErrorString: string;
+
+  private ftxForm: FormGroup;
 
   constructor(public navCtrl: NavController,
     public admUserProvider: AdmUserProvider,
+    private formBuilder: FormBuilder,
     public md5Provider: Md5Provider,
     public storage: Storage,
     private platform: Platform,
@@ -33,25 +27,41 @@ export class LoginPage {
     public popup: PopupProvider,
     public translateService: TranslateService) {
 
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
+    this.ftxForm = this.formBuilder.group({
+      mobile: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      passwd: ['', []]
+    });
 
     platform.ready().then((result) => {
       this.backButtonProvider.registerBackButtonAction(null);
     })
-    popup.toast('aaa');
   }
 
   // Attempt to login in through our User service
   doLogin() {
-    this.user.user_code = this.user.user_code.toUpperCase();
-    this.user.passwd = this.md5Provider.make(this.user.password);
+    if (!this.ftxForm.valid) {
+      if (!this.ftxForm.controls.mobile.valid || this.ftxForm.controls.mobile.errors) {
+        this.popup.toast('请输入正确的手机号码')
+        return;
+      }
+      if (!this.ftxForm.controls.password.valid) {
+        this.popup.toast('请输入密码')
+        return;
+      }
+    }
 
-    this.admUserProvider.login(this.user).then((data) => {
-      this.navCtrl.push("TabsPage");
-    }, (err) => {
-      this.popup.toast(this.loginErrorString);
+    this.ftxForm.value.passwd = this.md5Provider.make(this.ftxForm.value.password);
+
+    this.admUserProvider.login(this.ftxForm.value).then((data) => {
+      if (data)
+        this.navCtrl.push("TabsPage");
     });
+  }
+  goSignUpPage() {
+    this.navCtrl.push("SignUpPage");
+  }
+  goForgetPage() {
+    this.navCtrl.push("ForgetPage");
   }
 }

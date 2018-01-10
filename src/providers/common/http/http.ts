@@ -12,7 +12,6 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class HttpProvider {
-  url: string = AppConfig.URL;
 
   constructor(public http: HttpClient,
     private storage: Storage,
@@ -37,13 +36,19 @@ export class HttpProvider {
       }
     }
 
-    return this.http.get(this.url + '/' + endpoint, reqOpts)
+    return this.http.get(AppConfig.BASE_URL + endpoint, reqOpts)
       .toPromise()
       .catch(err => this.handleError(err));;
   }
 
 
-  post(endpoint: string, body: any, reqOpts?: any) {
+  /**
+   * post请求 默认application/json
+   * @param url url地址
+   * @param body 请求参数
+   * @param reqOpts 请求配置
+   */
+  post(url: string, body: any, reqOpts?: any) {
 
     return this.storage.get(AppConfig.TOKEN).then(data => {
 
@@ -59,28 +64,37 @@ export class HttpProvider {
       };
       options = reqOpts ? reqOpts : options;
 
-      return this.http.post(this.url + '/' + endpoint, body, options)
+      return this.http.post(AppConfig.BASE_URL + url, body, options)
         .toPromise()
-        .then(this.extractData)
+        .then(res => this.handleSuccess(res))
         .catch(err => this.handleError(err));
     });
   }
 
-  private handleError(error: Response | any): Promise<any> {
+  /**
+   * 请求成功调用
+   * @param result 请求结果
+   */
+  private handleSuccess(result: Response | any) {
+    if (result && result.success == 'false') {
+      this.popup.toast('无权限访问');
+      return;
+    }
+    return result;
+  }
+
+  /**
+   * 请求失败调用
+   * @param error 请求失败
+   */
+  private handleError(error: Response | any) {
     let msg: any;
 
     this.translateService.get('err.badNet').subscribe((value) => {
       msg = value;
     })
-
-    if (error.status == 400) {
-      this.app.getRootNav().push('login-default');
-    }
-    this.popup.toast(msg);
-    return Promise.resolve();
+    if (msg)
+      this.popup.toast(msg);
   }
 
-  private extractData(res: Response) {
-    return res ? res : {};
-  }
 }

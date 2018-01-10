@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Md5Provider, PopupProvider } from '../../../providers/common/commonProviders';
 import { AdmUserProvider } from '../../../providers/providers';
-import swal from 'sweetalert2';
 
 @IonicPage()
 @Component({
@@ -76,14 +75,14 @@ export class SignUpPage {
   }
 
   goLoginPage() {
-    this.navCtrl.push('LoginPage');
+    this.navCtrl.pop();
   }
 
   goForgetPage() {
     this.navCtrl.push('ForgetPage');
   }
 
-  doRegister() {
+  doSignUp() {
     if (!this.ftxForm.valid) {
       if (!this.ftxForm.controls.mobile.valid || this.ftxForm.controls.mobile.errors) {
         this.popup.toast('请输入正确的手机号码')
