@@ -101,7 +101,7 @@ export class SignUpPage {
 
     this.ftxForm.controls.passwd.setValue(this.md5Provider.make(this.ftxForm.controls.password.value));
 
-    this.admuserProvider.signUp(this.ftxForm.value).then(data => {
+    this.admuserProvider.signUp(this.ftxForm.value).subscribe(data => {
       if (data) {
         this.popup.swal('注册成功').then(() => {
           this.app.getRootNav().push('TabsPage');

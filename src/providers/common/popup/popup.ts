@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LoadingController, AlertController, ToastController, ModalController } from 'ionic-angular';
 import swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  *  遮罩层服务
@@ -13,6 +14,7 @@ export class PopupProvider {
   constructor(public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
+    public translateService: TranslateService,
     public modalCtrl: ModalController) {
   }
 
@@ -136,9 +138,14 @@ export class PopupProvider {
    * @param {string} position    //"top", "middle", "bottom".
    * @param {number} duration
    */
-  toast(content: string, cssClass: string = 'toast-content', position: string = 'middle', duration: number = 2000) {
+  toast(content: string, content_body?: Object, cssClass: string = 'toast-content', position: string = 'middle', duration: number = 2000) {
+    let msg: any;
+    this.translateService.get(content, content_body).subscribe((data) => {
+      msg = data || content;
+    });
+
     let toast = this.toastCtrl.create({
-      message: content,
+      message: msg,
       duration: duration,
       position: position,
       cssClass: cssClass,

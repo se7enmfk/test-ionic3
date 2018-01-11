@@ -48,7 +48,7 @@ export class ChangePasswordPage {
     }
     this.admUserProvider._admUser.passwd = new_passwd;
     this.admUserProvider._admUser.mode_ = 'E';
-    this.admUserProvider.save(this.admUserProvider._admUser).then((data) => {
+    this.admUserProvider.save(this.admUserProvider._admUser).subscribe((data) => {
       if (data) {
         this.popup.toast("密码修改成功");
         this.navCtrl.pop();

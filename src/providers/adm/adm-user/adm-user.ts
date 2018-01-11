@@ -11,48 +11,58 @@ export class AdmUserProvider {
     public popup: PopupProvider,
     private storage: Storage) { }
 
-  save(admUser) {
-    let seq = this.http.post('adm/user', admUser);
-    seq.then((data: any) => {
-      this._admUser = data.entity;
-      this.storage.set(AppConfig.SYS_USER, data.entity);
-    });
-    return seq;
-  }
   /**
-   * Send a POST request to our login endpoint with the data
-   * the user entered on the form.
+   * 保存用户信息
+   * @param admUser 实体
+   */
+  save(admUser) {
+    return this.http.post('adm/user', admUser).map(data => {
+      if (data) {
+        this._admUser = data.entity;
+        this.storage.set(AppConfig.SYS_USER, data.entity);
+      }
+      return false;
+    });
+  }
+
+  /**
+   * 登录
+   * @param admUser 实体
    */
   login(admUser: any) {
 
-    return new Promise((resolve) => {
-      this.http.post('login/login', admUser).then((data: any) => {
- 
-        if (data) {
-          if (data.code == '203') {
-            resolve(false);
-            this.popup.toast(data.msg)
-          } else if (data.code == '204') {
-            resolve(false);
-            this.popup.toast(data.msg)
-          } else {
-            this._admUser = data.entity;
-            this.storage.set(AppConfig.SYS_USER, data.entity);
-            this.storage.set(AppConfig.TOKEN, data.entity.token);
-            resolve(true);
-          }
+    return this.http.post('login/login', admUser).map((data) => {
+      
+      if (data) {
+        if (data.code == '201') {
+          this.popup.toast(data.msg);
+          return false;
+        } else if (data.code == '202') {
+          this.popup.toast(data.msg);
+          return false;
+        } else if (data.code == '203') {
+          this.popup.toast(data.msg);
+          return false;
+        } else {
+          this._admUser = data.entity;
+          this.storage.set(AppConfig.SYS_USER, data.entity);
+          this.storage.set(AppConfig.TOKEN, data.entity.token);
+          this.http._token = data.entity.token;
+          return true;
         }
+      }
+      return false;
+    });
 
-      });
-    })
   }
 
   /**
-   * Send a POST request to our signup endpoint with the data
-   * the user entered on the form.
+   * 注册
+   * @param admUser 实体
    */
   signUp(admUser: any) {
     admUser.user_name = "aaa";
+    admUser.active_ind = "Y";
     let seq = this.http.post('login/signUp', admUser);
     return seq;
   }
@@ -60,9 +70,7 @@ export class AdmUserProvider {
     // let seq = this.http.post('login/signUp', admUser);
     return Promise.resolve(true);
   }
-  /**
-   * Log the user out, which forgets the session
-   */
+
   logout() {
     this._admUser = null;
   }

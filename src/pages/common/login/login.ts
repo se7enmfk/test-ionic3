@@ -4,7 +4,6 @@ import { IonicPage, NavController, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { AdmUserProvider } from '../../../providers/providers';
-import { AppConfig } from '../../../app/app.config';
 import { BackButtonProvider, PopupProvider, Md5Provider } from '../../../providers/common/commonProviders';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -53,7 +52,7 @@ export class LoginPage {
 
     this.ftxForm.value.passwd = this.md5Provider.make(this.ftxForm.value.password);
 
-    this.admUserProvider.login(this.ftxForm.value).then((data) => {
+    this.admUserProvider.login(this.ftxForm.value).subscribe((data) => {
       if (data)
         this.navCtrl.push("TabsPage");
     });

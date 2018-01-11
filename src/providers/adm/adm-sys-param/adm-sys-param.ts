@@ -9,7 +9,7 @@ export class AdmSysParamProvider {
   constructor(public http: HttpProvider) { }
 
   retrieveSysParamList() {
-    this.http.post('adm/sysParamList', {}).then((data) => {
+    this.http.post('adm/sysParamList').subscribe((data) => {
       this._sys_param = data;
     });
   }
