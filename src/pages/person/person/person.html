@@ -1,6 +1,6 @@
 <!-- header -->
 <ion-header>
-  <ion-navbar color='navbar'>
+  <ion-navbar color='ftx-theme'>
     <ion-buttons left>
       <button ion-button icon-only (click)="goSettingPage()">
         <ion-icon name="settings"></ion-icon>
@@ -25,7 +25,7 @@
   <ion-list class="profile-list">
     <ion-item (click)="personDetail(1)">
       <ion-thumbnail item-start>
-        <img src="{{user.avatar_url || 'assets/imgs/icon.png'}}">
+        <img src="{{user.avatar_url || web_url+'assets/imgs/icon.png'}}">
       </ion-thumbnail>
       <h2>
         <span ion-text [color]="user.is_vip?'danger':'dark'">{{user.nickname || '啬甩'}}</span>

@@ -31,7 +31,6 @@ export class MyApp {
     });
 
     this.initTranslate();
-    this.storage.set(AppConfig.TOKEN, null);
 
     admSysParam.retrieveSysParamList();
     

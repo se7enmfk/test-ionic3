@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { AppConfig } from '../../../app/app.config';
 import { AdmUserProvider } from '../../../providers/providers';
@@ -13,19 +13,21 @@ export class PersonPage {
   messageCount = 10;
   user = {};
 
+  web_url = AppConfig.WEB_URL;
   constructor(public navCtrl: NavController,
     public admUserProvider: AdmUserProvider,
     public storage: Storage,
+    public modalCtrl: ModalController,
     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
+    
     this.storage.get(AppConfig.SYS_USER).then((data) => {
-      this.user = data;
+      if(!data){
+        this.modalCtrl.create('LoginPage').present();
+      }
     })
-
-    console.log(this.user);
-
   }
   doRefresh(refresher) {
 

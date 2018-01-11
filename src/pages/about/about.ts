@@ -22,8 +22,7 @@ export class AboutPage {
   }
 
   ionViewDidLoad() {
-    
-    console.log(this.admSysParamProvider._sys_param);
+    // console.log(this.admSysParamProvider._sys_param);
   }
 
 }

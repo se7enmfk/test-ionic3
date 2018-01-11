@@ -33,8 +33,7 @@ export class LoginPage {
 
     platform.registerBackButtonAction();
   }
-
-  // Attempt to login in through our User service
+ 
   doLogin() {
     if (!this.ftxForm.valid) {
       if (!this.ftxForm.controls.mobile.valid || this.ftxForm.controls.mobile.errors) {
@@ -51,7 +50,7 @@ export class LoginPage {
 
     this.admUserProvider.login(this.ftxForm.value).subscribe((data) => {
       if (data)
-        this.navCtrl.push("TabsPage");
+        this.navCtrl.pop();
     });
   }
   goSignUpPage() {

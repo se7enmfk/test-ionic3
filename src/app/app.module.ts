@@ -20,11 +20,12 @@ import { MyApp } from './app.component';
 
 import { AdmUserProvider, AdmSysParamProvider } from '../providers/providers';
 import { PlatformProvider, Md5Provider, HttpProvider, PopupProvider } from '../providers/common/commonProviders';
+import { AppConfig } from './app.config';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, AppConfig.WEB_URL+'./assets/i18n/', '.json');
 }
 
 @NgModule({

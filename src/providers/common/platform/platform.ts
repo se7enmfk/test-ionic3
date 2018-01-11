@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Platform, Tabs, App, NavController } from 'ionic-angular';
+import { Platform, Tabs, App, NavController, Keyboard } from 'ionic-angular';
 import { PopupProvider } from "../popup/popup";
 @Injectable()
 export class PlatformProvider {
@@ -9,15 +9,27 @@ export class PlatformProvider {
 
   constructor(private platform: Platform,
     public appCtrl: App,
+    public keyboard: Keyboard,
     private popup: PopupProvider) {
   }
 
+  aaa() {
+
+    this.platform.ready().then(() => {
+      if (this.keyboard.isOpen()) {
+        document.body.classList.add('keyboard-is-open');
+      } else {
+        document.body.classList.remove('keyboard-is-open');
+      }
+
+    });
+  }
   registerBackButtonAction(tabRef?: Tabs) {
     this.platform.ready().then((result) => {
       this.registerBackButton(tabRef);
     })
   }
- 
+
   registerBackButton(tabRef: Tabs): void {
 
     //registerBackButtonAction是系统自带的方法

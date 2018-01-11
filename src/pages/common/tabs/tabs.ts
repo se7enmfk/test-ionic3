@@ -17,6 +17,7 @@ export class TabsPage {
   marketRoot = 'MarketPage'
   personRoot = 'PersonPage'
 
+  tab_ind = true;
   @ViewChild('menuTabs') tabRef: Tabs;
 
   constructor(public navCtrl: NavController,
@@ -31,7 +32,12 @@ export class TabsPage {
 
     platform.registerBackButtonAction(this.tabRef);
 
-    this.modalCtrl.create(GesturePasswordPage).present();
+    storage.get(AppConfig.SYS_USER).then((data) => {
+      if (data) {
+        this.modalCtrl.create(GesturePasswordPage).present();
+      }
+    })
+
   }
 
 }

@@ -8,6 +8,8 @@ export class AppConfig {
     static SYS_NAME = "FTX";
     static SYS_USER = "TestUser";
     static TOKEN = "token";
+    static WEB_URL = "";
+    // static WEB_URL = "http://192.168.1.108:8100/";
     // static BASE_URL = 'http://localhost:2080/AppFrameworkServer/';
     static BASE_URL = 'http://192.168.1.108:2080/AppFrameworkServer/';
     // static URL = 'http://uat.ftecx.com:2080/AppFrameworkServer/';

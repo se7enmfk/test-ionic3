@@ -20,6 +20,7 @@ export class AdmUserProvider {
       if (data) {
         this._admUser = data.entity;
         this.storage.set(AppConfig.SYS_USER, data.entity);
+        return true;
       }
       return false;
     });
