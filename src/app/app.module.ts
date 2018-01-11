@@ -19,7 +19,7 @@ import { GesturePasswordModule } from 'ngx-gesture-password';
 import { MyApp } from './app.component';
 
 import { AdmUserProvider, AdmSysParamProvider } from '../providers/providers';
-import { Md5Provider, HttpProvider, BackButtonProvider, PopupProvider } from '../providers/common/commonProviders';
+import { PlatformProvider, Md5Provider, HttpProvider, PopupProvider } from '../providers/common/commonProviders';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -60,9 +60,9 @@ export function createTranslateLoader(http: HttpClient) {
     AdmSysParamProvider,
     AdmUserProvider,
     HttpProvider,
-    BackButtonProvider,
     PopupProvider,
-    Md5Provider
+    Md5Provider,
+    PlatformProvider
   ]
 })
 export class AppModule { }

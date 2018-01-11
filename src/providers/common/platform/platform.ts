@@ -1,27 +1,24 @@
-import { Platform, App, NavController, Tabs } from 'ionic-angular';
 import { Injectable } from '@angular/core';
-import { PopupProvider } from '../popup/popup';
-
-/*
-  Generated class for the BackButtonProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
+import { Platform, Tabs, App, NavController } from 'ionic-angular';
+import { PopupProvider } from "../popup/popup";
 @Injectable()
-export class BackButtonProvider {
-
+export class PlatformProvider {
 
   //控制硬件返回按钮是否触发，默认false
   backButtonPressed: boolean = false;
 
-  //构造函数 依赖注入
-  constructor(public platform: Platform,
+  constructor(private platform: Platform,
     public appCtrl: App,
-    private popup: PopupProvider) { }
+    private popup: PopupProvider) {
+  }
 
-  //注册方法
-  registerBackButtonAction(tabRef: Tabs): void {
+  registerBackButtonAction(tabRef?: Tabs) {
+    this.platform.ready().then((result) => {
+      this.registerBackButton(tabRef);
+    })
+  }
+ 
+  registerBackButton(tabRef: Tabs): void {
 
     //registerBackButtonAction是系统自带的方法
     this.platform.registerBackButtonAction(() => {

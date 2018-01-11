@@ -23,8 +23,8 @@ export class GesturePasswordPage {
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public storage: Storage) {
-    this.storage.set(AppConfig.PERSON_PASSWORD, '12369');
-    this.storage.get(AppConfig.PERSON_PASSWORD).then((result) => {
+      this.storage.set(AppConfig.GESTURE_PASSWORD,'12369');
+    this.storage.get(AppConfig.GESTURE_PASSWORD).then((result) => {
       this.pwd = result;
     });
   }
@@ -39,7 +39,6 @@ export class GesturePasswordPage {
 
   }
   onChecked(e) {
-    console.log(e);
     if(e.result ==this.pwd){
       this.viewCtrl.dismiss();
     }

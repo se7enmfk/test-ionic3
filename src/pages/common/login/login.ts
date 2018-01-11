@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, Platform } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { AdmUserProvider } from '../../../providers/providers';
-import { BackButtonProvider, PopupProvider, Md5Provider } from '../../../providers/common/commonProviders';
+import { PopupProvider, Md5Provider, PlatformProvider } from '../../../providers/common/commonProviders';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
@@ -21,8 +21,7 @@ export class LoginPage {
     private formBuilder: FormBuilder,
     public md5Provider: Md5Provider,
     public storage: Storage,
-    private platform: Platform,
-    public backButtonProvider: BackButtonProvider,
+    private platform: PlatformProvider,
     public popup: PopupProvider,
     public translateService: TranslateService) {
 
@@ -32,9 +31,7 @@ export class LoginPage {
       passwd: ['', []]
     });
 
-    platform.ready().then((result) => {
-      this.backButtonProvider.registerBackButtonAction(null);
-    })
+    platform.registerBackButtonAction();
   }
 
   // Attempt to login in through our User service
