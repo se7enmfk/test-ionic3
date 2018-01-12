@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { AdmUserProvider } from '../../../providers/providers';
 import { PopupProvider, Md5Provider, PlatformProvider } from '../../../providers/common/commonProviders';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AppConfig } from '../../../app/app.config';
+import { App } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -21,9 +23,11 @@ export class LoginPage {
     private formBuilder: FormBuilder,
     public md5Provider: Md5Provider,
     public storage: Storage,
+    public app: App,
     private platform: PlatformProvider,
     public popup: PopupProvider,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    public viewCtrl: ViewController) {
 
     this.ftxForm = this.formBuilder.group({
       mobile: ['', [Validators.required]],
@@ -33,7 +37,7 @@ export class LoginPage {
 
     platform.registerBackButtonAction();
   }
- 
+
   doLogin() {
     if (!this.ftxForm.valid) {
       if (!this.ftxForm.controls.mobile.valid || this.ftxForm.controls.mobile.errors) {
@@ -49,8 +53,13 @@ export class LoginPage {
     this.ftxForm.value.passwd = this.md5Provider.make(this.ftxForm.value.password);
 
     this.admUserProvider.login(this.ftxForm.value).subscribe((data) => {
-      if (data)
-        this.navCtrl.pop();
+      if (data) {
+        this.viewCtrl.dismiss();
+        this.storage.get(AppConfig.GESTURE_PASSWORD).then(data => {
+          if (!data)
+            this.popup.showPage('GesturePasswordPage', { type: 'recorder' });
+        });
+      }
     });
   }
   goSignUpPage() {
@@ -58,5 +67,9 @@ export class LoginPage {
   }
   goForgetPage() {
     this.navCtrl.push("ForgetPage");
+  }
+  goHomePage(){
+    this.viewCtrl.dismiss();
+    this.app.getRootNav().push("TabsPage");
   }
 }

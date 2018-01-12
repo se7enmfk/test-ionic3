@@ -37,6 +37,13 @@ export class MyApp {
     this.storage.get(AppConfig.SYS_USER).then((data) => {
       admUserProvider._admUser = data;
     })
+
+    config.set('backButtonIcon','ios-arrow-back');
+    config.set('iconMode','ios');
+    config.set('modalEnter','modal-slide-in');
+    config.set('modalLeave','modal-slide-out');
+    config.set('pageTransition','ios'); 
+    
   }
 
   //init translate
@@ -48,13 +55,14 @@ export class MyApp {
     if (browserLang) {
       if (browserLang === 'zh') {
         const browserCultureLang = this.translate.getBrowserCultureLang();
+      
 
         if (browserCultureLang.match(/-CN|CHS|Hans/i)) {
           this.translate.use('zh-cmn-Hans');
         } else if (browserCultureLang.match(/-TW|CHT|Hant/i)) {
           this.translate.use('zh-cmn-Hant');
         }
-      } else {
+      } else { 
         this.translate.use(this.translate.getBrowserLang());
       }
     } else {

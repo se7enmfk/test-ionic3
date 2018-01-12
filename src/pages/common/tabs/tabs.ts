@@ -3,7 +3,7 @@ import { IonicPage, NavController, Tabs, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { AppConfig } from '../../../app/app.config';
 import { GesturePasswordPage } from '../../pages';
-import { PlatformProvider } from '../../../providers/common/commonProviders';
+import { PlatformProvider, PopupProvider } from '../../../providers/common/commonProviders';
 
 @IonicPage()
 @Component({
@@ -23,7 +23,7 @@ export class TabsPage {
   constructor(public navCtrl: NavController,
     public storage: Storage,
     private platform: PlatformProvider,
-    public modalCtrl: ModalController) {
+    public popup: PopupProvider) {
     let p1 = this.storage.get(AppConfig.SYS_NAME);
     let p2 = this.storage.get(AppConfig.TOKEN);
     Promise.all([p1, p2]).then((result) => {
@@ -34,7 +34,7 @@ export class TabsPage {
 
     storage.get(AppConfig.SYS_USER).then((data) => {
       if (data) {
-        this.modalCtrl.create(GesturePasswordPage).present();
+        this.popup.showPage(GesturePasswordPage);
       }
     })
 

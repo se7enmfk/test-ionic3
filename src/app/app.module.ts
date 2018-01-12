@@ -38,8 +38,8 @@ export function createTranslateLoader(http: HttpClient) {
     NgxEchartsModule,
     GesturePasswordModule,
     IonicStorageModule.forRoot({
-      name: 'drip_db',
-      driverOrder: ['sqlite', 'websql', 'indexdb', 'localstorage']
+      name: 'ftx_app_db',
+      driverOrder: [ 'localstorage','sqlite', 'websql', 'indexdb', 'localstorage']
     }),
     TranslateModule.forRoot({
       loader: {

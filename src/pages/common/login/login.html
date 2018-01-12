@@ -1,5 +1,11 @@
 <ion-header>
+
   <ion-navbar color="ftx-theme">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goHomePage()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>{{ 'LOGIN_TITLE' | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
@@ -18,7 +24,7 @@
         <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
         <ion-input type="{{isShowPassword?'text':'password'}}" placeholder="密码" formControlName="password" maxLength='16'></ion-input>
       </ion-item>
-      
+
       <ion-row padding>
         <button block round ion-button color="ftx-theme" (click)="doLogin()">{{ 'LOGIN_BUTTON' | translate }}</button>
       </ion-row>

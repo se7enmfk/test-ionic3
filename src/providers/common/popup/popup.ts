@@ -242,4 +242,8 @@ export class PopupProvider {
       width: '80%'
     });
   }
+
+  showPage(page: String, data?: any) {
+    this.modalCtrl.create(page, data).present();
+  }
 }

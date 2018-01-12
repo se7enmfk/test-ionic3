@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { AppConfig } from '../../../app/app.config';
+import { PopupProvider } from '../../../providers/common/commonProviders';
+import { ERR } from '../../../../node_modules/_ngx-gesture-password@1.0.1@ngx-gesture-password/components/interfaces/err';
+import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 
 /**
  * Generated class for the GesturePasswordPage page.
@@ -18,40 +21,74 @@ import { AppConfig } from '../../../app/app.config';
 
 export class GesturePasswordPage {
   pwd: any;
-  type = 'check';
+  type = this.navParams.get('type') || 'check';
+  chance = AppConfig.gesture_num;
+  // type = 'recorder';
+  chance_ind = false;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
+    public popup: PopupProvider,
     public viewCtrl: ViewController,
     public storage: Storage) {
-      this.storage.set(AppConfig.GESTURE_PASSWORD,'12369');
+
     this.storage.get(AppConfig.GESTURE_PASSWORD).then((result) => {
       this.pwd = result;
     });
   }
 
   ionViewDidLoad() {
+
   }
 
   onError(e) {
-    console.log('1');
 
-    console.log(e);
 
   }
   onChecked(e) {
-    if(e.result ==this.pwd){
-      this.viewCtrl.dismiss();
+    switch (e.err) {
+      case ERR.NOT_ENOUGH_POINTS:
+        this.popup.toast('至少4个节点以上');
+        break;
+      case ERR.PASSWORD_MISMATCH:
+        this.popup.toast('密码不匹配');
+        break;
+      default:
+        this.popup.toast('密码匹配');
+        this.navCtrl.pop();
+        break;
     }
   }
   onBeforeRepeat(e) {
-    console.log(e);
-    console.log(e.result);
-
-    console.log('3');
-
+    switch (e.err) {
+      case ERR.NOT_ENOUGH_POINTS:
+        this.popup.toast('至少4个节点以上');
+        break;
+      default:
+        this.popup.toast('请再次绘制相同图案');
+        break;
+    }
   }
   onAfterRepeat(e) {
-    console.log(e.result);
-    console.log('4');
+    switch (e.err) {
+      case ERR.NOT_ENOUGH_POINTS:
+        this.popup.toast('至少4个节点以上');
+        break;
+      case ERR.PASSWORD_MISMATCH:
+        this.popup.toast('两次密码不匹配');
+        this.chance_ind = true;
+        this.chance--;
+        if (this.chance == 0) {
+          this.viewCtrl.dismiss();
+          this.popup.showPage('LoginPage');
+        }
+        break;
+      default:
+        this.popup.toast('新密码已经生效');
+        this.storage.set(AppConfig.GESTURE_PASSWORD, e.result);
+        this.viewCtrl.dismiss();
+        break;
+    }
   }
+
 }
