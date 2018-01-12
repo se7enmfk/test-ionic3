@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  test-ionic3:
+    image: test-ionic3
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 80:80

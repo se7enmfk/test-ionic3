@@ -13,8 +13,7 @@
     "ionic:serve": "ionic-app-scripts serve"
   },
   "config": {
-    "ionic_copy": "./config.js",
-    "ionic_www_dir":"./webapp"
+    "ionic_copy": "./config.js"
   },
   "dependencies": {
     "@angular/common": "5.0.3",

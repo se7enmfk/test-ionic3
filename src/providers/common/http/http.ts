@@ -32,7 +32,7 @@ export class HttpProvider {
 
     let options = { headers: { 'Authorization': 'Bearer ' + this._token } };
 
-    url = url.indexOf('http') > 0 ? url : AppConfig.BASE_URL + url;
+    url = url.indexOf('http') > 0 ? url : AppConfig.API_URL + url;
 
     return this.http.get(url, options)
       .map(res => this.extractData(res))
@@ -53,7 +53,7 @@ export class HttpProvider {
 
     options = reqOpts ? reqOpts : options;
     
-    url = url.indexOf('http') > 0 ? url : AppConfig.BASE_URL + url;
+    url = url.indexOf('http') > 0 ? url : AppConfig.API_URL + url;
 
     return this.http.post(url, body, options)
       .map(res => this.extractData(res))
@@ -102,7 +102,7 @@ export class HttpProvider {
        };
        options = reqOpts ? reqOpts : options;
  
-       return this.http.post(AppConfig.BASE_URL + url, body, options)
+       return this.http.post(AppConfig.API_URL + url, body, options)
          .toPromise()
          .then(res => this.handleSuccess(res))
          .catch(err => this.handleError(err));
