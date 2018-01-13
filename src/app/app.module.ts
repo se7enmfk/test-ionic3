@@ -25,7 +25,7 @@ import { AppConfig } from './app.config';
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, AppConfig.WEB_URL+'./assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, AppConfig.WEB_URL + './assets/i18n/', '.json');
 }
 
 @NgModule({
@@ -39,7 +39,7 @@ export function createTranslateLoader(http: HttpClient) {
     GesturePasswordModule,
     IonicStorageModule.forRoot({
       name: 'ftx_app_db',
-      driverOrder: [ 'localstorage','sqlite', 'websql', 'indexdb', 'localstorage']
+      driverOrder: ['localstorage', 'sqlite', 'websql', 'indexdb', 'localstorage']
     }),
     TranslateModule.forRoot({
       loader: {
@@ -48,7 +48,9 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      tabsHideOnSubPages: true
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

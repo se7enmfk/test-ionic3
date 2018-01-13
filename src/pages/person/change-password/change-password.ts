@@ -1,26 +1,30 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Md5Provider, PopupProvider } from '../../../providers/common/commonProviders';
-import { AdmUserProvider } from '../../../providers/providers';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Md5Provider, PopupProvider} from '../../../providers/common/commonProviders';
+import {AdmUserProvider} from '../../../providers/providers';
+import {BasePage} from "../../pages";
 
 @IonicPage()
 @Component({
   selector: 'page-change-password',
   templateUrl: 'change-password.html',
 })
-export class ChangePasswordPage {
+export class ChangePasswordPage extends BasePage {
 
   private ftxForm: FormGroup;
   showPass = false;
   _showPass = false;
 
   constructor(public navCtrl: NavController,
-    private formBuilder: FormBuilder,
-    private md5Provider: Md5Provider,
-    private admUserProvider: AdmUserProvider,
-    private popup: PopupProvider,
-    public navParams: NavParams) {
+              public viewCtrl: ViewController,
+              public navParams: NavParams,
+              public popup: PopupProvider,
+              private formBuilder: FormBuilder,
+              private md5Provider: Md5Provider,
+              private admUserProvider: AdmUserProvider) {
+
+    super(navCtrl, viewCtrl, navParams, popup);
 
     this.ftxForm = this.formBuilder.group({
       'old_password': ['', [Validators.required]],
@@ -50,12 +54,13 @@ export class ChangePasswordPage {
     this.admUserProvider._admUser.mode_ = 'E';
     this.admUserProvider.save(this.admUserProvider._admUser).subscribe((data) => {
       if (data) {
-        this.popup.toast("密码修改成功");
-        this.navCtrl.pop();
+        this.popup.swal("密码修改成功");
+        this.popPage();
       }
     });
 
   }
+
   showPassword(flag) {
     if (flag) {
       this.showPass = !this.showPass;

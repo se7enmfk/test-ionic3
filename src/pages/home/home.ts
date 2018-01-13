@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { AppConfig } from '../../app/app.config';
 import { AdmUserProvider } from '../../providers/providers';
 
 @IonicPage()
@@ -15,12 +14,11 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public admUserProvider: AdmUserProvider,
-    private storage: Storage) {
+    public admUserProvider: AdmUserProvider) {
   }
 
   ionViewDidLoad() {
-    
+
   }
   onChartClick(e) {
     console.log(e.dataIndex);

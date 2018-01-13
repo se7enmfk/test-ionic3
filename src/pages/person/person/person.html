@@ -2,13 +2,13 @@
 <ion-header>
   <ion-navbar color='ftx-theme'>
     <ion-buttons left>
-      <button ion-button icon-only (click)="goSettingPage()">
+      <button ion-button icon-only (click)="pushPage('SettingPage')">
         <ion-icon name="settings"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title center>我</ion-title>
     <ion-buttons right>
-      <button ion-button icon-only (click)="goMessagePage()" class="message-btn">
+      <button ion-button icon-only (click)="pushPage('MessagePage')" class="message-btn">
         <ion-icon name="mail">
           <ion-badge class="message-badge" color="danger" *ngIf="messageCount>0">{{messageCount}}</ion-badge>
         </ion-icon>
@@ -18,12 +18,17 @@
 </ion-header>
 <!-- content -->
 <ion-content>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="加载中...">
+  <ion-refresher (ionRefresh)="doRefresh($event)" pullMax="300">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="下拉刷新"
+      refreshingSpinner="circles"
+      refreshingText="加载中...">
     </ion-refresher-content>
   </ion-refresher>
+
   <ion-list class="profile-list">
-    <ion-item (click)="personDetail(1)">
+    <ion-item (click)="pushPage('PersonDetailPage')">
       <ion-thumbnail item-start>
         <img src="{{user.avatar_url || web_url+'assets/imgs/icon.png'}}">
       </ion-thumbnail>
@@ -40,42 +45,41 @@
   </ion-list>
 
   <ion-list>
-    <ion-item (click)="personDetail(2)">
+    <ion-item (click)="pushPage('BankCardPage')">
       <ion-icon name="ios-card" item-start></ion-icon>
       银行卡
       <ion-note clear item-end>
-        <strong ion-text class="num" color="danger"> {{user.coin || '54,323'}} </strong>
+        <strong ion-text > 1张 </strong>
         <ion-icon name="arrow-forward"></ion-icon>
       </ion-note>
     </ion-item>
-    <ion-item (click)="changePassword()">
+    <ion-item (click)="pushPage('ChangePasswordPage')">
       <ion-icon name="ios-card" item-start></ion-icon>
       密码修改
       <ion-note clear item-end>
-        <strong ion-text class="num" color="danger"> {{user.coin || '54,323'}} </strong>
         <ion-icon name="arrow-forward"></ion-icon>
       </ion-note>
     </ion-item>
-    <ion-item (click)="personDetail(4)">
+    <ion-item (click)="pushPage('RiskPage')">
       <ion-icon name="ios-card" item-start></ion-icon>
       风险偏好测试
       <ion-note clear item-end>
-        <strong ion-text class="num" color="danger"> {{user.coin || '54,323'}} </strong>
+        <strong ion-text > 成长型 </strong>
         <ion-icon name="arrow-forward"></ion-icon>
       </ion-note>
     </ion-item>
-    <ion-item (click)="personDetail(5)">
+    <ion-item (click)="pushPage('RefereePage')">
       <ion-icon name="ios-card" item-start></ion-icon>
       推荐人信息
       <ion-note clear item-end>
-        <strong ion-text class="num" color="danger"> {{user.coin || '54,323'}} </strong>
+        <strong ion-text > daslfk</strong>
         <ion-icon name="arrow-forward"></ion-icon>
       </ion-note>
     </ion-item>
   </ion-list>
 
   <ion-list>
-    <ion-item text-center (click)="doLogin()">
+    <ion-item text-center (click)="doLogout()">
       <ion-note color='danger'>安全退出</ion-note>
     </ion-item>
   </ion-list>

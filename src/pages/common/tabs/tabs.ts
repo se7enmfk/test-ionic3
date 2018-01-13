@@ -1,16 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, Tabs, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, Tabs, ViewController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { AppConfig } from '../../../app/app.config';
-import { GesturePasswordPage } from '../../pages';
 import { PlatformProvider, PopupProvider } from '../../../providers/common/commonProviders';
+import { BasePage } from '../../pages';
 
 @IonicPage()
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html'
 })
-export class TabsPage {
+export class TabsPage extends BasePage {
 
   homeRoot = 'HomePage'
   aboutRoot = 'AboutPage'
@@ -21,9 +21,13 @@ export class TabsPage {
   @ViewChild('menuTabs') tabRef: Tabs;
 
   constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public popup: PopupProvider,
+    public viewCtrl: ViewController,
     public storage: Storage,
-    private platform: PlatformProvider,
-    public popup: PopupProvider) {
+    private platform: PlatformProvider) {
+    super(navCtrl, viewCtrl, navParams, popup);
+    
     let p1 = this.storage.get(AppConfig.SYS_NAME);
     let p2 = this.storage.get(AppConfig.TOKEN);
     Promise.all([p1, p2]).then((result) => {
@@ -32,9 +36,9 @@ export class TabsPage {
 
     platform.registerBackButtonAction(this.tabRef);
 
-    storage.get(AppConfig.SYS_USER).then((data) => {
+    storage.get(AppConfig.GESTURE_PASSWORD).then((data) => {
       if (data) {
-        this.popup.showPage(GesturePasswordPage);
+        this.showModal('GesturePasswordPage');
       }
     })
 

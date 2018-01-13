@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
-import { AppConfig } from '../../../app/app.config';
-import { HttpProvider, PopupProvider } from '../../common/commonProviders';
+import {Injectable} from '@angular/core';
+import {Storage} from '@ionic/storage';
+import {AppConfig} from '../../../app/app.config';
+import {HttpProvider, PopupProvider} from '../../common/commonProviders';
 
 @Injectable()
 export class AdmUserProvider {
-  _admUser: { passwd: any, mode_: any };
+  _admUser: any;
 
   constructor(public http: HttpProvider,
-    public popup: PopupProvider,
-    private storage: Storage) { }
+              public popup: PopupProvider,
+              private storage: Storage) {
+  }
 
   /**
    * 保存用户信息
@@ -33,7 +34,7 @@ export class AdmUserProvider {
   login(admUser: any) {
 
     return this.http.post('login/login', admUser).map((data) => {
-      
+
       if (data) {
         if (data.code == '201') {
           this.popup.toast(data.msg);
@@ -67,6 +68,7 @@ export class AdmUserProvider {
     let seq = this.http.post('login/signUp', admUser);
     return seq;
   }
+
   getCode(admUser) {
     // let seq = this.http.post('login/signUp', admUser);
     return Promise.resolve(true);
@@ -74,5 +76,9 @@ export class AdmUserProvider {
 
   logout() {
     this._admUser = null;
+    this.storage.remove(AppConfig.SYS_USER);
+    this.storage.remove(AppConfig.TOKEN);
+    this.storage.remove(AppConfig.GESTURE_PASSWORD);
+    this.popup.showModal('LoginPage');
   }
 }

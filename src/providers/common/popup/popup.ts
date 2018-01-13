@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { LoadingController, AlertController, ToastController, ModalController } from 'ionic-angular';
+import {Injectable} from '@angular/core';
+import {LoadingController, AlertController, ToastController, ModalController} from 'ionic-angular';
 import swal from 'sweetalert2';
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 
 /**
  *  遮罩层服务
@@ -11,18 +11,21 @@ import { TranslateService } from '@ngx-translate/core';
 export class PopupProvider {
 
   private load: any;
+
   constructor(public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService,
-    public modalCtrl: ModalController) {
+              public alertCtrl: AlertController,
+              public toastCtrl: ToastController,
+              public modalCtrl: ModalController,
+              public translateService: TranslateService) {
   }
 
   /**
    * alert弹窗
    * http://ionicframework.com/docs/api/components/alert/AlertController/
    */
-  alert(content, callback = () => { }) {
+  alert(content, callback = () => {
+  }) {
+
     let alert = this.alertCtrl.create({
       title: '<span>提示</span>',
       message: '<div>' + content + '</div>',
@@ -45,7 +48,8 @@ export class PopupProvider {
   /**
    * 自定义alert弹窗-
    */
-  alertDIY(obj, ok_callback: any = () => { }) {
+  alertDIY(obj, ok_callback: any = () => {
+  }) {
     let confirm_diy = this.alertCtrl.create({
       title: obj.title || '<div class="content_img">提示</div>',
       subTitle: obj.subTitle,
@@ -70,7 +74,8 @@ export class PopupProvider {
   /**
    * confirm确认框
    */
-  confirm(content, ok_callback = () => { }) {
+  confirm(content, ok_callback = () => {
+  }) {
     let alert = this.alertCtrl.create({
       title: '<div class="content_img">提示</div>',
       subTitle: '',
@@ -99,7 +104,9 @@ export class PopupProvider {
   /**
    * 自定义confirm确认框
    */
-  confirmDIY(obj, esc_callback: any = () => { }, ok_callback: any = () => { }) {
+  confirmDIY(obj, esc_callback: any = () => {
+  }, ok_callback: any = () => {
+  }) {
     let confirm_diy = this.alertCtrl.create({
       title: obj.title || '<div class="content_img"><img  src="assets/img/use_over.png" class="img"/></div>',
       subTitle: obj.subTitle || '',
@@ -153,14 +160,17 @@ export class PopupProvider {
       closeButtonText: "关闭",
       dismissOnPageChange: true,     //当页面变化时是否dismiss
     });
-    toast.onDidDismiss(() => { });
+    toast.onDidDismiss(() => {
+    });
     toast.present();
   }
 
   /**
    * 拨打号码弹窗
    */
-  callPop(obj, esc_callback: any = () => { }, ok_callback: any = () => { }) {
+  callPop(obj, esc_callback: any = () => {
+  }, ok_callback: any = () => {
+  }) {
     setTimeout(() => {//延迟几秒可以等html反应，这样获取的高度才准确
       let test = document.getElementsByClassName("pop_btn")[0];
       test.innerHTML = "<a href='tel:" + obj.tel + "'> 继续呼叫 </a>";
@@ -227,11 +237,12 @@ export class PopupProvider {
       console.log('Dismissed loading');
     });
   }
+
   /**
    * swalalert2弹出信息
    * @param {string} title  //
-   * @param {string} type   //'success' | 'error' | 'warning' | 'info' | 'question' 
-   * @param {string} timer   
+   * @param {string} type   //'success' | 'error' | 'warning' | 'info' | 'question'
+   * @param {string} timer
    */
   swal(title: string, type: any = 'success', timer: number = 2000) {
     return swal({
@@ -243,7 +254,7 @@ export class PopupProvider {
     });
   }
 
-  showPage(page: String, data?: any) {
-    this.modalCtrl.create(page, data).present();
+  showModal(page: String, params?: any) {
+    this.modalCtrl.create(page, params).present();
   }
 }

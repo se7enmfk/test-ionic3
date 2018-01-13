@@ -3,15 +3,9 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { Storage } from '@ionic/storage';
 import { AppConfig } from '../../../app/app.config';
 import { PopupProvider } from '../../../providers/common/commonProviders';
-import { ERR } from '../../../../node_modules/_ngx-gesture-password@1.0.1@ngx-gesture-password/components/interfaces/err';
-import { ModalController } from 'ionic-angular/components/modal/modal-controller';
-
-/**
- * Generated class for the GesturePasswordPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ERR } from 'ngx-gesture-password';
+import { BasePage } from '../../pages';
+import { AdmUserProvider } from '../../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -19,7 +13,8 @@ import { ModalController } from 'ionic-angular/components/modal/modal-controller
   templateUrl: 'gesture-password.html',
 })
 
-export class GesturePasswordPage {
+export class GesturePasswordPage extends BasePage {
+  
   pwd: any;
   type = this.navParams.get('type') || 'check';
   chance = AppConfig.gesture_num;
@@ -30,8 +25,10 @@ export class GesturePasswordPage {
     public navParams: NavParams,
     public popup: PopupProvider,
     public viewCtrl: ViewController,
+    private admUserProvider:AdmUserProvider,
     public storage: Storage) {
 
+    super(navCtrl, viewCtrl, navParams, popup);
     this.storage.get(AppConfig.GESTURE_PASSWORD).then((result) => {
       this.pwd = result;
     });
@@ -52,10 +49,16 @@ export class GesturePasswordPage {
         break;
       case ERR.PASSWORD_MISMATCH:
         this.popup.toast('密码不匹配');
+        this.chance_ind = true;
+        this.chance--;
+        if (this.chance == 0) {
+          this.dismiss();
+          this.admUserProvider.logout();
+        }
         break;
       default:
         this.popup.toast('密码匹配');
-        this.navCtrl.pop();
+        this.dismiss();
         break;
     }
   }
@@ -79,14 +82,13 @@ export class GesturePasswordPage {
         this.chance_ind = true;
         this.chance--;
         if (this.chance == 0) {
-          this.viewCtrl.dismiss();
-          this.popup.showPage('LoginPage');
+          this.dismiss();
         }
         break;
       default:
         this.popup.toast('新密码已经生效');
         this.storage.set(AppConfig.GESTURE_PASSWORD, e.result);
-        this.viewCtrl.dismiss();
+        this.dismiss();
         break;
     }
   }

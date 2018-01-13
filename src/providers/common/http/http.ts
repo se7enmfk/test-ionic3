@@ -1,6 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-// import { URLSearchParams } from '@angular/http';
-
 import { Injectable, Injector } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { App } from 'ionic-angular';
@@ -9,6 +7,8 @@ import { PopupProvider } from "../popup/popup";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+
+// import { URLSearchParams } from '@angular/http';
 
 @Injectable()
 export class HttpProvider {
@@ -24,8 +24,8 @@ export class HttpProvider {
   }
 
   /**
-   * get请求 
-   * @param url  // like /a/b?c=1 
+   * get请求
+   * @param url  // like /a/b?c=1
    * @param reqOpts //请求配置
    */
   get(url: string, reqOpts?: any) {
@@ -48,11 +48,11 @@ export class HttpProvider {
   * @param reqOpts 请求配置
   */
   post(url: string, body?: any, reqOpts?: any) {
-    
+
     let options = { headers: { 'Authorization': 'Bearer ' + this._token } };
 
     options = reqOpts ? reqOpts : options;
-    
+
     url = url.indexOf('http') > 0 ? url : AppConfig.API_URL + url;
 
     return this.http.post(url, body, options)
@@ -87,13 +87,13 @@ export class HttpProvider {
   * @param reqOpts 请求配置
   */
   /*  post(url: string, body: any, reqOpts?: any) {
- 
+
      return this.storage.get(AppConfig.TOKEN).then(data => {
- 
+
        let params = new URLSearchParams();
        for (let key in body)
          params.append(key, body[key]);
- 
+
        let options = {
          headers: {
            // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -101,7 +101,7 @@ export class HttpProvider {
          }
        };
        options = reqOpts ? reqOpts : options;
- 
+
        return this.http.post(AppConfig.API_URL + url, body, options)
          .toPromise()
          .then(res => this.handleSuccess(res))

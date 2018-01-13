@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -15,49 +14,53 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+ion-content {
+  background-color: color($colors, darkWhite) !important;
+}
 
-ion-content{
-    background-color: color($colors, darkWhite)!important;
+ion-title {
+  text-align: center;
 }
-ion-title{
-    text-align: center;
-}
+
 .message-btn {
-    position: relative;
-    width: 42px;
-    top:1px;
-    right: 1px;
-    overflow: visible!important;
+  position: relative;
+  width: 42px;
+  top: 1px;
+  right: 1px;
+  overflow: visible !important;
 }
 
 .message-badge {
-    background-color: red;
-    position: absolute;
-    top: -3px;
-    right: -3px;
-    border-radius: 100%;
+  background-color: red;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  border-radius: 100%;
 }
-.toast-content{ 
-    text-align: center;
-    top:33px;
-    .toast-message {
-        padding:3px;
-    }
-    .toast-wrapper {
-        left:0;
-        right:0;
-        border-radius: 0;
-    } 
+
+.toast-content {
+  text-align: center;
+  top: 33px;
+  .toast-message {
+    padding: 3px;
+  }
+  .toast-wrapper {
+    left: 0;
+    right: 0;
+    border-radius: 0;
+  }
 }
+
 .footer-bar {
-    span {
-      color: #999;
-    }
+  span {
+    color: #999;
   }
-  body.keyboard-is-open ion-tabbar {
-    display: none;
-  }
-  
-  body.keyboard-is-open scroll-content {
-    margin-bottom: 0 !important;
-  }
+}
+
+body.keyboard-is-open ion-tabbar {
+  display: none;
+}
+
+body.keyboard-is-open scroll-content {
+  margin-bottom: 0 !important;
+}
