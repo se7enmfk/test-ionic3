@@ -18,6 +18,7 @@ export class BasePage {
     this.viewCtrl.dismiss();
   }
   pushPage(page, params?: any) {
+    console.log(this); 
     this.navCtrl.push(page, params);
   }
   popPage() {

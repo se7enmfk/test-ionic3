@@ -39,9 +39,8 @@ export class GesturePasswordPage extends BasePage {
   }
 
   onError(e) {
-
-
   }
+  
   onChecked(e) {
     switch (e.err) {
       case ERR.NOT_ENOUGH_POINTS:

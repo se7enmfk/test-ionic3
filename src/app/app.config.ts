@@ -8,6 +8,7 @@ export class AppConfig {
   static SYS_NAME = "FTX";
   static SYS_USER = "TestUser";
   static TOKEN = "token";
+  static BURIED_POINT = "buried_point";
 
   // static WEB_URL = "http://192.168.1.108:8100/";
   // static API_URL = 'http://192.168.1.108:2080/AppFrameworkServer/';

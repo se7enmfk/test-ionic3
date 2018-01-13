@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ViewController,NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { AdmUserProvider } from '../../../providers/providers';
@@ -55,12 +55,12 @@ export class LoginPage extends BasePage {
     this.admUserProvider.login(this.ftxForm.value).subscribe((data: any) => {
       if (data) {
         this.dismiss();
-        // if (this.admUserProvider._admUser.gesture_ind)
+        if (this.admUserProvider._admUser.gesture_ind)
           this.showModal('GesturePasswordPage', { type: 'recorder' });
       }
     });
   }
-  
+
   goHomePage() {
     this.dismiss();
     this.navCtrl.setRoot('TabsPage');
