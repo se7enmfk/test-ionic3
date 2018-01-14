@@ -18,7 +18,19 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-
+    let course = {
+      name: 'Database',
+      id: 7
+    };
+    let newCourse = {
+      name: 'Database',
+      id: 6,
+      cd:8
+    };
+    let newCourse1 = Object.assign({},newCourse, course);
+    course.name = "aaaa";
+    console.log(course.name); // writes Database
+    console.log(newCourse1); // writes Dataware
   }
   onChartClick(e) {
     console.log(e.dataIndex);

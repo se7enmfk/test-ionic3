@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Platform, Tabs, App, NavController, Keyboard } from 'ionic-angular';
-import { PopupProvider } from "../popup/popup";
+import { UtilProvider } from "../util/util";
 @Injectable()
 export class PlatformProvider {
 
@@ -10,7 +10,7 @@ export class PlatformProvider {
   constructor(private platform: Platform,
     public appCtrl: App,
     public keyboard: Keyboard,
-    private popup: PopupProvider) {
+    private utilProvider: UtilProvider) {
   }
 
   aaa() {
@@ -58,7 +58,7 @@ export class PlatformProvider {
       this.platform.exitApp();
     } else {
       //第一次按，弹出Toast
-      this.popup.toast('再按一次退出应用');
+      this.utilProvider.toast('再按一次退出应用');
       //标记为true
       this.backButtonPressed = true;
       //两秒后标记为false，如果退出的话，就不会执行了

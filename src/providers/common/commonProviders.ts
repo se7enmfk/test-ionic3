@@ -1,11 +1,9 @@
 import { HttpProvider } from "./http/http";
-import { PopupProvider } from "./popup/popup";
 import { PlatformProvider } from "./platform/platform";
-import { FtxUtilProvider } from "./ftx-util/ftx-util";
+import { UtilProvider } from "./util/util";
 
-export {
-    FtxUtilProvider,
-    PopupProvider,
+ export {
+    UtilProvider,
     PlatformProvider,
     HttpProvider,
-};
+}; 

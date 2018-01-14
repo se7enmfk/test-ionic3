@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { AppConfig } from '../../../app/app.config';
-import { PopupProvider } from '../../../providers/common/commonProviders';
+import { UtilProvider } from '../../../providers/common/commonProviders';
 import { ERR } from 'ngx-gesture-password';
 import { BasePage } from '../../pages';
 import { AdmUserProvider } from '../../../providers/providers';
@@ -23,12 +23,12 @@ export class GesturePasswordPage extends BasePage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public popup: PopupProvider,
+    public utilProvider: UtilProvider,
     public viewCtrl: ViewController,
     private admUserProvider:AdmUserProvider,
     public storage: Storage) {
 
-    super(navCtrl, viewCtrl, navParams, popup);
+    super(navCtrl, viewCtrl, navParams, utilProvider);
     this.storage.get(AppConfig.GESTURE_PASSWORD).then((result) => {
       this.pwd = result;
     });
@@ -44,10 +44,10 @@ export class GesturePasswordPage extends BasePage {
   onChecked(e) {
     switch (e.err) {
       case ERR.NOT_ENOUGH_POINTS:
-        this.popup.toast('至少4个节点以上');
+        this.utilProvider.toast('至少4个节点以上');
         break;
       case ERR.PASSWORD_MISMATCH:
-        this.popup.toast('密码不匹配');
+        this.utilProvider.toast('密码不匹配');
         this.chance_ind = true;
         this.chance--;
         if (this.chance == 0) {
@@ -56,7 +56,7 @@ export class GesturePasswordPage extends BasePage {
         }
         break;
       default:
-        this.popup.toast('密码匹配');
+        this.utilProvider.toast('密码匹配');
         this.dismiss();
         break;
     }
@@ -64,20 +64,20 @@ export class GesturePasswordPage extends BasePage {
   onBeforeRepeat(e) {
     switch (e.err) {
       case ERR.NOT_ENOUGH_POINTS:
-        this.popup.toast('至少4个节点以上');
+        this.utilProvider.toast('至少4个节点以上');
         break;
       default:
-        this.popup.toast('请再次绘制相同图案');
+        this.utilProvider.toast('请再次绘制相同图案');
         break;
     }
   }
   onAfterRepeat(e) {
     switch (e.err) {
       case ERR.NOT_ENOUGH_POINTS:
-        this.popup.toast('至少4个节点以上');
+        this.utilProvider.toast('至少4个节点以上');
         break;
       case ERR.PASSWORD_MISMATCH:
-        this.popup.toast('两次密码不匹配');
+        this.utilProvider.toast('两次密码不匹配');
         this.chance_ind = true;
         this.chance--;
         if (this.chance == 0) {
@@ -85,7 +85,7 @@ export class GesturePasswordPage extends BasePage {
         }
         break;
       default:
-        this.popup.toast('新密码已经生效');
+        this.utilProvider.toast('新密码已经生效');
         this.storage.set(AppConfig.GESTURE_PASSWORD, e.result);
         this.dismiss();
         break;

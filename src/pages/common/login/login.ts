@@ -4,7 +4,7 @@ import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angul
 import { Storage } from '@ionic/storage';
 
 import { AdmUserProvider } from '../../../providers/providers';
-import { PopupProvider, FtxUtilProvider, PlatformProvider } from '../../../providers/common/commonProviders';
+import { PlatformProvider, UtilProvider } from '../../../providers/common/commonProviders';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BasePage } from '../../pages';
 
@@ -20,15 +20,14 @@ export class LoginPage extends BasePage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
-    public popup: PopupProvider,
+    public utilProvider: UtilProvider,
     public admUserProvider: AdmUserProvider,
     private formBuilder: FormBuilder,
-    public ftxUtilProvider: FtxUtilProvider,
     public storage: Storage,
     private platform: PlatformProvider,
     public translateService: TranslateService) {
 
-    super(navCtrl, viewCtrl, navParams, popup);
+    super(navCtrl, viewCtrl, navParams, utilProvider);
     this.ftxForm = this.formBuilder.group({
       mobile: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -41,16 +40,16 @@ export class LoginPage extends BasePage {
   doLogin() {
     if (!this.ftxForm.valid) {
       if (!this.ftxForm.controls.mobile.valid || this.ftxForm.controls.mobile.errors) {
-        this.popup.toast('请输入正确的手机号码')
+        this.utilProvider.toast('请输入正确的手机号码')
         return;
       }
       if (!this.ftxForm.controls.password.valid) {
-        this.popup.toast('请输入密码')
+        this.utilProvider.toast('请输入密码')
         return;
       }
     }
 
-    this.ftxForm.value.passwd = this.ftxUtilProvider.make(this.ftxForm.value.password);
+    this.ftxForm.value.passwd = this.utilProvider.make(this.ftxForm.value.password);
 
     this.admUserProvider.login(this.ftxForm.value).subscribe((data: any) => {
       if (data) {

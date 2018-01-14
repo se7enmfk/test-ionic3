@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {BasePage} from "../../pages";
-import {PopupProvider} from "../../../providers/common/popup/popup";
+import { UtilProvider } from '../../../providers/common/commonProviders';
 
 /**
  * Generated class for the SettingPage page.
@@ -20,8 +20,8 @@ export class SettingPage extends BasePage {
   constructor(public navCtrl: NavController,
               public viewCtrl: ViewController,
               public navParams: NavParams,
-              public popup: PopupProvider) {
-    super(navCtrl, viewCtrl, navParams, popup);
+              public utilProvider: UtilProvider) {
+    super(navCtrl, viewCtrl, navParams, utilProvider);
   }
 
   ionViewDidLoad() {

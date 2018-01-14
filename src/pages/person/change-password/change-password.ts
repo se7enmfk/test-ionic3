@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {FtxUtilProvider, PopupProvider} from '../../../providers/common/commonProviders';
 import {AdmUserProvider} from '../../../providers/providers';
 import {BasePage} from "../../pages";
+import { UtilProvider } from '../../../providers/common/commonProviders';
 
 @IonicPage()
 @Component({
@@ -20,12 +20,11 @@ export class ChangePasswordPage extends BasePage {
   constructor(public navCtrl: NavController,
               public viewCtrl: ViewController,
               public navParams: NavParams,
-              public popup: PopupProvider,
+              public utilProvider: UtilProvider,
               private formBuilder: FormBuilder,
-              private ftxUtilProvider: FtxUtilProvider,
               private admUserProvider: AdmUserProvider) {
 
-    super(navCtrl, viewCtrl, navParams, popup);
+    super(navCtrl, viewCtrl, navParams, utilProvider);
 
     this.ftxForm = this.formBuilder.group({
       'old_password': ['', [Validators.required]],
@@ -36,26 +35,26 @@ export class ChangePasswordPage extends BasePage {
   save() {
     if (!this.ftxForm.valid) {
       if (!this.ftxForm.controls.old_password.valid) {
-        this.popup.toast("请输入原密码");
+        this.utilProvider.toast("请输入原密码");
         return;
       }
 
       if (!this.ftxForm.controls.new_password.valid) {
-        this.popup.toast("请输入新密码");
+        this.utilProvider.toast("请输入新密码");
         return;
       }
     }
-    let old_passwd = this.ftxUtilProvider.make(this.ftxForm.controls.old_password.value);
-    let new_passwd = this.ftxUtilProvider.make(this.ftxForm.controls.new_password.value);
+    let old_passwd = this.utilProvider.make(this.ftxForm.controls.old_password.value);
+    let new_passwd = this.utilProvider.make(this.ftxForm.controls.new_password.value);
     if (this.admUserProvider._admUser.passwd != old_passwd) {
-      this.popup.toast("原密码输入不正确");
+      this.utilProvider.toast("原密码输入不正确");
       return;
     }
     this.admUserProvider._admUser.passwd = new_passwd;
     this.admUserProvider._admUser.mode_ = 'E';
     this.admUserProvider.save(this.admUserProvider._admUser).subscribe((data) => {
       if (data) {
-        this.popup.swal("密码修改成功");
+        this.utilProvider.swal("密码修改成功");
         this.popPage();
       }
     });

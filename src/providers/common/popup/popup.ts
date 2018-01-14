@@ -137,33 +137,7 @@ export class PopupProvider {
   }
 
 
-  /**
-   * toast短暂提示   (支持自定义)
-   * http://ionicframework.com/docs/api/components/toast/ToastController/
-   * @param {string} content
-   * @param {string} cssClass
-   * @param {string} position    //"top", "middle", "bottom".
-   * @param {number} duration
-   */
-  toast(content: string, content_body?: Object, cssClass: string = 'toast-content', position: string = 'middle', duration: number = 2000) {
-    let msg: any;
-    this.translateService.get(content, content_body).subscribe((data) => {
-      msg = data || content;
-    });
-
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: duration,
-      position: position,
-      cssClass: cssClass,
-      showCloseButton: false,
-      closeButtonText: "关闭",
-      dismissOnPageChange: true,     //当页面变化时是否dismiss
-    });
-    toast.onDidDismiss(() => {
-    });
-    toast.present();
-  }
+  
 
   /**
    * 拨打号码弹窗
@@ -204,39 +178,7 @@ export class PopupProvider {
     confirm_diy.present();
   }
 
-  /**
-   * loading加载动画
-   * http://ionicframework.com/docs/api/components/loading/LoadingController/
-   * @param {string} op       // 取值：open hide
-   * @param {string} content
-   * @param {string} spinner    动画SVG  // 取值：ios ios-small bubbles circles crescent dots
-   * @param {string} css
-   * @param {boolean} showBackdrop    是否有黑色遮罩
-   */
-  loading(op: string, content: string = '', spinner: string = 'ios-small', css: string = '', showBackdrop: boolean = true) {
-    if (op == 'hide') {
-      if (this.load) {
-        this.load.dismiss();
-      }
-    } else {
-      this.load = this.loadingCtrl.create({
-        spinner: spinner,
-        content: content,
-        cssClass: css,
-        showBackdrop: showBackdrop,      //是否有黑色遮罩
-        enableBackdropDismiss: false,
-        dismissOnPageChange: false,
-        // duration:3000
-      });
-      this.load.present();
-      setTimeout(() => {
-        this.load.dismiss();
-      }, 10000);
-    }
-    this.load.onDidDismiss(() => {
-      console.log('Dismissed loading');
-    });
-  }
+ 
 
   /**
    * swalalert2弹出信息

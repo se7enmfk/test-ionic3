@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PopupProvider, FtxUtilProvider } from '../../../providers/common/commonProviders';
 import { AdmUserProvider } from '../../../providers/providers';
+import { UtilProvider } from '../../../providers/common/commonProviders';
 
 @IonicPage()
 @Component({
@@ -20,9 +20,8 @@ export class SignUpPage {
 
   constructor(public navCtrl: NavController,
     private formBuilder: FormBuilder,
-    private ftxUtilProvider: FtxUtilProvider,
+    private utilProvider: UtilProvider,
     private admuserProvider: AdmUserProvider,
-    private popup: PopupProvider,
     private app: App,
     public navParams: NavParams) {
 
@@ -39,7 +38,7 @@ export class SignUpPage {
   sendCode($event) {
     $event.preventDefault();
     if (!this.ftxForm.controls.mobile.valid || this.ftxForm.controls.mobile.errors) {
-      this.popup.toast('请输入正确的手机号码')
+      this.utilProvider.toast('请输入正确的手机号码')
       return;
     }
 
@@ -47,7 +46,7 @@ export class SignUpPage {
       console.log(response);
 
       if (response) {
-        this.popup.toast('验证码已发送，请注意查收', 'success')
+        this.utilProvider.toast('验证码已发送，请注意查收', 'success')
         this.isTimerStart = true;
         this.timerTracker();
       }
@@ -85,25 +84,25 @@ export class SignUpPage {
   doSignUp() {
     if (!this.ftxForm.valid) {
       if (!this.ftxForm.controls.mobile.valid || this.ftxForm.controls.mobile.errors) {
-        this.popup.toast('请输入正确的手机号码')
+        this.utilProvider.toast('请输入正确的手机号码')
         return;
       }
       if (!this.ftxForm.controls.password.valid) {
-        this.popup.toast('请输入密码')
+        this.utilProvider.toast('请输入密码')
         return;
       }
 
       /* if (!this.ftxForm.controls.code.valid) {
-        this.popup.toast('请输入验证码')
+        this.utilProvider.toast('请输入验证码')
         return;
       } */
     }
 
-    this.ftxForm.controls.passwd.setValue(this.ftxUtilProvider.make(this.ftxForm.controls.password.value));
+    this.ftxForm.controls.passwd.setValue(this.utilProvider.make(this.ftxForm.controls.password.value));
 
     this.admuserProvider.signUp(this.ftxForm.value).subscribe(data => {
       if (data) {
-        this.popup.swal('注册成功').then(() => {
+        this.utilProvider.swal('注册成功').then(() => {
           this.app.getRootNav().push('TabsPage');
         });
       }

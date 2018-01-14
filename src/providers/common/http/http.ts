@@ -3,10 +3,10 @@ import { Injectable, Injector } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { App } from 'ionic-angular';
 import { AppConfig } from '../../../app/app.config';
-import { PopupProvider } from "../popup/popup";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import { UtilProvider } from "../util/util";
 
 // import { URLSearchParams } from '@angular/http';
 
@@ -15,7 +15,7 @@ export class HttpProvider {
   _token: any;
   constructor(public http: HttpClient,
     private storage: Storage,
-    private popup: PopupProvider,
+    private utilProvider: UtilProvider,
     protected injector: Injector,
     protected app: App) {
     this.storage.get(AppConfig.TOKEN).then((data) => {
@@ -65,7 +65,7 @@ export class HttpProvider {
     */
   extractData(res: Response | any) {
     if (res && res.success == 'false') {
-      this.popup.toast('无权限访问');
+      this.utilProvider.toast('无权限访问');
       return false;
     }
     return res;
@@ -75,7 +75,7 @@ export class HttpProvider {
   * @param error 请求失败
   */
   catchError(err: Response | any) {
-    this.popup.toast('err.badNet');
+    this.utilProvider.toast('err.badNet');
     return Observable.throw(err);
   }
 
@@ -115,7 +115,7 @@ export class HttpProvider {
    */
   /*  private handleSuccess(result: Response | any) {
      if (result && result.success == 'false') {
-       this.popup.toast('无权限访问');
+       this.utilProvider.toast('无权限访问');
        return;
      }
      return result;
@@ -132,6 +132,6 @@ export class HttpProvider {
       msg = value;
     })
     if (msg)
-      this.popup.toast(msg);
+      this.utilProvider.toast(msg);
   } */
 }

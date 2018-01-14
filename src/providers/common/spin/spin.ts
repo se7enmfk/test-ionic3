@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/observable/of';
-import { PopupProvider } from "../popup/popup";
+import { UtilProvider } from "../util/util";
 
 
 @Injectable()
@@ -11,7 +11,7 @@ export class SpinInterceptor implements HttpInterceptor {
     public pendingRequests: number = 0;
     public showLoading: Boolean = false;
 
-    constructor(private popup: PopupProvider) { }
+    constructor(private utilProvider: UtilProvider) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.pendingRequests++;
@@ -46,7 +46,7 @@ export class SpinInterceptor implements HttpInterceptor {
     private turnOnModal() {
         if (!this.showLoading) {
             this.showLoading = true;
-            this.popup.loading('open');
+            this.utilProvider.loading('open');
             console.log("Turned on modal");
         }
         this.showLoading = true;
@@ -56,7 +56,7 @@ export class SpinInterceptor implements HttpInterceptor {
         this.pendingRequests--;
         if (this.pendingRequests <= 0) {
             if (this.showLoading) {
-                this.popup.loading('hide');
+                this.utilProvider.loading('hide');
             }
             this.showLoading = false;
         }

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { Storage } from '@ionic/storage';
 import { AppConfig } from '../../../app/app.config';
 import { AdmUserProvider } from '../../../providers/providers';
-import { PopupProvider } from '../../../providers/common/commonProviders';
+import { UtilProvider } from '../../../providers/common/commonProviders';
 import { BasePage } from '../../pages';
 
 @IonicPage()
@@ -20,10 +20,10 @@ export class PersonPage extends BasePage {
   constructor(public navCtrl: NavController,
     public viewCtrl: ViewController,
     public navParams: NavParams,
-    public popup: PopupProvider,
+    public utilProvider: UtilProvider,
     private admUserProvider: AdmUserProvider,
     private storage: Storage) {
-    super(navCtrl, viewCtrl, navParams, popup);
+    super(navCtrl, viewCtrl, navParams, utilProvider);
   }
 
   ionViewDidLoad() {

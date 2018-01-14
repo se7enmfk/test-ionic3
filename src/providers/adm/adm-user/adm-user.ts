@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {AppConfig} from '../../../app/app.config';
-import {HttpProvider, PopupProvider} from '../../common/commonProviders';
+import {HttpProvider, UtilProvider} from '../../common/commonProviders';
 
 @Injectable()
 export class AdmUserProvider {
   _admUser: any;
 
   constructor(public http: HttpProvider,
-              public popup: PopupProvider,
+              public utilProvider: UtilProvider,
               private storage: Storage) {
   }
 
@@ -37,13 +37,13 @@ export class AdmUserProvider {
 
       if (data) {
         if (data.code == '201') {
-          this.popup.toast(data.msg);
+          this.utilProvider.toast(data.msg);
           return false;
         } else if (data.code == '202') {
-          this.popup.toast(data.msg);
+          this.utilProvider.toast(data.msg);
           return false;
         } else if (data.code == '203') {
-          this.popup.toast(data.msg);
+          this.utilProvider.toast(data.msg);
           return false;
         } else {
           this._admUser = data.entity;
@@ -79,6 +79,6 @@ export class AdmUserProvider {
     this.storage.remove(AppConfig.SYS_USER);
     this.storage.remove(AppConfig.TOKEN);
     this.storage.remove(AppConfig.GESTURE_PASSWORD);
-    this.popup.showModal('LoginPage');
+    this.utilProvider.showModal('LoginPage');
   }
 }
