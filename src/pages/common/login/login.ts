@@ -4,7 +4,7 @@ import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angul
 import { Storage } from '@ionic/storage';
 
 import { AdmUserProvider } from '../../../providers/providers';
-import { PopupProvider, Md5Provider, PlatformProvider } from '../../../providers/common/commonProviders';
+import { PopupProvider, FtxUtilProvider, PlatformProvider } from '../../../providers/common/commonProviders';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BasePage } from '../../pages';
 
@@ -23,7 +23,7 @@ export class LoginPage extends BasePage {
     public popup: PopupProvider,
     public admUserProvider: AdmUserProvider,
     private formBuilder: FormBuilder,
-    public md5Provider: Md5Provider,
+    public ftxUtilProvider: FtxUtilProvider,
     public storage: Storage,
     private platform: PlatformProvider,
     public translateService: TranslateService) {
@@ -50,7 +50,7 @@ export class LoginPage extends BasePage {
       }
     }
 
-    this.ftxForm.value.passwd = this.md5Provider.make(this.ftxForm.value.password);
+    this.ftxForm.value.passwd = this.ftxUtilProvider.make(this.ftxForm.value.password);
 
     this.admUserProvider.login(this.ftxForm.value).subscribe((data: any) => {
       if (data) {

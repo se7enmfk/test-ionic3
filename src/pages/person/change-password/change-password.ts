@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Md5Provider, PopupProvider} from '../../../providers/common/commonProviders';
+import {FtxUtilProvider, PopupProvider} from '../../../providers/common/commonProviders';
 import {AdmUserProvider} from '../../../providers/providers';
 import {BasePage} from "../../pages";
 
@@ -10,6 +10,7 @@ import {BasePage} from "../../pages";
   selector: 'page-change-password',
   templateUrl: 'change-password.html',
 })
+
 export class ChangePasswordPage extends BasePage {
 
   private ftxForm: FormGroup;
@@ -21,7 +22,7 @@ export class ChangePasswordPage extends BasePage {
               public navParams: NavParams,
               public popup: PopupProvider,
               private formBuilder: FormBuilder,
-              private md5Provider: Md5Provider,
+              private ftxUtilProvider: FtxUtilProvider,
               private admUserProvider: AdmUserProvider) {
 
     super(navCtrl, viewCtrl, navParams, popup);
@@ -44,8 +45,8 @@ export class ChangePasswordPage extends BasePage {
         return;
       }
     }
-    let old_passwd = this.md5Provider.make(this.ftxForm.controls.old_password.value);
-    let new_passwd = this.md5Provider.make(this.ftxForm.controls.new_password.value);
+    let old_passwd = this.ftxUtilProvider.make(this.ftxForm.controls.old_password.value);
+    let new_passwd = this.ftxUtilProvider.make(this.ftxForm.controls.new_password.value);
     if (this.admUserProvider._admUser.passwd != old_passwd) {
       this.popup.toast("原密码输入不正确");
       return;

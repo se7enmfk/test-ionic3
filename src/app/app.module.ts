@@ -19,7 +19,7 @@ import { GesturePasswordModule } from 'ngx-gesture-password';
 import { MyApp } from './app.component';
 
 import { AdmUserProvider, AdmSysParamProvider } from '../providers/providers';
-import { PlatformProvider, Md5Provider, HttpProvider, PopupProvider } from '../providers/common/commonProviders';
+import { PlatformProvider, FtxUtilProvider, HttpProvider, PopupProvider } from '../providers/common/commonProviders';
 import { AppConfig } from './app.config';
 
 // The translate loader needs to know where to load i18n files
@@ -64,7 +64,7 @@ export function createTranslateLoader(http: HttpClient) {
     AdmUserProvider,
     HttpProvider,
     PopupProvider,
-    Md5Provider,
+    FtxUtilProvider,
     PlatformProvider
   ]
 })

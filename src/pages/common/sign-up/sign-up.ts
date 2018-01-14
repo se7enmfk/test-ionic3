@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Md5Provider, PopupProvider } from '../../../providers/common/commonProviders';
+import { PopupProvider, FtxUtilProvider } from '../../../providers/common/commonProviders';
 import { AdmUserProvider } from '../../../providers/providers';
 
 @IonicPage()
@@ -20,7 +20,7 @@ export class SignUpPage {
 
   constructor(public navCtrl: NavController,
     private formBuilder: FormBuilder,
-    private md5Provider: Md5Provider,
+    private ftxUtilProvider: FtxUtilProvider,
     private admuserProvider: AdmUserProvider,
     private popup: PopupProvider,
     private app: App,
@@ -99,7 +99,7 @@ export class SignUpPage {
       } */
     }
 
-    this.ftxForm.controls.passwd.setValue(this.md5Provider.make(this.ftxForm.controls.password.value));
+    this.ftxForm.controls.passwd.setValue(this.ftxUtilProvider.make(this.ftxForm.controls.password.value));
 
     this.admuserProvider.signUp(this.ftxForm.value).subscribe(data => {
       if (data) {
