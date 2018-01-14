@@ -26,7 +26,7 @@ export class PersonPage extends BasePage {
 
   ionViewDidLoad() {
 
-    this.utilProvider.getItem(AppConfig.SYS_USER).then((data) => {
+    this.utilProvider.getItem(AppConfig.SYS_USER).subscribe((data) => {
       if (!data) {
         this.showModal('LoginPage');
       }

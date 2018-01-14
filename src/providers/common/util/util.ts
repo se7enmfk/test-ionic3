@@ -5,6 +5,10 @@ import { LoadingController, AlertController, ToastController, ModalController } 
 import { TranslateService } from '@ngx-translate/core';
 import swal from 'sweetalert2';
 import { Storage } from '@ionic/storage';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromPromise';
+// import 'rxjs/add/observable/interval';
+// import 'rxjs/add/operator/scan';
 /*
  通用方法
 */
@@ -121,11 +125,14 @@ export class UtilProvider {
   }
 
   getItem(key: string) {
-    return new Promise((resolve, reject) => {
-      this.storage.get(key).then((data) => {
-        return resolve(data);
-      })
-    });
+    return Observable.fromPromise(this.storage.get(key)).map((data) => {
+      return data;
+    })
+    /*  return new Promise((resolve, reject) => {
+       this.storage.get(key).then((data) => {
+         return resolve(data);
+       })
+     }); */
   }
   setItem(key: string, value: any) {
     this.storage.set(key, value);

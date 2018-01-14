@@ -25,16 +25,16 @@ export class TabsPage extends BasePage {
     public viewCtrl: ViewController,
     private platform: PlatformProvider) {
     super(navCtrl, viewCtrl, navParams, utilProvider);
-
+/* 
     let p1 = this.utilProvider.getItem(AppConfig.SYS_NAME);
     let p2 = this.utilProvider.getItem(AppConfig.TOKEN);
     Promise.all([p1, p2]).then((result) => {
       // console.log(result);
-    });
+    }); */
 
     platform.registerBackButtonAction(this.tabRef);
 
-    utilProvider.getItem(AppConfig.GESTURE_PASSWORD).then((data) => {
+    utilProvider.getItem(AppConfig.GESTURE_PASSWORD).subscribe((data) => {
       if (data) {
         this.showModal('GesturePasswordPage');
       }

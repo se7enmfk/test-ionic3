@@ -28,7 +28,7 @@ export class GesturePasswordPage extends BasePage {
 
     super(navCtrl, viewCtrl, navParams, utilProvider);
     
-     this.utilProvider.getItem(AppConfig.GESTURE_PASSWORD).then((result) => {
+     this.utilProvider.getItem(AppConfig.GESTURE_PASSWORD).subscribe((result) => {
       this.pwd = result;
     });
   }

@@ -7,6 +7,7 @@ export class AppConfig {
   static GESTURE_PASSWORD = "gesture_password";
   static SYS_NAME = "FTX";
   static SYS_USER = "TestUser";
+  static SYS_PARAM = "SysParam";
   static TOKEN = "token";
   static BURIED_POINT = "buried_point";
 

@@ -3,6 +3,8 @@ import { IonicPageModule } from 'ionic-angular';
 import { HomePage } from './home';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxEchartsModule } from "ngx-echarts";
+import { PipesModule } from '../../pipes/pipes.module';
+import { AsyncPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -11,7 +13,8 @@ import { NgxEchartsModule } from "ngx-echarts";
   imports: [
     IonicPageModule.forChild(HomePage),
     TranslateModule.forChild(),
-    NgxEchartsModule
+    NgxEchartsModule,
+    PipesModule
   ],
 })
 export class HomePageModule {}

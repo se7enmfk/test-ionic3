@@ -16,7 +16,7 @@ export class HttpProvider {
     private utilProvider: UtilProvider,
     protected injector: Injector,
     protected app: App) {
-    this.utilProvider.getItem(AppConfig.TOKEN).then((data) => {
+    this.utilProvider.getItem(AppConfig.TOKEN).subscribe((data) => {
       this._token = data;
     });
   }
