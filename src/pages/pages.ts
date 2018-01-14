@@ -18,7 +18,7 @@ export class BasePage {
    * @param params 页面参数
    */
   pushPage(page, params?: any) {
-    console.log(this);
+    // console.log(this);
     this.navCtrl.push(page, params);
   }
   /**

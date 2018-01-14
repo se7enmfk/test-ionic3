@@ -27,14 +27,18 @@ export class ChangePasswordPage extends BasePage {
     super(navCtrl, viewCtrl, navParams, utilProvider);
 
     this.ftxForm = this.formBuilder.group({
-      'old_password': ['', [Validators.required]],
+      'old_password': ['', [Validators.required,Validators.maxLength(5)]],
       'new_password': ['', [Validators.required]],
     });
   }
 
   save() {
+    
     if (!this.ftxForm.valid) {
+        
       if (!this.ftxForm.controls.old_password.valid) {
+        console.log(this.ftxForm.get('old_password').errors);
+        
         this.utilProvider.toast("请输入原密码");
         return;
       }
@@ -44,12 +48,13 @@ export class ChangePasswordPage extends BasePage {
         return;
       }
     }
-    let old_passwd = this.utilProvider.make(this.ftxForm.controls.old_password.value);
-    let new_passwd = this.utilProvider.make(this.ftxForm.controls.new_password.value);
+    let old_passwd = this.utilProvider.make(this.ftxForm.value.old_password);
+    let new_passwd = this.utilProvider.make(this.ftxForm.value.new_password);
     if (this.admUserProvider._admUser.passwd != old_passwd) {
       this.utilProvider.toast("原密码输入不正确");
       return;
     }
+
     this.admUserProvider._admUser.passwd = new_passwd;
     this.admUserProvider._admUser.mode_ = 'E';
     this.admUserProvider.save(this.admUserProvider._admUser).subscribe((data) => {

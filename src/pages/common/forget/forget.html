@@ -1,18 +1,56 @@
-<!--
-  Generated template for the ForgetPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>forget</ion-title>
+  <ion-navbar color="ftx-theme">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>忘记密码</ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content padding-top><!-- 
+  <form [formGroup]="ftxForm">
 
-<ion-content padding>
+    <ion-list>
 
+      <ion-item>
+        <ion-label>
+          <ion-icon name="md-phone-portrait" color="light"></ion-icon>
+        </ion-label>
+        <ion-input type="text" placeholder="手机号或邮箱" clearInput formControlName="mobile" maxLength='11'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <ion-icon name="ios-color-filter" color="light"></ion-icon>
+        </ion-label>
+        <ion-input type="text" placeholder="验证码" clearInput formControlName="code" maxLength='6'></ion-input>
+        <button ion-button clear item-right (click)="sendCode($event)" #sendBtn [disabled]="isTimerStart">
+          {{timerText}}
+        </button>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <ion-icon name="md-unlock" color="light"></ion-icon>
+        </ion-label>
+        <ion-input type="{{isShowPassword?'text':'password'}}" placeholder="密码" formControlName="password" maxLength='16'></ion-input>
+        <button ion-button clear item-right (click)="showPassword($event)" class="show-btn">
+          <ion-icon name="{{isShowPassword?'eye':'eye-off'}}" color="light"></ion-icon>
+        </button>
+      </ion-item>
+
+      <ion-note item-start>
+        密码长度6-16位，支持字母、数字、符号
+      </ion-note>
+
+      <ion-row padding>
+        <button block round ion-button color="ftx-theme" (click)="doSignUp()">注册</button>
+      </ion-row>
+
+
+    </ion-list>
+
+  </form> -->
 </ion-content>

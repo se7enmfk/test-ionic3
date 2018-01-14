@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {AppConfig} from '../../../app/app.config';
-import {HttpProvider, UtilProvider} from '../../common/commonProviders';
+import { Injectable } from '@angular/core';
+import { AppConfig } from '../../../app/app.config';
+import { HttpProvider, UtilProvider } from '../../common/commonProviders';
+import { BaseObject } from '../../common/base-object';
 
 @Injectable()
 export class AdmUserProvider {
-  _admUser: any;
+  _admUser: AdmUser;
 
-  constructor(public http: HttpProvider,
-              public utilProvider: UtilProvider) {
+  constructor(public http: HttpProvider, public utilProvider: UtilProvider) {
   }
 
   /**
@@ -67,11 +67,18 @@ export class AdmUserProvider {
     return seq;
   }
 
+  /**
+   * 发送验证码
+   * @param admUser 实体
+   */
   getCode(admUser) {
     // let seq = this.http.post('login/signUp', admUser);
     return Promise.resolve(true);
   }
 
+  /**
+   * 登出
+   */
   logout() {
     this._admUser = null;
     this.utilProvider.removeItem(AppConfig.SYS_USER);
@@ -79,4 +86,22 @@ export class AdmUserProvider {
     this.utilProvider.removeItem(AppConfig.GESTURE_PASSWORD);
     this.utilProvider.showModal('LoginPage');
   }
+}
+
+export class AdmUser extends BaseObject {
+  user_code: string;
+  user_name: string;
+  passwd: any;
+  pwd_exp_dt: string;
+  email: string;
+  mobile: string;
+  gender: string;
+  login_tried: number;
+  last_login_ts: string;
+  active_ind: string;
+  create_ts: string;
+  create_by: string;
+  modify_ts: string;
+  modify_by: string;
+  gesture_ind:boolean;
 }

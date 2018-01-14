@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
 import { AdmUserProvider } from '../../../providers/providers';
 import { PlatformProvider, UtilProvider } from '../../../providers/common/commonProviders';
@@ -23,9 +22,7 @@ export class LoginPage extends BasePage {
     public utilProvider: UtilProvider,
     public admUserProvider: AdmUserProvider,
     private formBuilder: FormBuilder,
-    public storage: Storage,
-    private platform: PlatformProvider,
-    public translateService: TranslateService) {
+    private platform: PlatformProvider) {
 
     super(navCtrl, viewCtrl, navParams, utilProvider);
     this.ftxForm = this.formBuilder.group({
@@ -39,7 +36,7 @@ export class LoginPage extends BasePage {
 
   doLogin() {
     if (!this.ftxForm.valid) {
-      if (!this.ftxForm.controls.mobile.valid || this.ftxForm.controls.mobile.errors) {
+      if (!this.ftxForm.controls.mobile.valid) {
         this.utilProvider.toast('请输入正确的手机号码')
         return;
       }

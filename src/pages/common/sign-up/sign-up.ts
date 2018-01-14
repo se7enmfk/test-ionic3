@@ -3,13 +3,15 @@ import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdmUserProvider } from '../../../providers/providers';
 import { UtilProvider } from '../../../providers/common/commonProviders';
+import { BasePage } from '../../pages';
+import { ViewController } from 'ionic-angular/navigation/view-controller';
 
 @IonicPage()
 @Component({
   selector: 'page-sign-up',
   templateUrl: 'sign-up.html',
 })
-export class SignUpPage {
+export class SignUpPage extends BasePage {
 
   private ftxForm: FormGroup;
 
@@ -20,10 +22,11 @@ export class SignUpPage {
 
   constructor(public navCtrl: NavController,
     private formBuilder: FormBuilder,
-    private utilProvider: UtilProvider,
+    public utilProvider: UtilProvider,
+    public viewCtrl: ViewController,
     private admuserProvider: AdmUserProvider,
-    private app: App,
     public navParams: NavParams) {
+    super(navCtrl, viewCtrl, navParams, utilProvider);
 
     this.ftxForm = this.formBuilder.group({
       mobile: ['', [Validators.required]],
@@ -33,8 +36,6 @@ export class SignUpPage {
     });
   }
 
-  ionViewDidLoad() {
-  }
   sendCode($event) {
     $event.preventDefault();
     if (!this.ftxForm.controls.mobile.valid || this.ftxForm.controls.mobile.errors) {
@@ -73,14 +74,6 @@ export class SignUpPage {
     this.isShowPassword = !this.isShowPassword;
   }
 
-  goLoginPage() {
-    this.navCtrl.pop();
-  }
-
-  goForgetPage() {
-    this.navCtrl.push('ForgetPage');
-  }
-
   doSignUp() {
     if (!this.ftxForm.valid) {
       if (!this.ftxForm.controls.mobile.valid || this.ftxForm.controls.mobile.errors) {
@@ -102,10 +95,12 @@ export class SignUpPage {
 
     this.admuserProvider.signUp(this.ftxForm.value).subscribe(data => {
       if (data) {
-        this.utilProvider.swal('注册成功').then(() => {
-          this.app.getRootNav().push('TabsPage');
-        });
+        this.utilProvider.swal('注册成功');
+        this.navCtrl.setRoot('TabsPage');
       }
     });
   }
+
+  
+
 }

@@ -31,7 +31,6 @@ export class PersonPage extends BasePage {
         this.showModal('LoginPage');
       }
     });
-
   }
 
   doRefresh(refresher) {
@@ -40,7 +39,6 @@ export class PersonPage extends BasePage {
       this.ionViewDidLoad();
     }, 2000);
   }
-
 
   doLogout() {
     this.admUserProvider.logout();
