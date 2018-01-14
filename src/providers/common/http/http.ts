@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
-import { Storage } from '@ionic/storage';
 import { App } from 'ionic-angular';
 import { AppConfig } from '../../../app/app.config';
 import { Observable } from 'rxjs/Observable';
@@ -14,13 +13,12 @@ import { UtilProvider } from "../util/util";
 export class HttpProvider {
   _token: any;
   constructor(public http: HttpClient,
-    private storage: Storage,
     private utilProvider: UtilProvider,
     protected injector: Injector,
     protected app: App) {
-    this.storage.get(AppConfig.TOKEN).then((data) => {
+    this.utilProvider.getItem(AppConfig.TOKEN).then((data) => {
       this._token = data;
-    })
+    });
   }
 
   /**

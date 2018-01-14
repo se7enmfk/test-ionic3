@@ -4,6 +4,7 @@ import { AppConfig } from '../../../app/app.config';
 import { LoadingController, AlertController, ToastController, ModalController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import swal from 'sweetalert2';
+import { Storage } from '@ionic/storage';
 /*
  通用方法
 */
@@ -16,6 +17,7 @@ export class UtilProvider {
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
     public modalCtrl: ModalController,
+    public storage: Storage,
     public translateService: TranslateService) {
   }
 
@@ -61,13 +63,9 @@ export class UtilProvider {
    * @param {number} duration
    */
   toast(content: string, content_body?: Object, cssClass: string = 'toast-content', position: string = 'middle', duration: number = 2000) {
-    let msg: any;
-    this.translateService.get(content, content_body).subscribe((data) => {
-      msg = data || content;
-    });
 
     let toast = this.toastCtrl.create({
-      message: msg,
+      message: this.translate(content, content_body),
       duration: duration,
       position: position,
       cssClass: cssClass,
@@ -80,15 +78,15 @@ export class UtilProvider {
     toast.present();
   }
 
-   /**
-   * loading加载动画
-   * http://ionicframework.com/docs/api/components/loading/LoadingController/
-   * @param {string} op       // 取值：open hide
-   * @param {string} content
-   * @param {string} spinner    动画SVG  // 取值：ios ios-small bubbles circles crescent dots
-   * @param {string} css
-   * @param {boolean} showBackdrop    是否有黑色遮罩
-   */
+  /**
+  * loading加载动画
+  * http://ionicframework.com/docs/api/components/loading/LoadingController/
+  * @param {string} op       // 取值：open hide
+  * @param {string} content
+  * @param {string} spinner    动画SVG  // 取值：ios ios-small bubbles circles crescent dots
+  * @param {string} css
+  * @param {boolean} showBackdrop    是否有黑色遮罩
+  */
   loading(op: string, content: string = '', spinner: string = 'ios-small', css: string = '', showBackdrop: boolean = true) {
     if (op == 'hide') {
       if (this.load) {
@@ -97,7 +95,7 @@ export class UtilProvider {
     } else {
       this.load = this.loadingCtrl.create({
         spinner: spinner,
-        content: content,
+        content: this.translate(content),
         cssClass: css,
         showBackdrop: showBackdrop,      //是否有黑色遮罩
         enableBackdropDismiss: false,
@@ -112,5 +110,27 @@ export class UtilProvider {
     this.load.onDidDismiss(() => {
       console.log('Dismissed loading');
     });
+  }
+
+  translate(content: string, content_body?: Object) {
+    let msg: string;
+    this.translateService.get(content, content_body).subscribe((data) => {
+      msg = data || content;
+    });
+    return msg;
+  }
+
+  getItem(key: string) {
+    return new Promise((resolve, reject) => {
+      this.storage.get(key).then((data) => {
+        return resolve(data);
+      })
+    });
+  }
+  setItem(key: string, value: any) {
+    this.storage.set(key, value);
+  }
+  removeItem(key: string) {
+    this.storage.remove(key);
   }
 }

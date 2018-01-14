@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, Tabs, ViewController, NavParams } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 import { AppConfig } from '../../../app/app.config';
 import { PlatformProvider, UtilProvider } from '../../../providers/common/commonProviders';
 import { BasePage } from '../../pages';
@@ -24,23 +23,23 @@ export class TabsPage extends BasePage {
     public navParams: NavParams,
     public utilProvider: UtilProvider,
     public viewCtrl: ViewController,
-    public storage: Storage,
     private platform: PlatformProvider) {
     super(navCtrl, viewCtrl, navParams, utilProvider);
-    
-    let p1 = this.storage.get(AppConfig.SYS_NAME);
-    let p2 = this.storage.get(AppConfig.TOKEN);
+
+    let p1 = this.utilProvider.getItem(AppConfig.SYS_NAME);
+    let p2 = this.utilProvider.getItem(AppConfig.TOKEN);
     Promise.all([p1, p2]).then((result) => {
       // console.log(result);
     });
 
     platform.registerBackButtonAction(this.tabRef);
 
-    storage.get(AppConfig.GESTURE_PASSWORD).then((data) => {
+    utilProvider.getItem(AppConfig.GESTURE_PASSWORD).then((data) => {
       if (data) {
         this.showModal('GesturePasswordPage');
       }
     })
+
 
   }
 

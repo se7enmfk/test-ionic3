@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 import { AppConfig } from '../../../app/app.config';
 import { UtilProvider } from '../../../providers/common/commonProviders';
 import { ERR } from 'ngx-gesture-password';
@@ -25,11 +24,11 @@ export class GesturePasswordPage extends BasePage {
     public navParams: NavParams,
     public utilProvider: UtilProvider,
     public viewCtrl: ViewController,
-    private admUserProvider:AdmUserProvider,
-    public storage: Storage) {
+    private admUserProvider:AdmUserProvider) {
 
     super(navCtrl, viewCtrl, navParams, utilProvider);
-    this.storage.get(AppConfig.GESTURE_PASSWORD).then((result) => {
+    
+     this.utilProvider.getItem(AppConfig.GESTURE_PASSWORD).then((result) => {
       this.pwd = result;
     });
   }
@@ -86,7 +85,7 @@ export class GesturePasswordPage extends BasePage {
         break;
       default:
         this.utilProvider.toast('新密码已经生效');
-        this.storage.set(AppConfig.GESTURE_PASSWORD, e.result);
+        this.utilProvider.setItem(AppConfig.GESTURE_PASSWORD, e.result);
         this.dismiss();
         break;
     }

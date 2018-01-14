@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Storage} from '@ionic/storage';
 import {AppConfig} from '../../../app/app.config';
 import {HttpProvider, UtilProvider} from '../../common/commonProviders';
 
@@ -8,8 +7,7 @@ export class AdmUserProvider {
   _admUser: any;
 
   constructor(public http: HttpProvider,
-              public utilProvider: UtilProvider,
-              private storage: Storage) {
+              public utilProvider: UtilProvider) {
   }
 
   /**
@@ -20,7 +18,7 @@ export class AdmUserProvider {
     return this.http.post('adm/user', admUser).map(data => {
       if (data) {
         this._admUser = data.entity;
-        this.storage.set(AppConfig.SYS_USER, data.entity);
+        this.utilProvider.setItem(AppConfig.SYS_USER, data.entity);
         return true;
       }
       return false;
@@ -47,8 +45,8 @@ export class AdmUserProvider {
           return false;
         } else {
           this._admUser = data.entity;
-          this.storage.set(AppConfig.SYS_USER, data.entity);
-          this.storage.set(AppConfig.TOKEN, data.entity.token);
+          this.utilProvider.setItem(AppConfig.SYS_USER, data.entity);
+          this.utilProvider.setItem(AppConfig.TOKEN, data.entity.token);
           this.http._token = data.entity.token;
           return true;
         }
@@ -76,9 +74,9 @@ export class AdmUserProvider {
 
   logout() {
     this._admUser = null;
-    this.storage.remove(AppConfig.SYS_USER);
-    this.storage.remove(AppConfig.TOKEN);
-    this.storage.remove(AppConfig.GESTURE_PASSWORD);
+    this.utilProvider.removeItem(AppConfig.SYS_USER);
+    this.utilProvider.removeItem(AppConfig.TOKEN);
+    this.utilProvider.removeItem(AppConfig.GESTURE_PASSWORD);
     this.utilProvider.showModal('LoginPage');
   }
 }

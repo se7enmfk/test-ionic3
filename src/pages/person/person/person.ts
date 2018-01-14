@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 import { AppConfig } from '../../../app/app.config';
 import { AdmUserProvider } from '../../../providers/providers';
 import { UtilProvider } from '../../../providers/common/commonProviders';
@@ -21,18 +20,18 @@ export class PersonPage extends BasePage {
     public viewCtrl: ViewController,
     public navParams: NavParams,
     public utilProvider: UtilProvider,
-    private admUserProvider: AdmUserProvider,
-    private storage: Storage) {
+    private admUserProvider: AdmUserProvider) {
     super(navCtrl, viewCtrl, navParams, utilProvider);
   }
 
   ionViewDidLoad() {
 
-    this.storage.get(AppConfig.SYS_USER).then((data) => {
+    this.utilProvider.getItem(AppConfig.SYS_USER).then((data) => {
       if (!data) {
         this.showModal('LoginPage');
       }
-    })
+    });
+
   }
 
   doRefresh(refresher) {
@@ -41,7 +40,7 @@ export class PersonPage extends BasePage {
       this.ionViewDidLoad();
     }, 2000);
   }
-  
+
 
   doLogout() {
     this.admUserProvider.logout();
