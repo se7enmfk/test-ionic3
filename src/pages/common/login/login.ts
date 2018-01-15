@@ -7,6 +7,9 @@ import { PlatformProvider, UtilProvider } from '../../../providers/common/common
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BasePage } from '../../pages';
 
+/**
+ * 登录页面
+ */
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -20,11 +23,12 @@ export class LoginPage extends BasePage {
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public utilProvider: UtilProvider,
-    public admUserProvider: AdmUserProvider,
+    private admUserProvider: AdmUserProvider,
     private formBuilder: FormBuilder,
     private platform: PlatformProvider) {
 
     super(navCtrl, viewCtrl, navParams, utilProvider);
+
     this.ftxForm = this.formBuilder.group({
       mobile: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -34,6 +38,9 @@ export class LoginPage extends BasePage {
     platform.registerBackButtonAction();
   }
 
+  /**
+   * 登录
+   */
   doLogin() {
     if (!this.ftxForm.valid) {
       if (!this.ftxForm.controls.mobile.valid) {
@@ -57,7 +64,10 @@ export class LoginPage extends BasePage {
     });
   }
 
-  goHomePage() {
+  /**
+   * 跳转到TabsPage
+   */
+  goTabsPage() {
     this.dismiss();
     this.navCtrl.setRoot('TabsPage');
   }
