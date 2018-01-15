@@ -12,4 +12,10 @@
   <div echarts [options]="options" (chartClick)="onChartClick($event)" class="demo-chart"></div>
 
   {{'AGR'|sysFilter:'APPROVE_TYPE'|async}}
+
+  <ion-list >
+    <ion-item *ngFor="let sys of admSysParamProvider.list|filter:{param_type:'APPROVE_TYPE'}" >
+      {{sys.param_code}}
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { SysFilterPipe } from './sys-filter/sys-filter';
+import { FilterPipe } from './filter/filter';
 @NgModule({
-	declarations: [SysFilterPipe],
+	declarations: [SysFilterPipe,
+    FilterPipe],
 	imports: [],
-	exports: [SysFilterPipe]
+	exports: [SysFilterPipe,
+    FilterPipe]
 })
 export class PipesModule {}

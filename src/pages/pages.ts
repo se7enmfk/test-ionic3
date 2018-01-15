@@ -12,6 +12,7 @@ export class BasePage {
     public navParams: NavParams,
     public utilProvider: UtilProvider) {
   }
+  
   /**
    * 打开页面
    * @param page 跳转页面
@@ -21,12 +22,14 @@ export class BasePage {
     // console.log(this);
     this.navCtrl.push(page, params);
   }
+
   /**
    * 关闭页面
    */
   popPage() {
     this.navCtrl.pop();
   }
+
   /**
    * 弹出modal页面
    * @param page 弹出页面
