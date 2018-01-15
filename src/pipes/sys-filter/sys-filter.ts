@@ -14,8 +14,6 @@ export class SysFilterPipe implements PipeTransform {
   constructor(private admSysParamProvider: AdmSysParamProvider) { }
 
   transform(value: string, ...args) {
-
     return this.admSysParamProvider.getSysParam(args[0], value);
-
   }
 }

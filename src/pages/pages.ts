@@ -2,7 +2,7 @@ import { NavController, NavParams, ViewController } from "ionic-angular";
 import { UtilProvider } from "../providers/common/commonProviders";
 
 export const FirstPage = 'TabsPage';
-// export const FirstPage = 'TabsPage';
+// export const FirstPage = 'PersonPage';
 // export const FirstPage = 'SignUpPage';
 
 export class BasePage {

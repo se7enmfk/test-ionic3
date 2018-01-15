@@ -43,7 +43,7 @@ export class MyApp {
     config.set('modalEnter','modal-slide-in');
     config.set('modalLeave','modal-slide-out');
     config.set('pageTransition','ios');
-
+    config.set('mode','ios');
   }
 
   //init translate

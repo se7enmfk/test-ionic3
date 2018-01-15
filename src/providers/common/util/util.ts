@@ -52,6 +52,7 @@ export class UtilProvider {
 
   /**
    * 弹出框
+   * http://ionicframework.com/docs/api/components/modal/ModalController/
    * @param page 页面
    * @param params 页面参数
    */
@@ -170,5 +171,12 @@ export class UtilProvider {
     } else {
       return list;
     }
+  }
+
+  createObservable(data){
+    return Observable.create(observer => {
+      observer.next(data);
+      observer.complete();
+  });
   }
 }

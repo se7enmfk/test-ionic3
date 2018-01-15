@@ -8,19 +8,31 @@
   </ion-navbar>
 </ion-header>
 <!-- content -->
-<ion-content>
-  <!--<form [formGroup]="ftxForm" (ngSubmit)="save()">-->
-  <ion-list>
-    <ion-item>
-      <ion-label fixed>原密码</ion-label>
-      <!--<ion-input clearInput type="{{showPass?'text':'password'}}" placeholder="请输入原密码" formControlName="old_password" maxLength='10'></ion-input>-->
-      <!--<ion-icon name="{{showPass?'eye':'eye-off'}}" color="light"></ion-icon>-->
-    </ion-item>
-    <ion-item>
-      <ion-label fixed>新密码</ion-label>
-      <!--<ion-input clearInput type="{{_showPass?'text':'password'}}" placeholder="请输入新密码" formControlName="new_password" maxLength='10'></ion-input>-->
-      <!--<ion-icon name="{{_showPass?'eye':'eye-off'}}" color="light"></ion-icon>-->
-    </ion-item>
-  </ion-list>
-  <!--</form>-->
+<ion-content> 
+  <form [formGroup]="ftxForm">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>姓名</ion-label>
+        <ion-input clearInput type="text" placeholder="请输入姓名" formControlName="user_name" maxLength='10'></ion-input>
+      </ion-item>
+      <ion-item (click)="openActionSheet()">
+        <ion-label fixed>性别</ion-label>
+        <ion-note clear item-end>
+          <span ion-text > {{ftxForm.value.gender|sysFilter:'GENDER'|async}} </span>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>手机号码</ion-label>
+        <ion-note clear item-end>
+          <span ion-text> 13728890918 </span>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>邮箱</ion-label>
+        <ion-input clearInput type="text" placeholder="请输入邮箱" formControlName="email" maxLength='10'></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>

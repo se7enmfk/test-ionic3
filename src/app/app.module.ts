@@ -10,7 +10,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-
 import { NgxEchartsModule } from "ngx-echarts";
 import { GesturePasswordModule } from 'ngx-gesture-password';
 

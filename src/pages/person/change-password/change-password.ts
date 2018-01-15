@@ -57,7 +57,10 @@ export class ChangePasswordPage extends BasePage {
 
     this.admUserProvider._admUser.passwd = new_passwd;
     this.admUserProvider._admUser.mode_ = 'E';
-    this.admUserProvider.save(this.admUserProvider._admUser).subscribe((data) => {
+    console.log(  this.admUserProvider.save(this.admUserProvider._admUser));
+    
+    this.admUserProvider.save(this.admUserProvider._admUser)
+    .subscribe((data) => {
       if (data) {
         this.utilProvider.swal("密码修改成功");
         this.popPage();

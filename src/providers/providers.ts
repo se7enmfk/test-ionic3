@@ -1,5 +1,9 @@
-import { AdmSysParamProvider } from "./adm/adm-sys-param/adm-sys-param";
-import { AdmUserProvider } from "./adm/adm-user/adm-user";
+// import { AdmSysParamProvider } from "./adm/adm-sys-param/adm-sys-param";
+// import { AdmUserProvider } from "./adm/adm-user/adm-user";
+
+import { AdmSysParamProvider } from "../mocks/adm/adm-sys-param/adm-sys-param";
+import { AdmUserProvider } from "../mocks/adm/adm-user/adm-user";
+
 import { PlatformProvider, HttpProvider, UtilProvider } from "./common/commonProviders";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";

@@ -177,26 +177,4 @@ export class PopupProvider {
     });
     confirm_diy.present();
   }
-
- 
-
-  /**
-   * swalalert2弹出信息
-   * @param {string} title  //
-   * @param {string} type   //'success' | 'error' | 'warning' | 'info' | 'question'
-   * @param {string} timer
-   */
-  swal(title: string, type: any = 'success', timer: number = 2000) {
-    return swal({
-      title: title,
-      type: type,
-      timer: timer,
-      showConfirmButton: false,
-      width: '80%'
-    });
-  }
-
-  showModal(page: String, params?: any) {
-    this.modalCtrl.create(page, params).present();
-  }
 }
