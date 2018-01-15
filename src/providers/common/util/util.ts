@@ -116,6 +116,11 @@ export class UtilProvider {
     });
   }
 
+  /**
+   * 翻译
+   * @param content 内容
+   * @param content_body 内容中可换属性 
+   */
   translate(content: string, content_body?: Object) {
     let msg: string;
     this.translateService.get(content, content_body).subscribe((data) => {
@@ -124,20 +129,46 @@ export class UtilProvider {
     return msg;
   }
 
+  /**
+   * get storage by key
+   * @param key storage key
+   */
   getItem(key: string) {
     return Observable.fromPromise(this.storage.get(key)).map((data) => {
       return data;
     })
-    /*  return new Promise((resolve, reject) => {
-       this.storage.get(key).then((data) => {
-         return resolve(data);
-       })
-     }); */
   }
+  /**
+   * set storage
+   * @param key storage key
+   * @param value storage value
+   */
   setItem(key: string, value: any) {
     this.storage.set(key, value);
   }
+  /**
+   * remove storage by key
+   * @param key storage key 
+   */
   removeItem(key: string) {
     this.storage.remove(key);
+  }
+
+  /**
+   * 返回筛选后的list
+   * @param list 待filter的list
+   * @param filter filter对象
+   */
+  getFilterList(list: any, filter: object) {
+
+    if (filter && Array.isArray(list)) {
+      let filterKeys = Object.keys(filter);
+
+      return list.filter(item =>
+        filterKeys.reduce((memo, keyName) =>
+          memo && item[keyName].toLowerCase() === filter[keyName].toLowerCase(), true));
+    } else {
+      return list;
+    }
   }
 }

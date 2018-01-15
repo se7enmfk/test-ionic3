@@ -10,12 +10,24 @@ export class AdmSysParamProvider {
   list: AdmSysParam[];
   constructor(public http: HttpProvider, private utilProvider: UtilProvider) { }
 
-  retrieveSysParamList() {
+  getSysParamList() {
     this.http.post('adm/sysParamList').subscribe((data) => {
       this.list = data;
       this.utilProvider.setItem(AppConfig.SYS_PARAM, data);
     });
   }
+
+  getSysParam(param_type, param_code) {
+    return this.utilProvider.getItem(AppConfig.SYS_PARAM).map((data) => {
+
+      let list: any = this.list || data;
+
+      list = list.filter((data) => (data.param_type == param_type && data.param_code == param_code));
+
+      return list[0].param_name;
+    });
+  }
+
 }
 
 export class AdmSysParam extends BaseObject {

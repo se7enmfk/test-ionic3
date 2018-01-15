@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { UtilProvider } from '../../providers/common/commonProviders';
 
 /**
  * 根据list object中object属性返回filter后的list
@@ -8,21 +9,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
+  constructor(private utilProvider: UtilProvider) { }
   transform(value: any, ...args) {
-    let filter = args[0];
- 
-    if (filter && Array.isArray(value)) {
-      let filterKeys = Object.keys(filter);
-      
-      return value.filter(item =>
-        filterKeys.reduce((memo, keyName) =>
-          memo && item[keyName].toLowerCase() === filter[keyName].toLowerCase(), true));
-    } else {
-      return value;
-    }
-
-
-
+   return this.utilProvider.getFilterList(value,args[0]);
   }
 }
 /* class Person {

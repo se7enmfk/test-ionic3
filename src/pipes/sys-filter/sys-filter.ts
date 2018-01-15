@@ -11,19 +11,11 @@ import { AppConfig } from '../../app/app.config';
 })
 export class SysFilterPipe implements PipeTransform {
 
-  constructor(private admSysParamProvider: AdmSysParamProvider, private utilProvider: UtilProvider) { }
+  constructor(private admSysParamProvider: AdmSysParamProvider) { }
 
   transform(value: string, ...args) {
 
-    return this.utilProvider.getItem(AppConfig.SYS_PARAM).map((data) => {
+    return this.admSysParamProvider.getSysParam(args[0], value);
 
-      let list: any;
-
-      list = this.admSysParamProvider.list || data;
-
-      list = list.filter((data) => (data.param_type == args[0] && data.param_code == value));
-
-      return list[0].param_name;
-    });
   }
 }

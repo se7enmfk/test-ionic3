@@ -32,7 +32,7 @@ export class MyApp {
 
     this.initTranslate();
 
-    admSysParam.retrieveSysParamList();
+    this.admSysParam.getSysParamList();
 
     this.storage.get(AppConfig.SYS_USER).then((data) => {
       admUserProvider._admUser = data;
