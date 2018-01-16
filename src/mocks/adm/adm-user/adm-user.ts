@@ -26,7 +26,8 @@ export class AdmUserProvider {
    * @param admUser 实体
    */
   save(admUser) {
-    this._admUser = Object.assign({}, admUser, this._admUser);
+    
+    this._admUser = Object.assign({}, this._admUser, admUser);
     this.utilProvider.setItem(AppConfig.SYS_USER, this._admUser);
     return this.utilProvider.createObservable(true);
   }
@@ -36,7 +37,6 @@ export class AdmUserProvider {
    * @param admUser 实体
    */
   login(admUser: any) {
-
     this.utilProvider.setItem(AppConfig.SYS_USER, this._admUser);
     this.utilProvider.setItem(AppConfig.TOKEN, this._admUser.token);
     this.http._token = this._admUser.token;
@@ -66,7 +66,6 @@ export class AdmUserProvider {
    * 登出
    */
   logout() {
-    this._admUser = null;
     this.utilProvider.removeItem(AppConfig.SYS_USER);
     this.utilProvider.removeItem(AppConfig.TOKEN);
     this.utilProvider.removeItem(AppConfig.GESTURE_PASSWORD);

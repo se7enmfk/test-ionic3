@@ -38,9 +38,7 @@
       </h2>
       <p>13729909281</p>
       <p>最后登录时间:{{user.signature || ''}}</p>
-      <ion-note item-end>
-        <ion-icon name="arrow-forward"></ion-icon>
-      </ion-note>
+      <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
     </ion-item>
   </ion-list>
 
@@ -48,33 +46,25 @@
     <ion-item (click)="pushPage('BankCardPage')">
       <ion-icon name="ios-card" item-start></ion-icon>
       银行卡
-      <ion-note clear item-end>
-        <strong ion-text > 1张 </strong>
-        <ion-icon name="arrow-forward"></ion-icon>
-      </ion-note>
+      <ion-note item-end>1张</ion-note>
+      <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
     </ion-item>
-    <ion-item (click)="pushPage('ChangePasswordPage')">
+    <ion-item (click)="pushPage('PasswordManagementPage')">
       <ion-icon name="ios-card" item-start></ion-icon>
-      密码修改
-      <ion-note clear item-end>
-        <ion-icon name="arrow-forward"></ion-icon>
-      </ion-note>
+      密码管理
+      <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
     </ion-item>
     <ion-item (click)="pushPage('RiskPage')">
       <ion-icon name="ios-card" item-start></ion-icon>
       风险偏好测试
-      <ion-note clear item-end>
-        <strong ion-text > 成长型 </strong>
-        <ion-icon name="arrow-forward"></ion-icon>
-      </ion-note>
+      <ion-note item-end>成长型</ion-note>
+      <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
     </ion-item>
     <ion-item (click)="pushPage('RefereePage')">
       <ion-icon name="ios-card" item-start></ion-icon>
       推荐人信息
-      <ion-note clear item-end>
-        <strong ion-text > daslfk</strong>
-        <ion-icon name="arrow-forward"></ion-icon>
-      </ion-note>
+      <ion-note item-end>daslfk</ion-note>
+      <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
     </ion-item>
   </ion-list>
 

@@ -13,33 +13,30 @@ import { AdmUserProvider } from '../../../providers/providers';
 })
 
 export class GesturePasswordPage extends BasePage {
-  
+
   pwd: any;
-  type = this.navParams.get('type') || 'check';
+  type = this.navParams.get('type') ? 'recorder' : 'check';
+  back_ind = this.navParams.get('type');
   chance = AppConfig.gesture_num;
   // type = 'recorder';
   chance_ind = false;
-
+  gesture_ind = this.navParams.get('gesture_ind');
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public utilProvider: UtilProvider,
     public viewCtrl: ViewController,
-    private admUserProvider:AdmUserProvider) {
+    private admUserProvider: AdmUserProvider) {
 
     super(navCtrl, viewCtrl, navParams, utilProvider);
-    
-     this.utilProvider.getItem(AppConfig.GESTURE_PASSWORD).subscribe((result) => {
+
+    this.utilProvider.getItem(AppConfig.GESTURE_PASSWORD).subscribe((result) => {
       this.pwd = result;
     });
   }
-
-  ionViewDidLoad() {
-
-  }
-
-  onError(e) {
-  }
-  
+  /**
+   * 验证密码
+   * @param e 数据
+   */
   onChecked(e) {
     switch (e.err) {
       case ERR.NOT_ENOUGH_POINTS:
@@ -60,6 +57,10 @@ export class GesturePasswordPage extends BasePage {
         break;
     }
   }
+  /**
+   * 第一次设置密码
+   * @param e 数据
+   */
   onBeforeRepeat(e) {
     switch (e.err) {
       case ERR.NOT_ENOUGH_POINTS:
@@ -70,6 +71,10 @@ export class GesturePasswordPage extends BasePage {
         break;
     }
   }
+  /**
+   * 确认密码
+   * @param e 数据
+   */
   onAfterRepeat(e) {
     switch (e.err) {
       case ERR.NOT_ENOUGH_POINTS:
@@ -86,9 +91,13 @@ export class GesturePasswordPage extends BasePage {
       default:
         this.utilProvider.toast('新密码已经生效');
         this.utilProvider.setItem(AppConfig.GESTURE_PASSWORD, e.result);
-        this.dismiss();
+        this.dismiss(true);
         break;
     }
   }
+
+  onError(e) {
+  }
+
 
 }

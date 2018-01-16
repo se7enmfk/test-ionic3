@@ -62,7 +62,7 @@ export class ChangePasswordPage extends BasePage {
     this.admUserProvider.save(this.admUserProvider._admUser)
     .subscribe((data) => {
       if (data) {
-        this.utilProvider.swal("密码修改成功");
+        this.utilProvider.swal("修改成功");
         this.popPage();
       }
     });

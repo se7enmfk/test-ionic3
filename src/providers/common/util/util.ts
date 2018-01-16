@@ -57,7 +57,9 @@ export class UtilProvider {
    * @param params 页面参数
    */
   showModal(page: String, params?: any) {
-    this.modalCtrl.create(page, params).present();
+    let modal = this.modalCtrl.create(page, params);
+    modal.present();
+    return modal;
   }
   /**
    * toast短暂提示   (支持自定义)
@@ -173,10 +175,43 @@ export class UtilProvider {
     }
   }
 
+  /**
+   * 生成observable
+   * @param data 数据
+   */
   createObservable(data){
     return Observable.create(observer => {
       observer.next(data);
       observer.complete();
   });
+  }
+
+  prompt(title) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      inputs: [
+        {
+          name: 'username',
+          placeholder: 'Username'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Login',
+          handler: data => {
+            return false;
+          }
+        }
+      ]
+    });
+    alert.present();
+    return alert;
   }
 }

@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AdmSysParamProvider, AdmUserProvider } from '../providers/providers';
 import { AppConfig } from './app.config';
 import { FirstPage } from '../pages/pages';
+import { UtilProvider } from '../providers/common/commonProviders';
 
 @Component({
   templateUrl: 'app.html'
@@ -20,7 +21,8 @@ export class MyApp {
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
-    public admSysParam: AdmSysParamProvider,
+    public admSysParamProvider: AdmSysParamProvider,
+    public utilProvider: UtilProvider,
     public admUserProvider: AdmUserProvider,
     private storage: Storage) {
     platform.ready().then(() => {
@@ -32,18 +34,19 @@ export class MyApp {
 
     this.initTranslate();
 
-    this.admSysParam.getSysParamList();
+    this.admSysParamProvider.getSysParamList();
 
-    this.storage.get(AppConfig.SYS_USER).then((data) => {
+   /*  this.storage.get(AppConfig.SYS_USER).then((data) => {
       admUserProvider._admUser = data;
-    })
+    }) */
 
-    config.set('backButtonIcon','ios-arrow-back');
-    config.set('iconMode','ios');
-    config.set('modalEnter','modal-slide-in');
-    config.set('modalLeave','modal-slide-out');
-    config.set('pageTransition','ios');
-    config.set('mode','ios');
+    config.set('backButtonIcon', 'ios-arrow-back');
+    config.set('iconMode', 'ios');
+    config.set('modalEnter', 'modal-slide-in');
+    config.set('modalLeave', 'modal-slide-out');
+    config.set('pageTransition', 'ios');
+    config.set('mode', 'ios');
+    config.set('backButtonText', '');
   }
 
   //init translate
@@ -68,10 +71,6 @@ export class MyApp {
     } else {
       this.translate.use('en'); // Set your language here
     }
-
-    this.translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
-      this.config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
-    });
   }
 }
 

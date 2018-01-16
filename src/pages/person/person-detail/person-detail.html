@@ -3,35 +3,31 @@
   <ion-navbar color='ftx-theme'>
     <ion-title center>密码修改</ion-title>
     <ion-buttons right>
-      <button ion-button (click)="save()">保存</button>
+      <button ion-button (click)="doSave()">保存</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <!-- content -->
-<ion-content> 
+<ion-content>
   <form [formGroup]="ftxForm">
     <ion-list>
       <ion-item>
-        <ion-label fixed>姓名</ion-label>
+        <ion-label fixed>{{formLabel.user_name|translate}}</ion-label>
         <ion-input clearInput type="text" placeholder="请输入姓名" formControlName="user_name" maxLength='10'></ion-input>
       </ion-item>
       <ion-item (click)="openActionSheet()">
-        <ion-label fixed>性别</ion-label>
-        <ion-note clear item-end>
-          <span ion-text > {{ftxForm.value.gender|sysFilter:'GENDER'|async}} </span>
-          <ion-icon name="arrow-forward"></ion-icon>
-        </ion-note>
+        <ion-label fixed>{{formLabel.gender|translate}}</ion-label>
+        <ion-note item-end>{{ftxForm.value.gender|sysFilter:'GENDER'|async}} </ion-note>
+        <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
       </ion-item>
       <ion-item>
-        <ion-label fixed>手机号码</ion-label>
-        <ion-note clear item-end>
-          <span ion-text> 13728890918 </span>
-          <ion-icon name="arrow-forward"></ion-icon>
-        </ion-note>
+        <ion-label fixed>{{formLabel.mobile|translate}}</ion-label>
+        <ion-note item-end>{{ftxForm.value.mobile}} </ion-note>
+        <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
       </ion-item>
       <ion-item>
-        <ion-label fixed>邮箱</ion-label>
-        <ion-input clearInput type="text" placeholder="请输入邮箱" formControlName="email" maxLength='10'></ion-input>
+        <ion-label fixed>{{formLabel.email|translate}}</ion-label>
+        <ion-input clearInput type="text" placeholder="请输入邮箱" formControlName="email" maxLength='11'></ion-input>
       </ion-item>
     </ion-list>
   </form>

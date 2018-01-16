@@ -3,9 +3,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
 
 import { AdmUserProvider } from '../../../providers/providers';
-import { PlatformProvider, UtilProvider } from '../../../providers/common/commonProviders';
+import { PlatformProvider, UtilProvider, ValidateProvider } from '../../../providers/common/commonProviders';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BasePage } from '../../pages';
+import { RegularExpression } from '../../../providers/common/validate/validate';
 
 @IonicPage()
 @Component({
@@ -22,29 +23,28 @@ export class LoginPage extends BasePage {
     public utilProvider: UtilProvider,
     public admUserProvider: AdmUserProvider,
     private formBuilder: FormBuilder,
+    private validateProvider: ValidateProvider,
     private platform: PlatformProvider) {
 
     super(navCtrl, viewCtrl, navParams, utilProvider);
+
     this.ftxForm = this.formBuilder.group({
-      mobile: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      mobile: ['13712345678', [Validators.required, Validators.pattern(RegularExpression.mobile)]],
+      password: ['', [Validators.required, Validators.minLength(3)]],
       passwd: ['', []]
     });
 
     platform.registerBackButtonAction();
   }
 
+  formLabel = {
+    mobile: "label.person-detail.mobile",
+    password: "label.person-detail.password",
+  }
   doLogin() {
-    if (!this.ftxForm.valid) {
-      if (!this.ftxForm.controls.mobile.valid) {
-        this.utilProvider.toast('请输入正确的手机号码')
-        return;
-      }
-      if (!this.ftxForm.controls.password.valid) {
-        this.utilProvider.toast('请输入密码')
-        return;
-      }
-    }
+
+    if (!this.validateProvider.validate(this.ftxForm, this.formLabel))
+      return;
 
     this.ftxForm.value.passwd = this.utilProvider.make(this.ftxForm.value.password);
 
@@ -52,7 +52,7 @@ export class LoginPage extends BasePage {
       if (data) {
         this.dismiss();
         if (this.admUserProvider._admUser.gesture_ind)
-          this.showModal('GesturePasswordPage', { type: 'recorder' });
+          this.showModal('GesturePasswordPage', { type: 'first' });
       }
     });
   }

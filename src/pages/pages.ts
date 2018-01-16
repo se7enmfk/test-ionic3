@@ -36,13 +36,13 @@ export class BasePage {
    * @param params 页面参数
    */
   showModal(page, params?: any) {
-    this.utilProvider.showModal(page, params);
+    return this.utilProvider.showModal(page, params);
   }
 
   /**
    * 关闭modal页面
    */
-  dismiss() {
-    this.viewCtrl.dismiss();
+  dismiss(data?:any) {
+    this.viewCtrl.dismiss(data);
   }
 }
