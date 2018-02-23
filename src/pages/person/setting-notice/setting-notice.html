@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar color='ftx-theme'>
+    <ion-title centet>通知设定</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding-top>
+  <ion-list>
+    <div *ngFor="let r of settingNoticeList">
+      <ion-item>
+        <ion-label>{{r.notice_type.toLocaleUpperCase()|sysFilter:'NOTICE_TYPE'|async}}</ion-label>
+        <ion-toggle [(ngModel)]="r.notice_yn_bl" color='secondary' (ionChange)="selecltOperation(r)"></ion-toggle>
+        <!--<ion-toggle [(ngModel)]="profit_loss_notice" color='secondary' (ionChange)="doGesture($event)"></ion-toggle>-->
+      </ion-item>
+      <ion-item *ngIf="r.notice_yn_bl" (click)="goToDetailPage(r)">
+        <ion-label> {{r.notice_type.toLocaleUpperCase()|sysFilter:'NOTICE_TYPE'|async}}设定</ion-label>
+        <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
+      </ion-item>
+    </div>
+    <!--<ion-item >
+      <ion-label>组合盈亏通知{{profit_loss_notice}}profit_loss_notice</ion-label>
+      {{profit_loss_notice}}
+      <ion-toggle [(ngModel)]="profit_loss_notice" color='secondary' (ionChange)="doGesture(profit_loss_notice)"></ion-toggle>
+      &lt;!&ndash;<ion-toggle [(ngModel)]="profit_loss_notice" color='secondary' (ionChange)="doGesture($event)"></ion-toggle>&ndash;&gt;
+    </ion-item>
+    <ion-item *ngIf="profit_loss_notice" (click)="doModify(true)">
+      <ion-label> 修改盈亏通知比例</ion-label>
+      <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
+    </ion-item>-->
+  </ion-list>
+
+
+
+</ion-content>

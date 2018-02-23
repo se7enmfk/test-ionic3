@@ -1,5 +1,10 @@
 <ion-header>
   <ion-navbar color="ftx-theme">
+    <!-- <ion-buttons left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons> -->
     <ion-title>注册</ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,30 +15,34 @@
     <ion-list>
 
       <ion-item>
-        <ion-label>
-          <ion-icon name="md-phone-portrait" color="light"></ion-icon>
-        </ion-label>
-        <ion-input type="text" placeholder="手机号或邮箱" clearInput formControlName="mobile" maxLength='11'></ion-input>
+        <ion-label fixed>{{formLabel.user_code|translate}}</ion-label>
+        <ion-input type="text" placeholder="请输入账号" clearInput
+                   formControlName="user_code" maxLength='11' (blur)="doRepeatCheck()"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label fixed>{{formLabel.mobile|translate}} </ion-label>
+        <ion-input type="text" placeholder="请输入手机号" clearInput
+                   formControlName="mobile" maxLength='11'  (blur)="doMobileRepeatCheck()"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label>
-          <ion-icon name="ios-color-filter" color="light"></ion-icon>
-        </ion-label>
-        <ion-input type="text" placeholder="验证码" clearInput formControlName="code" maxLength='6'></ion-input>
+        <ion-label fixed>{{formLabel.mobile_code|translate}}</ion-label>
+        <ion-input type="text" placeholder="请输入验证码" clearInput formControlName="mobile_code" maxLength='6'></ion-input>
         <button ion-button clear item-right (click)="sendCode($event)" #sendBtn [disabled]="isTimerStart">
           {{timerText}}
         </button>
       </ion-item>
+      <ion-item>
+        <ion-label fixed>{{formLabel.password|translate}}</ion-label>
+        <ion-input type="{{isShowPassword?'text':'password'}}" placeholder="请输入登录密码" formControlName="password" maxLength='16'></ion-input>
+          <ion-icon name="{{isShowPassword?'eye-off':'eye'}}" *ngIf="ftxForm.value.password.length>0" item-end class="icon-flag-color" (click)="showPassword()"></ion-icon>
+      </ion-item>
 
       <ion-item>
-        <ion-label>
-          <ion-icon name="md-unlock" color="light"></ion-icon>
-        </ion-label>
-        <ion-input type="{{isShowPassword?'text':'password'}}" placeholder="密码" formControlName="password" maxLength='16'></ion-input>
-        <button ion-button clear item-right (click)="showPassword($event)" class="show-btn">
-          <ion-icon name="{{isShowPassword?'eye':'eye-off'}}" color="light"></ion-icon>
-        </button>
+        <ion-label fixed>{{formLabel.referee_desc|translate}} </ion-label>
+        <ion-input type="text" placeholder="请输入推荐人" clearInput formControlName="referee_desc" maxLength='11'></ion-input>
       </ion-item>
 
       <ion-note item-start>
@@ -44,14 +53,14 @@
         <button block round ion-button color="ftx-theme" (click)="doSignUp()">注册</button>
       </ion-row>
 
-      <ion-row padding class="footer-bar">
+      <!--  <ion-row padding class="footer-bar">
         <ion-col col-6 text-left>
           <span (click)="dismiss()">已有账号</span>
         </ion-col>
         <ion-col col-6 text-right>
           <span (click)="showModal('ForgetPage')">忘记密码?</span>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
 
     </ion-list>
 

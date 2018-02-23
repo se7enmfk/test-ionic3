@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { AdmUserProvider, AdmSysParamProvider } from '../../providers/providers';
+import { AdmUserProvider } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -14,8 +14,6 @@ export class HomePage {
   
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public admSysParamProvider: AdmSysParamProvider,
-    
     public admUserProvider: AdmUserProvider) {
   }
 

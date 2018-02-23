@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar color='ftx-theme' >
+    <ion-title >{{notice?.notice_title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list >
+    <ion-item >
+      <p>通知日期：{{notice?.notice_dt}}　　通知类型：{{notice?.notice_type}}</p>
+    </ion-item>
+  </ion-list>
+  {{notice?.notice_content}}
+</ion-content>

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { BasePage } from '../../pages';
 import { UtilProvider } from '../../../providers/common/commonProviders';
 import { AppConfig } from '../../../app/app.config';
+import { AdmUserProvider } from '../../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -13,12 +14,14 @@ export class PasswordManagementPage extends BasePage {
 
   gesture_ind: boolean;
 
+  gesture_toggle: boolean = false;
   constructor(public navCtrl: NavController,
     public viewCtrl: ViewController,
     public navParams: NavParams,
+    public admUserProvider: AdmUserProvider,
     public utilProvider: UtilProvider) {
     super(navCtrl, viewCtrl, navParams, utilProvider);
-  
+
 
   }
   ionViewDidLoad() {
@@ -30,19 +33,33 @@ export class PasswordManagementPage extends BasePage {
   /**
    * 开启手势密码
    */
-  doGesture() {
+  doGesture(e) {
+    this.gesture_toggle = !this.gesture_toggle;
+    if (this.gesture_toggle) {
 
-    let prompt = this.utilProvider.prompt("fsafasd");
-    prompt.onDidDismiss((data) => {
-       console.log(data);
-       
-    });
-    /* if (this.gesture_ind)
-      this.doModify(!this.gesture_ind);
+      this.admUserProvider.checkPassword((data) => {
 
-    if (!this.gesture_ind) {
-      this.utilProvider.removeItem(AppConfig.GESTURE_PASSWORD);
-    } */
+        let passwd = this.utilProvider.make(data.password);
+
+        if (passwd == this.admUserProvider._admUser.passwd) {
+          if (this.gesture_ind)
+            this.doModify(!this.gesture_ind);
+
+          if (!this.gesture_ind) {
+            this.utilProvider.removeItem(AppConfig.GESTURE_PASSWORD);
+            this.gesture_toggle = false;
+          }
+        } else {
+          this.utilProvider.toast('密码不正确');
+          this.gesture_ind = !this.gesture_ind;
+        }
+      }, (data) => {
+        this.gesture_ind = !this.gesture_ind;
+      })
+    } else {
+      this.gesture_toggle = false;
+    }
+
 
   }
 
@@ -55,6 +72,7 @@ export class PasswordManagementPage extends BasePage {
 
     dataSelectPageModal.onDidDismiss(data => {
       this.gesture_ind = data;
+      this.gesture_toggle = false;
     })
   }
 }

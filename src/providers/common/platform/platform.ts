@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Platform, Tabs, App, NavController, Keyboard } from 'ionic-angular';
+import { Platform, Tabs, App, NavController, Keyboard, AlertController } from 'ionic-angular';
 import { UtilProvider } from "../util/util";
+import { TransferObject, Transfer } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AppConfig } from '../../../app/app.config';
+import { SysReleaseVersion } from '../../../model/sys/sys-release-version';
 @Injectable()
 export class PlatformProvider {
 
@@ -10,6 +15,10 @@ export class PlatformProvider {
   constructor(private platform: Platform,
     public appCtrl: App,
     public keyboard: Keyboard,
+    public alertCtrl: AlertController,
+    private transfer: Transfer,
+    private file: File,
+    private inAppBrowser: InAppBrowser,
     private utilProvider: UtilProvider) {
   }
 
@@ -24,13 +33,97 @@ export class PlatformProvider {
 
     });
   }
+  /**
+     * 检查app是否需要升级
+     */
+  detectionUpgrade(list: Array<SysReleaseVersion>) {
+    if (list && list[list.length - 1].ver_no != AppConfig.APP_VERSION) {
+      this.alertCtrl.create({
+        title: '升级',
+        subTitle: '发现新版本,是否立即升级？',
+        buttons: [{ text: '取消' },
+        {
+          text: '确定',
+          handler: () => {
+            this.downloadApp();
+          }
+        }
+        ]
+      }).present();
+    }
+  }
+
+  /**
+   * 下载安装app
+   */
+  downloadApp() {
+    if (this.isAndroid()) {
+      let alert = this.alertCtrl.create({
+        title: '下载进度：0%',
+        enableBackdropDismiss: false,
+        buttons: ['后台下载']
+      });
+      alert.present();
+
+      const fileTransfer: TransferObject = this.transfer.create();
+      const apk = this.file.externalRootDirectory + 'android.apk'; //apk保存的目录
+
+      fileTransfer.download(AppConfig.APK_DOWNLOAD, apk).then(() => {
+        window['install'].install(apk.replace('file://', ''));
+      });
+
+      fileTransfer.onProgress((event: ProgressEvent) => {
+        let num = Math.floor(event.loaded / event.total * 100);
+        if (num === 100) {
+          alert.dismiss();
+        } else {
+          let title = document.getElementsByClassName('alert-title')[0];
+          title && (title.innerHTML = '下载进度：' + num + '%');
+        }
+      });
+    }
+    if (this.isIos()) {
+      this.openUrlByBrowser(AppConfig.APP_DOWNLOAD);
+    }
+  }
+
+  /**
+   * 通过浏览器打开url
+   */
+  openUrlByBrowser(url: string): void {
+    this.inAppBrowser.create(url, '_system');
+  }
+  /**
+     * 是否真机环境
+     * @return {boolean}
+     */
+  isMobile(): boolean {
+    return this.platform.is('mobile') && !this.platform.is('mobileweb');
+  }
+
+  /**
+   * 是否android真机环境
+   * @return {boolean}
+   */
+  isAndroid(): boolean {
+    return this.isMobile() && this.platform.is('android');
+  }
+
+  /**
+   * 是否ios真机环境
+   * @return {boolean}
+   */
+  isIos(): boolean {
+    return this.isMobile() && (this.platform.is('ios') || this.platform.is('ipad') || this.platform.is('iphone'));
+  }
+
   registerBackButtonAction(tabRef?: Tabs) {
     this.platform.ready().then((result) => {
       this.registerBackButton(tabRef);
     })
   }
 
-  registerBackButton(tabRef: Tabs): void {
+  private registerBackButton(tabRef: Tabs): void {
 
     //registerBackButtonAction是系统自带的方法
     this.platform.registerBackButtonAction(() => {

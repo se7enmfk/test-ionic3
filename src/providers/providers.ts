@@ -3,42 +3,55 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { ErrorHandler } from "@angular/core";
 import { IonicErrorHandler } from "ionic-angular";
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { File } from '@ionic-native/file';
+import { FileOpener } from '@ionic-native/file-opener';
+import { Transfer } from '@ionic-native/transfer';
 
-/* import { AdmSysParamProvider } from "./adm/adm-sys-param/adm-sys-param";
-import { AdmUserProvider } from "./adm/adm-user/adm-user";
-import { AdmRmBranchProvider } from "./adm/adm-rm-branch/adm-rm-branch";
-import { AdmRmUserProvider } from "./adm/adm-rm-user/adm-rm-user";
-import { CusBasicProvider } from "./cus/cus-basic/cus-basic";
-import { CusBindingBankcardProvider } from "./cus/cus-binding-bankcard/cus-binding-bankcard"; */
+/*provides*/
 
-import { AdmSysParamProvider } from "../mocks/adm/adm-sys-param/adm-sys-param";
-import { AdmUserProvider } from "../mocks/adm/adm-user/adm-user";
-import { AdmRmBranchProvider } from "../mocks/adm/adm-rm-branch/adm-rm-branch";
-import { AdmRmUserProvider } from "../mocks/adm/adm-rm-user/adm-rm-user";
-import { CusBasicProvider } from "../mocks/cus/cus-basic/cus-basic";
-import { CusBindingBankcardProvider } from "../mocks/cus/cus-binding-bankcard/cus-binding-bankcard";
+import { AdmNoticeProvider } from "./adm/adm-notice";
+import { AdmUserProvider } from "./adm/adm-user";
+import { SysProvider } from "./sys/sys";
+import { CusBasicProvider } from "./cus/cus-basic";
+import { AdmSysParamProvider } from "./adm/adm-sys-param";
 
-export {
-    AdmSysParamProvider,
-    AdmUserProvider,
-    AdmRmBranchProvider,
-    AdmRmUserProvider,
-    CusBasicProvider,
-    CusBindingBankcardProvider,
-};
+
+/*mocks*/
+/*import { AdmNoticeProvider } from "../mocks/adm/adm-notice";
+import { AdmUserProvider } from "../mocks/adm/adm-user";
+import { SysProvider } from "../mocks/sys/sys";
+import { CusBasicProvider } from "../mocks/cus/cus-basic";
+import { AdmSysParamProvider } from "../mocks/adm/adm-sys-param";*/
+
+
 
 export const Providers = [
+
+    AdmNoticeProvider,
     AdmSysParamProvider,
     AdmUserProvider,
-    AdmRmBranchProvider,
-    AdmRmUserProvider,
     CusBasicProvider,
-    CusBindingBankcardProvider,
+    SysProvider,
+
     StatusBar,
     SplashScreen,
+    InAppBrowser,
+    File,
+    FileOpener,
+    Transfer,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+
     HttpProvider,
     UtilProvider,
     ValidateProvider,
     PlatformProvider
 ]
+
+export {
+    AdmNoticeProvider,
+    AdmSysParamProvider,
+    AdmUserProvider,
+    CusBasicProvider,
+    SysProvider,
+}

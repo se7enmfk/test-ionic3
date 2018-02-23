@@ -1,26 +1,40 @@
 <!-- header -->
 <ion-header>
   <ion-navbar color='ftx-theme'>
-    <ion-title center>密码修改</ion-title>
-    <ion-buttons right>
-      <button ion-button (click)="save()">保存</button>
-    </ion-buttons>
+    <ion-title center>绑定银行卡</ion-title>
+    <!--<ion-buttons right>
+      <button ion-button (click)="save()">下一步</button>
+    </ion-buttons>-->
   </ion-navbar>
 </ion-header>
 <!-- content -->
 <ion-content>
-  <!--<form [formGroup]="ftxForm" (ngSubmit)="save()">-->
+  <form [formGroup]="ftxForm">
     <ion-list>
-      <ion-item>
-        <ion-label fixed>原密码</ion-label>
-        <!--<ion-input clearInput type="{{showPass?'text':'password'}}" placeholder="请输入原密码" formControlName="old_password" maxLength='10'></ion-input>-->
-        <!--<ion-icon name="{{showPass?'eye':'eye-off'}}" color="light"></ion-icon>-->
+      <ion-item (click)="bankSelect()">
+        <ion-label fixed>银行名称</ion-label>
+        <ion-note item-end>{{ftxForm.value.bank_code|sysFilter:'BANK_CODE'|async}}</ion-note>
+        <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
       </ion-item>
+
       <ion-item>
-        <ion-label fixed>新密码</ion-label>
-        <!--<ion-input clearInput type="{{_showPass?'text':'password'}}" placeholder="请输入新密码" formControlName="new_password" maxLength='10'></ion-input>-->
-        <!--<ion-icon name="{{_showPass?'eye':'eye-off'}}" color="light"></ion-icon>-->
+        <ion-label fixed>银行卡号</ion-label>
+        <ion-input clearInput type="text" placeholder="请输入银行卡号" formControlName="bankcard_code" maxLength='20'></ion-input>
       </ion-item>
+
+      <ion-item>
+        <ion-label>已阅读并同意《银行自动转账授权书》</ion-label>
+        <ion-checkbox checked="{{checkBoxFitstStatus}}" (click)="readingAndAuthorization(checkBoxFitstStatus)"></ion-checkbox>
+      </ion-item>
+
+      <ion-row padding>
+        <!--<button block round ion-button color="ftx-theme" (click)="doLogin()">{{ 'LOGIN_BUTTON' | translate }}</button>-->
+        <button block round ion-button color="ftx-theme" (click)="nextStep()">下一步</button>
+      </ion-row>
+
+
     </ion-list>
-  <!--</form>-->
+
+  </form>
+
 </ion-content>

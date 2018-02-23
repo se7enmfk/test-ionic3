@@ -1,7 +1,7 @@
 <!-- header -->
 <ion-header>
   <ion-navbar color='ftx-theme'>
-    <ion-title center>密码修改</ion-title>
+    <ion-title center>风险偏好测试</ion-title>
     <ion-buttons right>
       <button ion-button (click)="save()">保存</button>
     </ion-buttons>
@@ -10,17 +10,58 @@
 <!-- content -->
 <ion-content>
   <!--<form [formGroup]="ftxForm" (ngSubmit)="save()">-->
-  <ion-list>
+  <!--<ion-list>
     <ion-item>
       <ion-label fixed>原密码</ion-label>
-      <!--<ion-input clearInput type="{{showPass?'text':'password'}}" placeholder="请输入原密码" formControlName="old_password" maxLength='10'></ion-input>-->
-      <!--<ion-icon name="{{showPass?'eye':'eye-off'}}" color="light"></ion-icon>-->
+      <ion-radio ng-repeat="item in clientSideList"
+                 ng-value="item.value"
+                 ng-model="data.clientSide">
+        &lt;!&ndash;{{ item.text }}&ndash;&gt;新密码
+      </ion-radio>
+      &lt;!&ndash;<ion-input clearInput type="{{showPass?'text':'password'}}" placeholder="请输入原密码" formControlName="old_password" maxLength='10'></ion-input>&ndash;&gt;
+      &lt;!&ndash;<ion-icon name="{{showPass?'eye':'eye-off'}}" color="light"></ion-icon>&ndash;&gt;
     </ion-item>
     <ion-item>
       <ion-label fixed>新密码</ion-label>
-      <!--<ion-input clearInput type="{{_showPass?'text':'password'}}" placeholder="请输入新密码" formControlName="new_password" maxLength='10'></ion-input>-->
-      <!--<ion-icon name="{{_showPass?'eye':'eye-off'}}" color="light"></ion-icon>-->
+      &lt;!&ndash;<ion-input clearInput type="{{_showPass?'text':'password'}}" placeholder="请输入新密码" formControlName="new_password" maxLength='10'></ion-input>&ndash;&gt;
+      &lt;!&ndash;<ion-icon name="{{_showPass?'eye':'eye-off'}}" color="light"></ion-icon>&ndash;&gt;
     </ion-item>
-  </ion-list>
+  </ion-list>-->
   <!--</form>-->
+
+  <ion-list radio-group>
+
+    <ion-list-header>
+      1、您的年龄处于哪个范围？
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>29岁以下</ion-label>
+      <ion-radio value="cord"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>30-39岁</ion-label>
+      <ion-radio value="duesenberg"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>40-49岁</ion-label>
+      <ion-radio value="hudson"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>50-59岁</ion-label>
+      <ion-radio value="packard"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>60岁以上</ion-label>
+      <ion-radio value="studebaker"></ion-radio>
+    </ion-item>
+
+  </ion-list>
+
+
+
 </ion-content>

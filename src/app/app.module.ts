@@ -17,7 +17,6 @@ import { MyApp } from './app.component';
 
 import { Providers } from '../providers/providers';
 import { AppConfig } from './app.config';
-import { AsyncPipe } from '@angular/common';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.

@@ -1,0 +1,29 @@
+<ion-header>
+
+  <ion-navbar color="ftx-theme">
+    <ion-title>意见反馈</ion-title>
+  <ion-buttons right>
+    <button ion-button (click)="doSave()">提交</button>
+  </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding-top>
+  <form [formGroup]="ftxForm">
+
+  <ion-item>
+    <ion-label>满意度</ion-label>
+    <ion-select formControlName="score" placeholder="请点击选择满意度" interface="popover">
+      <!--<ion-option selected value="&#45;&#45;">请点击选择满意度</ion-option>-->
+      <ion-option value="5">满意</ion-option>
+      <ion-option value="4">较满意</ion-option>
+      <ion-option value="3">一般</ion-option>
+      <ion-option value="2">不怎么好</ion-option>
+      <ion-option value="1">不满意</ion-option>
+    </ion-select>
+  </ion-item>
+
+    <textarea class="adveise-textarea" placeholder="请留下您的宝贵意见..." formControlName="advice_content" maxlength="200"></textarea>
+  </form>
+</ion-content>

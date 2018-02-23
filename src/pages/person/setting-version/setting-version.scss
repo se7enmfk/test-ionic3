@@ -1,0 +1,36 @@
+page-setting-version {
+  /*.logo-style {
+    text-align: center;
+    width: 100%;
+    height:25%;
+    line-height: 200px;
+    background: white;
+    !*padding-top: 15%;
+    padding-left: 20%;
+    padding-right: 20%;*!
+  }*/
+
+  .logo-style {
+    text-align: center;
+    width: 100%;
+    height: 25%;
+    /*line-height: 200px;*/
+    background: white;
+    padding-top: 80px;
+    /*padding-left: 20%;
+    padding-right: 25%;*/
+  }
+
+  .logo-style-img {
+    display: block;
+    /*vertical-align: middle;*/
+  }
+
+  .logo-style-word {
+    display: inline-block;
+  }
+
+  .span-blk-position {
+    display: block;
+  }
+}

@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar color="ftx-theme">
+    <ion-title>设定盈亏通知比例</ion-title>
+    <ion-buttons right>
+    <button ion-button (click)="doSave()">保存</button>
+  </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding-top>
+  <form [formGroup]="ftxForm">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>{{formLabel.profit_exceed}}</ion-label>
+        <ion-input clearInput type="text" placeholder="请输入盈利比例" formControlName="profit_exceed" maxLength='3'></ion-input>
+        <ion-note item-end class="color-black">%</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>{{formLabel.loss_exceed}}</ion-label>
+        <ion-input clearInput type="text" placeholder="请输入亏损比例" formControlName="loss_exceed" maxLength='3'></ion-input>
+        <ion-note item-end class="color-black">%</ion-note>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

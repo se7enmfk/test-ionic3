@@ -1,7 +1,7 @@
 <!-- header -->
 <ion-header>
   <ion-navbar color='ftx-theme'>
-    <ion-title center>密码修改</ion-title>
+    <ion-title center>账户信息</ion-title>
     <ion-buttons right>
       <button ion-button (click)="doSave()">保存</button>
     </ion-buttons>
@@ -13,21 +13,25 @@
     <ion-list>
       <ion-item>
         <ion-label fixed>{{formLabel.user_name|translate}}</ion-label>
-        <ion-input clearInput type="text" placeholder="请输入姓名" formControlName="user_name" maxLength='10'></ion-input>
+        <ion-input clearInput type="text" placeholder="请输入姓名" formControlName="user_name" maxLength='12'></ion-input>
       </ion-item>
       <ion-item (click)="openActionSheet()">
         <ion-label fixed>{{formLabel.gender|translate}}</ion-label>
-        <ion-note item-end>{{ftxForm.value.gender|sysFilter:'GENDER'|async}} </ion-note>
+        <ion-note item-end>{{ftxForm.value.gender|sysFilter:'GENDER'|async}}</ion-note>
         <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
+        <ion-input type="hidden" formControlName="gender"></ion-input>
+
       </ion-item>
-      <ion-item>
+      <ion-item (click)="pushPage('PersonMobilePage')">
         <ion-label fixed>{{formLabel.mobile|translate}}</ion-label>
-        <ion-note item-end>{{ftxForm.value.mobile}} </ion-note>
+        <ion-note item-end>{{ftxForm.value.mobile}}</ion-note>
         <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
+        <ion-input type="hidden" formControlName="mobile"></ion-input>
+
       </ion-item>
       <ion-item>
         <ion-label fixed>{{formLabel.email|translate}}</ion-label>
-        <ion-input clearInput type="text" placeholder="请输入邮箱" formControlName="email" maxLength='11'></ion-input>
+        <ion-input clearInput type="email" placeholder="请输入邮箱" formControlName="email" maxLength='20'></ion-input>
       </ion-item>
     </ion-list>
   </form>

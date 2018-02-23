@@ -1,0 +1,41 @@
+<!--header-->
+<ion-header>
+  <ion-navbar color='ftx-theme'>
+    <ion-title center>绑定银行卡</ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="doSave()">保存</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<!-- content -->
+<ion-content >
+  <form [formGroup]="ftxForm">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>姓　　名</ion-label>
+        <ion-input clearInput type="text" placeholder="请输入姓名" formControlName="account_name" maxLength='11'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>身份证号</ion-label>
+        <ion-input clearInput type="text" placeholder="请输入身份证号" formControlName="id_no" maxLength='20'></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label fixed>密　　码</ion-label>
+        <ion-input clearInput type="{{showPass?'password':'text'}}" placeholder="请输入交易密码" formControlName="payment_passwd" maxLength='16'></ion-input>
+        <ion-icon class="icon-flag-color" item-end name="{{showPass?'eye':'eye-off'}}" *ngIf="ftxForm.value.payment_passwd.length>0"  (click)="showPassword()"></ion-icon>
+
+      </ion-item>
+
+
+      <!--<ion-row padding>
+        <button block round ion-button color="ftx-theme" (click)="nextStep()">保存</button>
+      </ion-row>-->
+
+
+    </ion-list>
+
+  </form>
+</ion-content>

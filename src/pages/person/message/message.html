@@ -1,26 +1,19 @@
 <!-- header -->
 <ion-header>
   <ion-navbar color='ftx-theme'>
-    <ion-title center>密码修改</ion-title>
-    <ion-buttons right>
-      <button ion-button (click)="save()">保存</button>
-    </ion-buttons>
+    <ion-title>消息中心</ion-title>
   </ion-navbar>
 </ion-header>
 <!-- content -->
-<ion-content>
-  <!--<form [formGroup]="ftxForm" (ngSubmit)="save()">-->
+<ion-content padding-top>
   <ion-list>
-    <ion-item>
-      <ion-label fixed>原密码</ion-label>
-      <!--<ion-input clearInput type="{{showPass?'text':'password'}}" placeholder="请输入原密码" formControlName="old_password" maxLength='10'></ion-input>-->
-      <!--<ion-icon name="{{showPass?'eye':'eye-off'}}" color="light"></ion-icon>-->
+    <ion-item (click)="pushPage('MessageNoticePublicPage')">
+      <ion-label> 系统公告</ion-label>
+      <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
     </ion-item>
-    <ion-item>
-      <ion-label fixed>新密码</ion-label>
-      <!--<ion-input clearInput type="{{_showPass?'text':'password'}}" placeholder="请输入新密码" formControlName="new_password" maxLength='10'></ion-input>-->
-      <!--<ion-icon name="{{_showPass?'eye':'eye-off'}}" color="light"></ion-icon>-->
+    <ion-item (click)="pushPage('MessageNoticeUserPage')">
+      <ion-label> 我的消息</ion-label>
+      <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
     </ion-item>
   </ion-list>
-  <!--</form>-->
 </ion-content>

@@ -1,0 +1,43 @@
+<!--header-->
+<ion-header>
+  <ion-navbar color='ftx-theme'>
+    <ion-title center>绑定银行卡</ion-title>
+  </ion-navbar>
+</ion-header>
+<!-- content -->
+<ion-content>
+  <form [formGroup]="ftxForm">
+    <ion-list>
+      <!--<ion-item>
+        <ion-label fixed>手机号</ion-label>
+        <ion-input clearInput type="text" placeholder="请输入银行预留手机号" formControlName="mobile" maxLength='11'></ion-input>
+      </ion-item>-->
+
+      <ion-item>
+        <ion-label>手机号
+          <!--<ion-icon name="md-phone-portrait" color="light"></ion-icon>-->
+        </ion-label>
+        <ion-input type="text" placeholder="请输入银行预留手机号" clearInput formControlName="reserved_mobile" maxLength='11'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>验证码
+          <!--<ion-icon name="ios-color-filter" color="light"></ion-icon>-->
+        </ion-label>
+        <ion-input type="text" placeholder="验证码" clearInput formControlName="check_code" maxLength='6'></ion-input>
+        <button ion-button clear item-right (click)="sendCode($event)" #sendBtn [disabled]="isTimerStart">
+          {{timerText}}
+        </button>
+      </ion-item>
+
+      <ion-row padding>
+        <!--<button block round ion-button color="ftx-theme" (click)="doLogin()">{{ 'LOGIN_BUTTON' | translate }}</button>-->
+        <button block round ion-button color="ftx-theme" (click)="nextStep()">下一步</button>
+      </ion-row>
+
+
+    </ion-list>
+
+  </form>
+
+</ion-content>

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {BasePage} from "../../pages";
-import { UtilProvider } from '../../../providers/common/commonProviders';
+import {UtilProvider} from '../../../providers/common/commonProviders';
 
 /**
  * Generated class for the RiskPage page.
@@ -24,8 +24,14 @@ export class RiskPage extends BasePage {
     super(navCtrl, viewCtrl, navParams, utilProvider);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RiskPage');
+  save = function () {
+    this.utilProvider.swal("测试完成");
+    this.navCtrl.pop();
   }
+
+
+/*ionViewDidLoad(){
+ console.log('ionViewDidLoad RiskPage');
+ }*/
 
 }

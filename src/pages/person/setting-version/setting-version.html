@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar color='ftx-theme'>
+    <ion-title>版本更新</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding-top>
+  <ion-thumbnail class="logo-style">
+    <!--<div style="width: 100%;height: 200px;background: url('assets/imgs/ftxLogo/Fintech.png') center no-repeat;padding-top: 80px;">
+      APP Version 2.1.1
+    </div>-->
+
+    <p class="logo-style-word">
+    <img class="logo-style-img"  src="{{logo}}">
+      <span class="span-blk-position">　</span>
+      APP Version 2.1.1</p>
+  </ion-thumbnail>
+  <ion-list >
+    <!--(click)="pushPage('BankCardPage')"-->
+    <ion-item >
+      <ion-label>更新版本</ion-label>
+      <ion-note item-end>最新版本{{latestVersion.ver_no}}</ion-note>
+      <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
+    </ion-item>
+    <!--(click)="pushPage('BankCardPage')"-->
+    <ion-item >
+      <ion-label fixed>更新说明</ion-label>
+      <!--<ion-note item-end>123456</ion-note>-->
+      <ion-icon item-end name="arrow-forward" color='arrow-forward-color'></ion-icon>
+      <!--<ion-input type="hidden" formControlName="mobile"></ion-input>-->
+    </ion-item>
+
+  </ion-list>
+</ion-content>

@@ -21,7 +21,7 @@ export class MarketPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.navCtrl.push
   }
- 
+
   swipeEvnet(event) {
     //向左滑
     if (event.direction == 2) {
@@ -34,6 +34,6 @@ export class MarketPage {
       if (this.testArray.indexOf(this.testSegment) > 0) {
         this.testSegment = this.testArray[this.testArray.indexOf(this.testSegment) - 1];
       }
-    } 
+    }
   }
 }

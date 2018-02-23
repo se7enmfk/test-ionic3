@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar color='ftx-theme'>
+    <ion-title>修改手机号码</ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="doSave()">保存</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding-top>
+
+  <form [formGroup]="ftxForm">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>{{formLabel.mobile|translate}}</ion-label>
+        <ion-input clearInput type="text" placeholder="请输入手机号码"
+                   formControlName="mobile" maxLength='11' (blur)="doMobileRepeatCheck()"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>{{formLabel.mobile_code|translate}}</ion-label>
+        <ion-input type="text" placeholder="请输入验证码" clearInput formControlName="mobile_code" maxLength='6'></ion-input>
+        <button ion-button clear item-right (click)="sendCode($event)" #sendBtn [disabled]="isTimerStart">
+          {{timerText}}
+        </button>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

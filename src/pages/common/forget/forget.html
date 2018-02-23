@@ -1,56 +1,62 @@
 <ion-header>
   <ion-navbar color="ftx-theme">
-    <ion-buttons left>
+    <!-- <ion-buttons left>
       <button ion-button icon-only (click)="dismiss()">
         <ion-icon name="arrow-back"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
     <ion-title>忘记密码</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding-top><!-- 
+<ion-content padding-top>
   <form [formGroup]="ftxForm">
 
     <ion-list>
 
       <ion-item>
-        <ion-label>
-          <ion-icon name="md-phone-portrait" color="light"></ion-icon>
+        <ion-label>手机号
+          <!--<ion-icon name="md-phone-portrait" color="light"></ion-icon>-->
         </ion-label>
-        <ion-input type="text" placeholder="手机号或邮箱" clearInput formControlName="mobile" maxLength='11'></ion-input>
+        <ion-input type="text" placeholder="手机号" clearInput formControlName="mobile" maxLength='11'></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label>
-          <ion-icon name="ios-color-filter" color="light"></ion-icon>
+        <ion-label>验证码
+          <!--<ion-icon name="ios-color-filter" color="light"></ion-icon>-->
         </ion-label>
         <ion-input type="text" placeholder="验证码" clearInput formControlName="code" maxLength='6'></ion-input>
-        <button ion-button clear item-right (click)="sendCode($event)" #sendBtn [disabled]="isTimerStart">
+        <button ion-button clear item-right (click)="sendCode()" #sendBtn [disabled]="isTimerStart">
           {{timerText}}
         </button>
       </ion-item>
 
       <ion-item>
-        <ion-label>
-          <ion-icon name="md-unlock" color="light"></ion-icon>
+        <ion-label>密　码
+          <!--<ion-icon name="md-unlock" color="light"></ion-icon>-->
         </ion-label>
         <ion-input type="{{isShowPassword?'text':'password'}}" placeholder="密码" formControlName="password" maxLength='16'></ion-input>
-        <button ion-button clear item-right (click)="showPassword($event)" class="show-btn">
-          <ion-icon name="{{isShowPassword?'eye':'eye-off'}}" color="light"></ion-icon>
-        </button>
+        <ion-icon name="{{isShowPassword?'eye-off':'eye'}}" *ngIf="ftxForm.value.password.length>0" item-end class="icon-flag-color" (click)="showPassword()"></ion-icon>
       </ion-item>
 
-      <ion-note item-start>
+      <!--<ion-note item-start>
         密码长度6-16位，支持字母、数字、符号
       </ion-note>
-
+-->
       <ion-row padding>
-        <button block round ion-button color="ftx-theme" (click)="doSignUp()">注册</button>
+        <button block round ion-button color="ftx-theme" (click)="doSignUp()">确认</button>
       </ion-row>
 
+      <!--<ion-row padding class="footer-bar">
+        <ion-col col-6 text-left>
+          <span (click)="dismiss()">已有账号</span>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <span (click)="showModal('ForgetPage')">忘记密码?</span>
+        </ion-col>
+      </ion-row>-->
 
     </ion-list>
 
-  </form> -->
+  </form>
 </ion-content>

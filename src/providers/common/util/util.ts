@@ -40,7 +40,7 @@ export class UtilProvider {
    * @param {string} type   //'success' | 'error' | 'warning' | 'info' | 'question'
    * @param {string} timer
    */
-  swal(title: string, type: any = 'success', timer: number = 2000) {
+  swal(title: string, type: any = 'success', timer: number = 1000) {
     return swal({
       title: title,
       type: type,
@@ -115,21 +115,22 @@ export class UtilProvider {
       }, 10000);
     }
     this.load.onDidDismiss(() => {
-      console.log('Dismissed loading');
     });
   }
 
+  showLoading(){
+    this.loading('open','loading...');
+  }
+  hideLoading(){
+    this.loading('hide');
+  }
   /**
    * 翻译
    * @param content 内容
    * @param content_body 内容中可换属性 
    */
   translate(content: string, content_body?: Object) {
-    let msg: string;
-    this.translateService.get(content, content_body).subscribe((data) => {
-      msg = data || content;
-    });
-    return msg;
+    return this.translateService.instant(content, content_body);
   }
 
   /**
@@ -179,34 +180,31 @@ export class UtilProvider {
    * 生成observable
    * @param data 数据
    */
-  createObservable(data){
+  createObservable(data) {
     return Observable.create(observer => {
       observer.next(data);
       observer.complete();
-  });
+    });
   }
 
-  prompt(title) {
+  prompt(title: string, inputs?: any, successCallBack?, cancelCallBack?) {
     let alert = this.alertCtrl.create({
       title: title,
-      inputs: [
-        {
-          name: 'username',
-          placeholder: 'Username'
-        }
-      ],
+      inputs: inputs,
       buttons: [
         {
-          text: 'Cancel',
+          text: '取消',
           role: 'cancel',
-          handler: data => {
-            console.log('Cancel clicked');
+          handler: (data: any) => {
+            cancelCallBack(data);
+            return true;
           }
         },
         {
-          text: 'Login',
-          handler: data => {
-            return false;
+          text: '确认',
+          handler: (data: any) => {
+            successCallBack(data);
+            return true;
           }
         }
       ]

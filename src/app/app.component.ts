@@ -5,10 +5,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
-import { AdmSysParamProvider, AdmUserProvider } from '../providers/providers';
+import { AdmSysParamProvider, AdmUserProvider, SysProvider } from '../providers/providers';
 import { AppConfig } from './app.config';
 import { FirstPage } from '../pages/pages';
-import { UtilProvider } from '../providers/common/commonProviders';
+import { UtilProvider, PlatformProvider } from '../providers/common/commonProviders';
 
 @Component({
   templateUrl: 'app.html'
@@ -22,23 +22,31 @@ export class MyApp {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     public admSysParamProvider: AdmSysParamProvider,
+    public sysReleaseVersionProvider: SysProvider,
     public utilProvider: UtilProvider,
     public admUserProvider: AdmUserProvider,
+    public platformProvider: PlatformProvider,
     private storage: Storage) {
+      
+    this.sysReleaseVersionProvider.getList();
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+
+      //检查app是否需要升级
+      platformProvider.detectionUpgrade(this.sysReleaseVersionProvider._list);
     });
 
     this.initTranslate();
 
     this.admSysParamProvider.getSysParamList();
 
-   /*  this.storage.get(AppConfig.SYS_USER).then((data) => {
-      admUserProvider._admUser = data;
-    }) */
+    /*  this.storage.get(AppConfig.SYS_USER).then((data) => {
+       admUserProvider._admUser = data;
+     }) */
 
     config.set('backButtonIcon', 'ios-arrow-back');
     config.set('iconMode', 'ios');

@@ -26,16 +26,19 @@ export class ValidateProvider {
         if (errorKeys[0] == 'minlength') {
           content_body.num = ftxForm.controls[data].errors[errorKeys[0]].requiredLength
         }
-        console.log(errorKeys);
-        
+
         this.utilProvider.toast(content, content_body);
         err_ind = false;
       }
-    })
+    });
     return err_ind;
   }
 }
 
 export const RegularExpression = {
-  mobile:'^1(3|4|5|7|8)\\d{9}$'
-}
+  mobile:'^1(3|4|5|7|8)\\d{9}$',
+  idCard:'(^\\d{15}$)|(^\\d{18}$)|(^\\d{17}(\\d|X|x)$)',
+  bankCard:'^([1-9]{1})(\\d{15}|\\d{18})$',
+  email:'^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$',
+  profitOrLoss:'^[1-9]|[1-9]\\d|100$'
+};
