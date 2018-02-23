@@ -12,6 +12,7 @@ https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi
 2。解压node_modules.7z
 
 安装淘宝镜像
+
 3。npm install -g cnpm --registry=https://registry.npm.taobao.org
  
 4。cnpm install -g ionic cordova
